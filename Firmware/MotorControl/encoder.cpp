@@ -329,11 +329,22 @@ bool Encoder::abs_spi_init(){
     SPI_HandleTypeDef * spi = hw_config_.spi;
     spi->Init.Mode = SPI_MODE_MASTER;
     spi->Init.Direction = SPI_DIRECTION_2LINES;
+    //SPI_DIRECTION_1LINE;
     spi->Init.DataSize = SPI_DATASIZE_16BIT;
     spi->Init.CLKPolarity = SPI_POLARITY_LOW;
     spi->Init.CLKPhase = SPI_PHASE_2EDGE;
     spi->Init.NSS = SPI_NSS_SOFT;
     spi->Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32;
+    /*
+    #define SPI_BAUDRATEPRESCALER_2         0x00000000U
+    #define SPI_BAUDRATEPRESCALER_4         0x00000008U
+    #define SPI_BAUDRATEPRESCALER_8         0x00000010U
+    #define SPI_BAUDRATEPRESCALER_16        0x00000018U
+    #define SPI_BAUDRATEPRESCALER_32        0x00000020U
+    #define SPI_BAUDRATEPRESCALER_64        0x00000028U
+    #define SPI_BAUDRATEPRESCALER_128       0x00000030U
+    #define SPI_BAUDRATEPRESCALER_256       0x00000038U
+*/
     spi->Init.FirstBit = SPI_FIRSTBIT_MSB;
     spi->Init.TIMode = SPI_TIMODE_DISABLE;
     spi->Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -354,7 +365,7 @@ bool Encoder::abs_spi_start_transaction(){
             return false;
         }
         HAL_GPIO_WritePin(abs_spi_cs_port_, abs_spi_cs_pin_, GPIO_PIN_RESET);
-        HAL_SPI_TransmitReceive_DMA(hw_config_.spi, (uint8_t*)abs_spi_dma_tx_, (uint8_t*)abs_spi_dma_rx_, 1);
+        HAL_SPI_TransmitReceive_DMA(hw_config_.spi, (uint8_t*)abs_spi_dma_tx_, (uint8_t*)abs_spi_dma_rx_, 1);   
     }
     return true;
 }
@@ -371,7 +382,7 @@ uint8_t ams_parity(uint16_t v) {
  * @param n: uint16_t to check
  * @return: false if ok
  */
-bool CheckParity(uint16_t n)
+/*bool CheckParity(uint16_t n)
 {   const int kNumSensorBits = 14;
     const int kParity  = 1;
     uint16_t parity = n;
@@ -380,7 +391,7 @@ bool CheckParity(uint16_t n)
         parity ^= n;
     }
     return (parity & kParity) != 0;
-}
+}*/
 uint8_t cui_parity(uint16_t v) {
     v ^= v >> 8;
     v ^= v >> 4;
@@ -398,14 +409,41 @@ void Encoder::abs_spi_cb(){
     switch (mode_) {
         case MODE_SPI_ABS_AMS: {
             uint16_t rawVal = abs_spi_dma_rx_[0];
-            // check if parity is correct (even) and error flag clear
-            //if (ams_parity(rawVal) || ((rawVal >> 14) & 1)) {
-            if (CheckParity(rawVal)){
+            
+            /**
+             * Parity check AS5047
+             * @param n: uint16_t to check
+             *   Name       BIT   Description
+             *   PARERR      2    Parity error
+             *   INVCOMM     1    Invalid command error: set to 1 by reading or writing an invalid register address
+             *   FRERR       0    Framing error: is set to 1 when a non-compliant SPIframe is detected
+             */
+            if (mWorkErrorSPI_ == 2){
+                errorCodeFromAS_ = rawVal & 0x3fff;
+                mWorkErrorSPI_ = 0;
                 return;
             }
-           /* if ((rawVal >> 14) & 1) {
+            // Set data to GET ANGLE after clean Error Bit
+            if (abs_spi_dma_tx_[0] == AS_CMD_ERROR){
+                abs_spi_dma_tx_[0] =AS_CMD_ANGLE;
+                mWorkErrorSPI_ = 2;
                 return;
-            }*/
+            }
+            // check if parity is correct (even) 
+            if (ams_parity(rawVal)){
+                return;
+            }
+            // check error flag clear
+            if ((rawVal >> 14) & 1) {
+                abs_spi_dma_tx_[0] = AS_CMD_ERROR ;
+                mWorkErrorSPI_ = 1;
+                return;
+            }
+/*
+            if (readErrorSPI == 1)return;
+            else if (readErrorSPI == 2){ errorCodeFromAS_ = rawVal & 0x3fff;return;}
+            else if (readErrorSPI > 2){ mWorkErrorSPI_ = false;return;}
+*/
             pos = rawVal & 0x3fff;
         } break;
 
@@ -432,21 +470,24 @@ void Encoder::abs_spi_cb(){
 }
 
 void Encoder::abs_spi_cs_pin_init(){
+    //mode_ = config_.mode;
+    //if(mode_ & MODE_FLAG_ABS){
     // Decode cs pin
-    abs_spi_cs_port_ = get_gpio_port_by_pin(config_.abs_spi_cs_gpio_pin);
-    abs_spi_cs_pin_ = get_gpio_pin_by_pin(config_.abs_spi_cs_gpio_pin);
+        abs_spi_cs_port_ = get_gpio_port_by_pin(config_.abs_spi_cs_gpio_pin);
+        abs_spi_cs_pin_ = get_gpio_pin_by_pin(config_.abs_spi_cs_gpio_pin);
+        HAL_GPIO_WritePin(abs_spi_cs_port_, abs_spi_cs_pin_, GPIO_PIN_SET);
+        // Init cs pin
+        HAL_GPIO_DeInit(abs_spi_cs_port_, abs_spi_cs_pin_);
+        GPIO_InitTypeDef GPIO_InitStruct;
+        GPIO_InitStruct.Pin = abs_spi_cs_pin_;
+        GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+        GPIO_InitStruct.Pull = GPIO_PULLUP;
+        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+        HAL_GPIO_Init(abs_spi_cs_port_, &GPIO_InitStruct);
 
-    // Init cs pin
-    HAL_GPIO_DeInit(abs_spi_cs_port_, abs_spi_cs_pin_);
-    GPIO_InitTypeDef GPIO_InitStruct;
-    GPIO_InitStruct.Pin = abs_spi_cs_pin_;
-    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-    GPIO_InitStruct.Pull = GPIO_PULLUP;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-    HAL_GPIO_Init(abs_spi_cs_port_, &GPIO_InitStruct);
-
-    // Write pin high
-    HAL_GPIO_WritePin(abs_spi_cs_port_, abs_spi_cs_pin_, GPIO_PIN_SET);
+        // Write pin high
+        HAL_GPIO_WritePin(abs_spi_cs_port_, abs_spi_cs_pin_, GPIO_PIN_SET);
+    //}
 }
 
 bool Encoder::update() {
@@ -500,12 +541,11 @@ bool Encoder::update() {
                 if ((spi_error_rate_ < 0.00005f) & (error_==ERROR_ABS_SPI_COM_FAIL)) {
                     error_=ERROR_NONE;
                     axis_->error_ &= Axis::ERROR_ENCODER_OK;//Axis::ERROR_ENCODER_FAILED= 0x100 000100000000 ->xóa and 111011111111 EFF
-                    }
+                }
             }
 
             abs_spi_pos_updated_ = false;
             delta_enc = pos_abs_latched - count_in_cpr_; //LATCH
-            //delta_enc = pos_abs_ - count_in_cpr_;
             delta_enc = mod(delta_enc, config_.cpr);
             if (delta_enc > config_.cpr/2) {
                 delta_enc -= config_.cpr;
@@ -524,8 +564,7 @@ bool Encoder::update() {
 
     if(mode_ & MODE_FLAG_ABS)
         count_in_cpr_ = pos_abs_latched;
-        //count_in_cpr_ = pos_abs_;
-
+        
     //// run pll (for now pll is in units of encoder counts)
     // Predict current pos
     pos_estimate_ += current_meas_period * vel_estimate_;
