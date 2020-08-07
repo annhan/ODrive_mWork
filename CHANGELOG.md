@@ -1,6 +1,24 @@
 # Unreleased Features
 Please add a note of your changes below this heading if you make a Pull Request.
 
+# Release Candidate
+## [0.5.1] - Date TBD
+### Added
+* Added motor `torque_constant`: units of torque are now [Nm] instead of just motor current.
+* [Motor thermistors support](docs/thermistors.md)
+* Enable/disable of thermistor thermal limits according `setting axis.<thermistor>.enabled`.
+* Introduced `odrive-interface.yaml` as a root source for the ODrive's API. `odrivetool` connects much faster as a side effect.
+* Added torque_constant and torque_lim to motor config
+
+### Changed
+* **`input_pos`, `input_vel`, `pos_estimate_linear`, `pos_estimate_circular`, are now in units of [turns] or [turns/s] instead of [counts] or [counts/s]**
+* `axis.motor.thermal_current_lim` has been removed. Instead a new property is available `axis.motor.effective_current_lim` which contains the effective current limit including any thermal limits.
+* `axis.motor.get_inverter_temp()`, `axis.motor.inverter_temp_limit_lower` and `axis.motor.inverter_temp_limit_upper` have been moved to seperate fet thermistor object under `axis.fet_thermistor`. `get_inverter_temp()` function has been renamed to `temp` and is now a read-only property.
+* `axis.config.counts_per_step` is now `axis.config.turns_per_step`
+
+
+# Releases
+## [0.5.0] - 2020-08-03
 ### Added
 * AC Induction Motor support.
   * Tracking of rotor flux through rotor time constant
@@ -42,7 +60,6 @@ Please add a note of your changes below this heading if you make a Pull Request.
 * Change `motor.get_inverter_temp()` to use a property which was already being sampled at `motor.inverter_temp`
 * Fixed a numerical issue in the trajectory planner that could cause sudden jumps of the position setpoint
 
-# Releases
 ## [0.4.12] - 2020-05-06
 ### Fixed
 * Fixed a numerical issue in the trajectory planner that could cause sudden jumps of the position setpoint
