@@ -804,7 +804,7 @@ void start_analog_thread() {
 
 void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef *hspi)
 {
-    if(hspi->pRxBuffPtr == (uint8_t*)axes[0]->encoder_.abs_spi_dma_rx_)
+    if(hspi->pRxBuffPtr == (uint8_t*)axes[0]->encoder_.abs_spi_dma_rx_) // dia chi bien luu bang cua axis0
         axes[0]->encoder_.abs_spi_cb();
     else if (hspi->pRxBuffPtr == (uint8_t*)axes[1]->encoder_.abs_spi_dma_rx_)
         axes[1]->encoder_.abs_spi_cb();
