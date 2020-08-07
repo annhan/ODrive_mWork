@@ -449,7 +449,7 @@ void Encoder::abs_spi_cb(){
             else if (readErrorSPI > 2){ mWorkErrorSPI_ = false;return;}
 */
            // pos = rawVal & 0x3fff;
-            pos = rawVal & 0x3ffc; //remove 2 first bit for noise
+            pos = rawVal & 0x3fff; //remove 2 first bit for noise
         } break;
 
         case MODE_SPI_ABS_CUI: {
