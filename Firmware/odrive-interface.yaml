@@ -326,6 +326,12 @@ interfaces:
             type: bool
             doc: Enable step/dir input after calibration.
               For M0 this has no effect if `config.enable_uart` is true.
+          use_enable_pin:
+            type: bool
+            doc: enable pin anable 
+          enable_pin_active_low:
+            type: bool
+            doc: dung muc thap
           step_dir_always_on:
             type: bool
             doc: Keep step/dir enabled while the motor is disabled.
@@ -340,6 +346,7 @@ interfaces:
           enable_watchdog: bool
           step_gpio_pin: {type: uint16, c_setter: 'set_step_gpio_pin'}
           dir_gpio_pin: {type: uint16, c_setter: 'set_dir_gpio_pin'}
+          en_gpio_pin: {type: uint16, c_setter: 'set_en_gpio_pin'}
           calibration_lockin: # TODO: this is a subset of lockin state
             c_is_class: False
             attributes:
@@ -773,6 +780,9 @@ interfaces:
       vel_estimate: readonly float32
       vel_estimate_counts: readonly float32
       calib_scan_response: readonly float32
+      mWorkFirstTime: readonly bool
+      mWorkErrorSPI: readonly uint8
+      errorCodeFromAS: readonly uint16
       pos_abs: int32
       spi_error_rate: readonly float32
       config:

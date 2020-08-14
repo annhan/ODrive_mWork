@@ -119,6 +119,12 @@ static inline bool odrive_axis_clear_errors(std::optional<ODriveIntf::AxisIntf*>
 
 
 
+
+
+
+
+
+
 static inline bool odrive_controller_move_incremental(std::optional<ODriveIntf::ControllerIntf*> in_obj, std::optional<float> in_displacement, std::optional<bool> in_from_input_pos, fibre::cbufptr_t* input_buffer, fibre::bufptr_t* output_buffer) {
     bool success = (in_obj.has_value() || (in_obj = fibre::Codec<ODriveIntf::ControllerIntf*>::decode(input_buffer)).has_value())
                 && (in_displacement.has_value() || (in_displacement = fibre::Codec<float>::decode(input_buffer)).has_value())
@@ -193,12 +199,28 @@ static inline bool odrive_encoder_set_linear_count(std::optional<ODriveIntf::Enc
 
 
 
+
+
+
+
 static inline bool fibre_property_float32_readonly_read(std::optional<Property<const float>> in_obj, float* out_value, fibre::cbufptr_t* input_buffer, fibre::bufptr_t* output_buffer) {
     bool success = (in_obj.has_value() || (in_obj = fibre::Codec<Property<const float>>::decode(input_buffer)).has_value());
     if (!success) {
         return false;
     }
     std::tuple<float> ret = in_obj.value()->read();
+    return ((out_value && ((*out_value = std::get<0>(ret)), true)) || fibre::Codec<float>::encode(std::get<0>(ret), output_buffer));
+}
+
+
+
+static inline bool fibre_property_float32_readwrite_exchange(std::optional<Property<float>> in_obj, std::optional<float> in_value, float* out_value, fibre::cbufptr_t* input_buffer, fibre::bufptr_t* output_buffer) {
+    bool success = (in_obj.has_value() || (in_obj = fibre::Codec<Property<float>>::decode(input_buffer)).has_value())
+                && (in_value.has_value() || (in_value = fibre::Codec<float>::decode(input_buffer)).has_value() || true);
+    if (!success) {
+        return false;
+    }
+    std::tuple<float> ret = in_obj.value()->exchange(in_value);
     return ((out_value && ((*out_value = std::get<0>(ret)), true)) || fibre::Codec<float>::encode(std::get<0>(ret), output_buffer));
 }
 
@@ -285,18 +307,6 @@ static inline bool fibre_property_endpoint_ref_readwrite_exchange(std::optional<
 
 
 
-static inline bool fibre_property_float32_readwrite_exchange(std::optional<Property<float>> in_obj, std::optional<float> in_value, float* out_value, fibre::cbufptr_t* input_buffer, fibre::bufptr_t* output_buffer) {
-    bool success = (in_obj.has_value() || (in_obj = fibre::Codec<Property<float>>::decode(input_buffer)).has_value())
-                && (in_value.has_value() || (in_value = fibre::Codec<float>::decode(input_buffer)).has_value() || true);
-    if (!success) {
-        return false;
-    }
-    std::tuple<float> ret = in_obj.value()->exchange(in_value);
-    return ((out_value && ((*out_value = std::get<0>(ret)), true)) || fibre::Codec<float>::encode(std::get<0>(ret), output_buffer));
-}
-
-
-
 static inline bool fibre_property_odrive_axis_error_readwrite_exchange(std::optional<Property<ODriveIntf::AxisIntf::Error>> in_obj, std::optional<ODriveIntf::AxisIntf::Error> in_value, ODriveIntf::AxisIntf::Error* out_value, fibre::cbufptr_t* input_buffer, fibre::bufptr_t* output_buffer) {
     bool success = (in_obj.has_value() || (in_obj = fibre::Codec<Property<ODriveIntf::AxisIntf::Error>>::decode(input_buffer)).has_value())
                 && (in_value.has_value() || (in_value = fibre::Codec<ODriveIntf::AxisIntf::Error>::decode(input_buffer)).has_value() || true);
@@ -350,6 +360,18 @@ static inline bool fibre_property_odrive_axis_lockin_state_readonly_read(std::op
     }
     std::tuple<ODriveIntf::AxisIntf::LockinState> ret = in_obj.value()->read();
     return ((out_value && ((*out_value = std::get<0>(ret)), true)) || fibre::Codec<ODriveIntf::AxisIntf::LockinState>::encode(std::get<0>(ret), output_buffer));
+}
+
+
+
+static inline bool fibre_property_odrive_thermistor_current_limiter_error_readwrite_exchange(std::optional<Property<ODriveIntf::ThermistorCurrentLimiterIntf::Error>> in_obj, std::optional<ODriveIntf::ThermistorCurrentLimiterIntf::Error> in_value, ODriveIntf::ThermistorCurrentLimiterIntf::Error* out_value, fibre::cbufptr_t* input_buffer, fibre::bufptr_t* output_buffer) {
+    bool success = (in_obj.has_value() || (in_obj = fibre::Codec<Property<ODriveIntf::ThermistorCurrentLimiterIntf::Error>>::decode(input_buffer)).has_value())
+                && (in_value.has_value() || (in_value = fibre::Codec<ODriveIntf::ThermistorCurrentLimiterIntf::Error>::decode(input_buffer)).has_value() || true);
+    if (!success) {
+        return false;
+    }
+    std::tuple<ODriveIntf::ThermistorCurrentLimiterIntf::Error> ret = in_obj.value()->exchange(in_value);
+    return ((out_value && ((*out_value = std::get<0>(ret)), true)) || fibre::Codec<ODriveIntf::ThermistorCurrentLimiterIntf::Error>::encode(std::get<0>(ret), output_buffer));
 }
 
 
@@ -412,6 +434,17 @@ static inline bool fibre_property_int32_readonly_read(std::optional<Property<con
 
 
 
+static inline bool fibre_property_uint16_readonly_read(std::optional<Property<const uint16_t>> in_obj, uint16_t* out_value, fibre::cbufptr_t* input_buffer, fibre::bufptr_t* output_buffer) {
+    bool success = (in_obj.has_value() || (in_obj = fibre::Codec<Property<const uint16_t>>::decode(input_buffer)).has_value());
+    if (!success) {
+        return false;
+    }
+    std::tuple<uint16_t> ret = in_obj.value()->read();
+    return ((out_value && ((*out_value = std::get<0>(ret)), true)) || fibre::Codec<uint16_t>::encode(std::get<0>(ret), output_buffer));
+}
+
+
+
 static inline bool fibre_property_int32_readwrite_exchange(std::optional<Property<int32_t>> in_obj, std::optional<int32_t> in_value, int32_t* out_value, fibre::cbufptr_t* input_buffer, fibre::bufptr_t* output_buffer) {
     bool success = (in_obj.has_value() || (in_obj = fibre::Codec<Property<int32_t>>::decode(input_buffer)).has_value())
                 && (in_value.has_value() || (in_value = fibre::Codec<int32_t>::decode(input_buffer)).has_value() || true);
@@ -467,17 +500,6 @@ static inline bool fibre_property_odrive_motor_gate_driver_drv_fault_readonly_re
     }
     std::tuple<ODriveIntf::MotorIntf::GateDriverIntf::DrvFault> ret = in_obj.value()->read();
     return ((out_value && ((*out_value = std::get<0>(ret)), true)) || fibre::Codec<ODriveIntf::MotorIntf::GateDriverIntf::DrvFault>::encode(std::get<0>(ret), output_buffer));
-}
-
-
-
-static inline bool fibre_property_uint16_readonly_read(std::optional<Property<const uint16_t>> in_obj, uint16_t* out_value, fibre::cbufptr_t* input_buffer, fibre::bufptr_t* output_buffer) {
-    bool success = (in_obj.has_value() || (in_obj = fibre::Codec<Property<const uint16_t>>::decode(input_buffer)).has_value());
-    if (!success) {
-        return false;
-    }
-    std::tuple<uint16_t> ret = in_obj.value()->read();
-    return ((out_value && ((*out_value = std::get<0>(ret)), true)) || fibre::Codec<uint16_t>::encode(std::get<0>(ret), output_buffer));
 }
 
 

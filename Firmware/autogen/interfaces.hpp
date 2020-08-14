@@ -15,7 +15,6 @@
 
 
 
-
 class ODriveIntf {
 public:
     class CanIntf {
@@ -103,14 +102,14 @@ public:
             template<typename T> static inline void get_startup_homing(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->startup_homing}; }
             template<typename T> static inline auto get_enable_step_dir(T* obj) { return Property<bool>{&obj->enable_step_dir}; }
             template<typename T> static inline void get_enable_step_dir(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->enable_step_dir}; }
+            template<typename T> static inline auto get_use_enable_pin(T* obj) { return Property<bool>{&obj->use_enable_pin}; }
+            template<typename T> static inline void get_use_enable_pin(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->use_enable_pin}; }
+            template<typename T> static inline auto get_enable_pin_active_low(T* obj) { return Property<bool>{&obj->enable_pin_active_low}; }
+            template<typename T> static inline void get_enable_pin_active_low(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->enable_pin_active_low}; }
             template<typename T> static inline auto get_step_dir_always_on(T* obj) { return Property<bool>{&obj->step_dir_always_on}; }
             template<typename T> static inline void get_step_dir_always_on(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->step_dir_always_on}; }
-            template<typename T> static inline auto get_use_enable_pin(T* obj) { return Property<bool>{obj, [](void* ctx){ return (bool)((T*)ctx)->use_enable_pin; }, [](void* ctx, bool value){ ((T*)ctx)->set_use_enable_pin(value); }}; }
-            template<typename T> static inline void get_use_enable_pin(T* obj, void* ptr) { new (ptr) Property<bool>{obj, [](void* ctx){ return (bool)((T*)ctx)->use_enable_pin; }, [](void* ctx, bool value){ ((T*)ctx)->set_use_enable_pin(value); }}; }
-            template<typename T> static inline auto get_enable_pin_active_low(T* obj) { return Property<bool>{obj, [](void* ctx){ return (bool)((T*)ctx)->enable_pin_active_low; }, [](void* ctx, bool value){ ((T*)ctx)->set_enable_pin_active_low(value); }}; }
-            template<typename T> static inline void get_enable_pin_active_low(T* obj, void* ptr) { new (ptr) Property<bool>{obj, [](void* ctx){ return (bool)((T*)ctx)->enable_pin_active_low; }, [](void* ctx, bool value){ ((T*)ctx)->set_enable_pin_active_low(value); }}; }
-            template<typename T> static inline auto get_counts_per_step(T* obj) { return Property<float>{&obj->counts_per_step}; }
-            template<typename T> static inline void get_counts_per_step(T* obj, void* ptr) { new (ptr) Property<float>{&obj->counts_per_step}; }
+            template<typename T> static inline auto get_turns_per_step(T* obj) { return Property<float>{&obj->turns_per_step}; }
+            template<typename T> static inline void get_turns_per_step(T* obj, void* ptr) { new (ptr) Property<float>{&obj->turns_per_step}; }
             template<typename T> static inline auto get_watchdog_timeout(T* obj) { return Property<float>{&obj->watchdog_timeout}; }
             template<typename T> static inline void get_watchdog_timeout(T* obj, void* ptr) { new (ptr) Property<float>{&obj->watchdog_timeout}; }
             template<typename T> static inline auto get_enable_watchdog(T* obj) { return Property<bool>{&obj->enable_watchdog}; }
@@ -149,6 +148,7 @@ public:
             ERROR_MAX_ENDSTOP_PRESSED        = 0x00002000,
             ERROR_ESTOP_REQUESTED            = 0x00004000,
             ERROR_HOMING_WITHOUT_ENDSTOP     = 0x00020000,
+            ERROR_OVER_TEMP                  = 0x00040000,
         };
         enum LockinState {
             LOCKIN_STATE_INACTIVE            = 0,
@@ -185,6 +185,8 @@ public:
         template<typename T> static inline auto get_is_homed(T* obj) { return Property<bool>{&obj->homing_.is_homed}; }
         template<typename T> static inline void get_is_homed(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->homing_.is_homed}; }
         template<typename T> static inline auto get_config(T* obj) { return &obj->config_; }
+        template<typename T> static inline auto get_fet_thermistor(T* obj) { return &obj->fet_thermistor_; }
+        template<typename T> static inline auto get_motor_thermistor(T* obj) { return &obj->motor_thermistor_; }
         template<typename T> static inline auto get_motor(T* obj) { return &obj->motor_; }
         template<typename T> static inline auto get_controller(T* obj) { return &obj->controller_; }
         template<typename T> static inline auto get_encoder(T* obj) { return &obj->encoder_; }
@@ -194,6 +196,57 @@ public:
         template<typename T> static inline auto get_max_endstop(T* obj) { return &obj->max_endstop_; }
         virtual void watchdog_feed() = 0;
         virtual void clear_errors() = 0;
+    };
+    class ThermistorCurrentLimiterIntf {
+    public:
+        enum Error {
+            ERROR_NONE                       = 0x00000000,
+            ERROR_OVER_TEMP                  = 0x00000001,
+        };
+    };
+    class OnboardThermistorCurrentLimiterIntf {
+    public:
+        class ConfigIntf {
+        public:
+            template<typename T> static inline auto get_temp_limit_lower(T* obj) { return Property<float>{&obj->temp_limit_lower}; }
+            template<typename T> static inline void get_temp_limit_lower(T* obj, void* ptr) { new (ptr) Property<float>{&obj->temp_limit_lower}; }
+            template<typename T> static inline auto get_temp_limit_upper(T* obj) { return Property<float>{&obj->temp_limit_upper}; }
+            template<typename T> static inline void get_temp_limit_upper(T* obj, void* ptr) { new (ptr) Property<float>{&obj->temp_limit_upper}; }
+            template<typename T> static inline auto get_enabled(T* obj) { return Property<bool>{&obj->enabled}; }
+            template<typename T> static inline void get_enabled(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->enabled}; }
+        };
+        template<typename T> static inline auto get_error(T* obj) { return Property<ODriveIntf::ThermistorCurrentLimiterIntf::Error>{&obj->error_}; }
+        template<typename T> static inline void get_error(T* obj, void* ptr) { new (ptr) Property<ODriveIntf::ThermistorCurrentLimiterIntf::Error>{&obj->error_}; }
+        template<typename T> static inline auto get_temperature(T* obj) { return Property<const float>{&obj->temperature_}; }
+        template<typename T> static inline void get_temperature(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->temperature_}; }
+        template<typename T> static inline auto get_config(T* obj) { return &obj->config_; }
+    };
+    class OffboardThermistorCurrentLimiterIntf {
+    public:
+        class ConfigIntf {
+        public:
+            template<typename T> static inline auto get_gpio_pin(T* obj) { return Property<uint16_t>{obj, [](void* ctx){ return (uint16_t)((T*)ctx)->gpio_pin; }, [](void* ctx, uint16_t value){ ((T*)ctx)->set_gpio_pin(value); }}; }
+            template<typename T> static inline void get_gpio_pin(T* obj, void* ptr) { new (ptr) Property<uint16_t>{obj, [](void* ctx){ return (uint16_t)((T*)ctx)->gpio_pin; }, [](void* ctx, uint16_t value){ ((T*)ctx)->set_gpio_pin(value); }}; }
+            template<typename T> static inline auto get_poly_coefficient_0(T* obj) { return Property<float>{&obj->thermistor_poly_coeffs[0]}; }
+            template<typename T> static inline void get_poly_coefficient_0(T* obj, void* ptr) { new (ptr) Property<float>{&obj->thermistor_poly_coeffs[0]}; }
+            template<typename T> static inline auto get_poly_coefficient_1(T* obj) { return Property<float>{&obj->thermistor_poly_coeffs[1]}; }
+            template<typename T> static inline void get_poly_coefficient_1(T* obj, void* ptr) { new (ptr) Property<float>{&obj->thermistor_poly_coeffs[1]}; }
+            template<typename T> static inline auto get_poly_coefficient_2(T* obj) { return Property<float>{&obj->thermistor_poly_coeffs[2]}; }
+            template<typename T> static inline void get_poly_coefficient_2(T* obj, void* ptr) { new (ptr) Property<float>{&obj->thermistor_poly_coeffs[2]}; }
+            template<typename T> static inline auto get_poly_coefficient_3(T* obj) { return Property<float>{&obj->thermistor_poly_coeffs[3]}; }
+            template<typename T> static inline void get_poly_coefficient_3(T* obj, void* ptr) { new (ptr) Property<float>{&obj->thermistor_poly_coeffs[3]}; }
+            template<typename T> static inline auto get_temp_limit_lower(T* obj) { return Property<float>{&obj->temp_limit_lower}; }
+            template<typename T> static inline void get_temp_limit_lower(T* obj, void* ptr) { new (ptr) Property<float>{&obj->temp_limit_lower}; }
+            template<typename T> static inline auto get_temp_limit_upper(T* obj) { return Property<float>{&obj->temp_limit_upper}; }
+            template<typename T> static inline void get_temp_limit_upper(T* obj, void* ptr) { new (ptr) Property<float>{&obj->temp_limit_upper}; }
+            template<typename T> static inline auto get_enabled(T* obj) { return Property<bool>{&obj->enabled}; }
+            template<typename T> static inline void get_enabled(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->enabled}; }
+        };
+        template<typename T> static inline auto get_error(T* obj) { return Property<ODriveIntf::ThermistorCurrentLimiterIntf::Error>{&obj->error_}; }
+        template<typename T> static inline void get_error(T* obj, void* ptr) { new (ptr) Property<ODriveIntf::ThermistorCurrentLimiterIntf::Error>{&obj->error_}; }
+        template<typename T> static inline auto get_temperature(T* obj) { return Property<const float>{&obj->temperature_}; }
+        template<typename T> static inline void get_temperature(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->temperature_}; }
+        template<typename T> static inline auto get_config(T* obj) { return &obj->config_; }
     };
     class MotorIntf {
     public:
@@ -340,7 +393,6 @@ public:
             ERROR_BRAKE_DEADTIME_VIOLATION   = 0x00000100,
             ERROR_UNEXPECTED_TIMER_CALLBACK  = 0x00000200,
             ERROR_CURRENT_SENSE_SATURATION   = 0x00000400,
-            ERROR_INVERTER_OVER_TEMP         = 0x00000800,
             ERROR_CURRENT_LIMIT_VIOLATION    = 0x00001000,
             ERROR_BRAKE_DUTY_CYCLE_NAN       = 0x00002000,
             ERROR_DC_BUS_OVER_REGEN_CURRENT  = 0x00004000,
@@ -373,10 +425,8 @@ public:
         template<typename T> static inline void get_DC_calib_phC(T* obj, void* ptr) { new (ptr) Property<float>{&obj->DC_calib_.phC}; }
         template<typename T> static inline auto get_phase_current_rev_gain(T* obj) { return Property<float>{&obj->phase_current_rev_gain_}; }
         template<typename T> static inline void get_phase_current_rev_gain(T* obj, void* ptr) { new (ptr) Property<float>{&obj->phase_current_rev_gain_}; }
-        template<typename T> static inline auto get_thermal_current_lim(T* obj) { return Property<const float>{&obj->thermal_current_lim_}; }
-        template<typename T> static inline void get_thermal_current_lim(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->thermal_current_lim_}; }
-        template<typename T> static inline auto get_inverter_temp(T* obj) { return Property<const float>{&obj->inverter_temp_}; }
-        template<typename T> static inline void get_inverter_temp(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->inverter_temp_}; }
+        template<typename T> static inline auto get_effective_current_lim(T* obj) { return Property<const float>{&obj->effective_current_lim_}; }
+        template<typename T> static inline void get_effective_current_lim(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->effective_current_lim_}; }
         template<typename T> static inline auto get_current_control(T* obj) { return &obj->current_control_; }
         template<typename T> static inline auto get_gate_driver(T* obj) { return &obj->gate_driver_exported_; }
         template<typename T> static inline auto get_timing_log(T* obj) { return &obj->timing_log_; }
@@ -431,6 +481,10 @@ public:
             template<typename T> static inline void get_vel_ramp_rate(T* obj, void* ptr) { new (ptr) Property<float>{&obj->vel_ramp_rate}; }
             template<typename T> static inline auto get_torque_ramp_rate(T* obj) { return Property<float>{&obj->torque_ramp_rate}; }
             template<typename T> static inline void get_torque_ramp_rate(T* obj, void* ptr) { new (ptr) Property<float>{&obj->torque_ramp_rate}; }
+            template<typename T> static inline auto get_circular_setpoints(T* obj) { return Property<bool>{&obj->circular_setpoints}; }
+            template<typename T> static inline void get_circular_setpoints(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->circular_setpoints}; }
+            template<typename T> static inline auto get_circular_setpoint_range(T* obj) { return Property<float>{&obj->circular_setpoint_range}; }
+            template<typename T> static inline void get_circular_setpoint_range(T* obj, void* ptr) { new (ptr) Property<float>{&obj->circular_setpoint_range}; }
             template<typename T> static inline auto get_homing_speed(T* obj) { return Property<float>{&obj->homing_speed}; }
             template<typename T> static inline void get_homing_speed(T* obj, void* ptr) { new (ptr) Property<float>{&obj->homing_speed}; }
             template<typename T> static inline auto get_inertia(T* obj) { return Property<float>{&obj->inertia}; }
@@ -560,6 +614,7 @@ public:
             MODE_SPI_ABS_CUI                 = 256,
             MODE_SPI_ABS_AMS                 = 257,
             MODE_SPI_ABS_AEAT                = 258,
+            MODE_SPI_ABS_RLS                 = 259,
         };
         template<typename T> static inline auto get_error(T* obj) { return Property<ODriveIntf::EncoderIntf::Error>{&obj->error_}; }
         template<typename T> static inline void get_error(T* obj, void* ptr) { new (ptr) Property<ODriveIntf::EncoderIntf::Error>{&obj->error_}; }
@@ -577,14 +632,28 @@ public:
         template<typename T> static inline void get_phase(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->phase_}; }
         template<typename T> static inline auto get_pos_estimate(T* obj) { return Property<const float>{&obj->pos_estimate_}; }
         template<typename T> static inline void get_pos_estimate(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->pos_estimate_}; }
+        template<typename T> static inline auto get_pos_estimate_counts(T* obj) { return Property<const float>{&obj->pos_estimate_counts_}; }
+        template<typename T> static inline void get_pos_estimate_counts(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->pos_estimate_counts_}; }
         template<typename T> static inline auto get_pos_cpr(T* obj) { return Property<const float>{&obj->pos_cpr_}; }
         template<typename T> static inline void get_pos_cpr(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->pos_cpr_}; }
+        template<typename T> static inline auto get_pos_cpr_counts(T* obj) { return Property<const float>{&obj->pos_cpr_counts_}; }
+        template<typename T> static inline void get_pos_cpr_counts(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->pos_cpr_counts_}; }
+        template<typename T> static inline auto get_pos_circular(T* obj) { return Property<const float>{&obj->pos_circular_}; }
+        template<typename T> static inline void get_pos_circular(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->pos_circular_}; }
         template<typename T> static inline auto get_hall_state(T* obj) { return Property<const uint8_t>{&obj->hall_state_}; }
         template<typename T> static inline void get_hall_state(T* obj, void* ptr) { new (ptr) Property<const uint8_t>{&obj->hall_state_}; }
         template<typename T> static inline auto get_vel_estimate(T* obj) { return Property<const float>{&obj->vel_estimate_}; }
         template<typename T> static inline void get_vel_estimate(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->vel_estimate_}; }
+        template<typename T> static inline auto get_vel_estimate_counts(T* obj) { return Property<const float>{&obj->vel_estimate_counts_}; }
+        template<typename T> static inline void get_vel_estimate_counts(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->vel_estimate_counts_}; }
         template<typename T> static inline auto get_calib_scan_response(T* obj) { return Property<const float>{&obj->calib_scan_response_}; }
         template<typename T> static inline void get_calib_scan_response(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->calib_scan_response_}; }
+        template<typename T> static inline auto get_mWorkFirstTime(T* obj) { return Property<const bool>{&obj->mWorkFirstTime_}; }
+        template<typename T> static inline void get_mWorkFirstTime(T* obj, void* ptr) { new (ptr) Property<const bool>{&obj->mWorkFirstTime_}; }
+        template<typename T> static inline auto get_mWorkErrorSPI(T* obj) { return Property<const uint8_t>{&obj->mWorkErrorSPI_}; }
+        template<typename T> static inline void get_mWorkErrorSPI(T* obj, void* ptr) { new (ptr) Property<const uint8_t>{&obj->mWorkErrorSPI_}; }
+        template<typename T> static inline auto get_errorCodeFromAS(T* obj) { return Property<const uint16_t>{&obj->errorCodeFromAS_}; }
+        template<typename T> static inline void get_errorCodeFromAS(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->errorCodeFromAS_}; }
         template<typename T> static inline auto get_pos_abs(T* obj) { return Property<int32_t>{&obj->pos_abs_}; }
         template<typename T> static inline void get_pos_abs(T* obj, void* ptr) { new (ptr) Property<int32_t>{&obj->pos_abs_}; }
         template<typename T> static inline auto get_spi_error_rate(T* obj) { return Property<const float>{&obj->spi_error_rate_}; }
@@ -754,6 +823,8 @@ public:
     template<typename T> static inline void get_vbus_voltage(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->vbus_voltage_}; }
     template<typename T> static inline auto get_ibus(T* obj) { return Property<const float>{&obj->ibus_}; }
     template<typename T> static inline void get_ibus(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->ibus_}; }
+    template<typename T> static inline auto get_ibus_report_filter_k(T* obj) { return Property<float>{&obj->ibus_report_filter_k_}; }
+    template<typename T> static inline void get_ibus_report_filter_k(T* obj, void* ptr) { new (ptr) Property<float>{&obj->ibus_report_filter_k_}; }
     template<typename T> static inline auto get_serial_number(T* obj) { return Property<const uint64_t>{&obj->serial_number_}; }
     template<typename T> static inline void get_serial_number(T* obj, void* ptr) { new (ptr) Property<const uint64_t>{&obj->serial_number_}; }
     template<typename T> static inline auto get_hw_version_major(T* obj) { return Property<const uint8_t>{&obj->hw_version_major_}; }
@@ -810,6 +881,14 @@ public:
     template<typename T> static void get_get_adc_voltage_out_voltage_(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->get_adc_voltage_out_voltage_}; }
 };
 
+// this is technically not thread-safe but practically it might be
+inline ODriveIntf::ThermistorCurrentLimiterIntf::Error operator | (ODriveIntf::ThermistorCurrentLimiterIntf::Error a, ODriveIntf::ThermistorCurrentLimiterIntf::Error b) { return static_cast<ODriveIntf::ThermistorCurrentLimiterIntf::Error>(static_cast<std::underlying_type_t<ODriveIntf::ThermistorCurrentLimiterIntf::Error>>(a) | static_cast<std::underlying_type_t<ODriveIntf::ThermistorCurrentLimiterIntf::Error>>(b)); }
+inline ODriveIntf::ThermistorCurrentLimiterIntf::Error operator & (ODriveIntf::ThermistorCurrentLimiterIntf::Error a, ODriveIntf::ThermistorCurrentLimiterIntf::Error b) { return static_cast<ODriveIntf::ThermistorCurrentLimiterIntf::Error>(static_cast<std::underlying_type_t<ODriveIntf::ThermistorCurrentLimiterIntf::Error>>(a) & static_cast<std::underlying_type_t<ODriveIntf::ThermistorCurrentLimiterIntf::Error>>(b)); }
+inline ODriveIntf::ThermistorCurrentLimiterIntf::Error operator ^ (ODriveIntf::ThermistorCurrentLimiterIntf::Error a, ODriveIntf::ThermistorCurrentLimiterIntf::Error b) { return static_cast<ODriveIntf::ThermistorCurrentLimiterIntf::Error>(static_cast<std::underlying_type_t<ODriveIntf::ThermistorCurrentLimiterIntf::Error>>(a) ^ static_cast<std::underlying_type_t<ODriveIntf::ThermistorCurrentLimiterIntf::Error>>(b)); }
+inline ODriveIntf::ThermistorCurrentLimiterIntf::Error& operator |= (ODriveIntf::ThermistorCurrentLimiterIntf::Error &a, ODriveIntf::ThermistorCurrentLimiterIntf::Error b) { return reinterpret_cast<ODriveIntf::ThermistorCurrentLimiterIntf::Error&>(reinterpret_cast<std::underlying_type_t<ODriveIntf::ThermistorCurrentLimiterIntf::Error>&>(a) |= static_cast<std::underlying_type_t<ODriveIntf::ThermistorCurrentLimiterIntf::Error>>(b)); }
+inline ODriveIntf::ThermistorCurrentLimiterIntf::Error& operator &= (ODriveIntf::ThermistorCurrentLimiterIntf::Error &a, ODriveIntf::ThermistorCurrentLimiterIntf::Error b) { return reinterpret_cast<ODriveIntf::ThermistorCurrentLimiterIntf::Error&>(reinterpret_cast<std::underlying_type_t<ODriveIntf::ThermistorCurrentLimiterIntf::Error>&>(a) &= static_cast<std::underlying_type_t<ODriveIntf::ThermistorCurrentLimiterIntf::Error>>(b)); }
+inline ODriveIntf::ThermistorCurrentLimiterIntf::Error& operator ^= (ODriveIntf::ThermistorCurrentLimiterIntf::Error &a, ODriveIntf::ThermistorCurrentLimiterIntf::Error b) { return reinterpret_cast<ODriveIntf::ThermistorCurrentLimiterIntf::Error&>(reinterpret_cast<std::underlying_type_t<ODriveIntf::ThermistorCurrentLimiterIntf::Error>&>(a) ^= static_cast<std::underlying_type_t<ODriveIntf::ThermistorCurrentLimiterIntf::Error>>(b)); }
+inline ODriveIntf::ThermistorCurrentLimiterIntf::Error operator ~ (ODriveIntf::ThermistorCurrentLimiterIntf::Error a) { return static_cast<ODriveIntf::ThermistorCurrentLimiterIntf::Error>(~static_cast<std::underlying_type_t<ODriveIntf::ThermistorCurrentLimiterIntf::Error>>(a)); }
 // this is technically not thread-safe but practically it might be
 inline ODriveIntf::CanIntf::Error operator | (ODriveIntf::CanIntf::Error a, ODriveIntf::CanIntf::Error b) { return static_cast<ODriveIntf::CanIntf::Error>(static_cast<std::underlying_type_t<ODriveIntf::CanIntf::Error>>(a) | static_cast<std::underlying_type_t<ODriveIntf::CanIntf::Error>>(b)); }
 inline ODriveIntf::CanIntf::Error operator & (ODriveIntf::CanIntf::Error a, ODriveIntf::CanIntf::Error b) { return static_cast<ODriveIntf::CanIntf::Error>(static_cast<std::underlying_type_t<ODriveIntf::CanIntf::Error>>(a) & static_cast<std::underlying_type_t<ODriveIntf::CanIntf::Error>>(b)); }

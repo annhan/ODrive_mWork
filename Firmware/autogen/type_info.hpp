@@ -28,23 +28,24 @@ struct ODriveTypeInfo : TypeInfo {
         switch (idx) {
             case 0: *(decltype(ODriveIntf::get_vbus_voltage(std::declval<T*>()))*)(&res) = ODriveIntf::get_vbus_voltage(ptr); break;
             case 1: *(decltype(ODriveIntf::get_ibus(std::declval<T*>()))*)(&res) = ODriveIntf::get_ibus(ptr); break;
-            case 2: *(decltype(ODriveIntf::get_serial_number(std::declval<T*>()))*)(&res) = ODriveIntf::get_serial_number(ptr); break;
-            case 3: *(decltype(ODriveIntf::get_hw_version_major(std::declval<T*>()))*)(&res) = ODriveIntf::get_hw_version_major(ptr); break;
-            case 4: *(decltype(ODriveIntf::get_hw_version_minor(std::declval<T*>()))*)(&res) = ODriveIntf::get_hw_version_minor(ptr); break;
-            case 5: *(decltype(ODriveIntf::get_hw_version_variant(std::declval<T*>()))*)(&res) = ODriveIntf::get_hw_version_variant(ptr); break;
-            case 6: *(decltype(ODriveIntf::get_fw_version_major(std::declval<T*>()))*)(&res) = ODriveIntf::get_fw_version_major(ptr); break;
-            case 7: *(decltype(ODriveIntf::get_fw_version_minor(std::declval<T*>()))*)(&res) = ODriveIntf::get_fw_version_minor(ptr); break;
-            case 8: *(decltype(ODriveIntf::get_fw_version_revision(std::declval<T*>()))*)(&res) = ODriveIntf::get_fw_version_revision(ptr); break;
-            case 9: *(decltype(ODriveIntf::get_fw_version_unreleased(std::declval<T*>()))*)(&res) = ODriveIntf::get_fw_version_unreleased(ptr); break;
-            case 10: *(decltype(ODriveIntf::get_brake_resistor_armed(std::declval<T*>()))*)(&res) = ODriveIntf::get_brake_resistor_armed(ptr); break;
-            case 11: *(decltype(ODriveIntf::get_brake_resistor_saturated(std::declval<T*>()))*)(&res) = ODriveIntf::get_brake_resistor_saturated(ptr); break;
-            case 12: *(decltype(ODriveIntf::get_system_stats(std::declval<T*>()))*)(&res) = ODriveIntf::get_system_stats(ptr); break;
-            case 13: *(decltype(ODriveIntf::get_config(std::declval<T*>()))*)(&res) = ODriveIntf::get_config(ptr); break;
-            case 14: *(decltype(ODriveIntf::get_user_config_loaded(std::declval<T*>()))*)(&res) = ODriveIntf::get_user_config_loaded(ptr); break;
-            case 15: *(decltype(ODriveIntf::get_axis0(std::declval<T*>()))*)(&res) = ODriveIntf::get_axis0(ptr); break;
-            case 16: *(decltype(ODriveIntf::get_axis1(std::declval<T*>()))*)(&res) = ODriveIntf::get_axis1(ptr); break;
-            case 17: *(decltype(ODriveIntf::get_can(std::declval<T*>()))*)(&res) = ODriveIntf::get_can(ptr); break;
-            case 18: *(decltype(ODriveIntf::get_test_property(std::declval<T*>()))*)(&res) = ODriveIntf::get_test_property(ptr); break;
+            case 2: *(decltype(ODriveIntf::get_ibus_report_filter_k(std::declval<T*>()))*)(&res) = ODriveIntf::get_ibus_report_filter_k(ptr); break;
+            case 3: *(decltype(ODriveIntf::get_serial_number(std::declval<T*>()))*)(&res) = ODriveIntf::get_serial_number(ptr); break;
+            case 4: *(decltype(ODriveIntf::get_hw_version_major(std::declval<T*>()))*)(&res) = ODriveIntf::get_hw_version_major(ptr); break;
+            case 5: *(decltype(ODriveIntf::get_hw_version_minor(std::declval<T*>()))*)(&res) = ODriveIntf::get_hw_version_minor(ptr); break;
+            case 6: *(decltype(ODriveIntf::get_hw_version_variant(std::declval<T*>()))*)(&res) = ODriveIntf::get_hw_version_variant(ptr); break;
+            case 7: *(decltype(ODriveIntf::get_fw_version_major(std::declval<T*>()))*)(&res) = ODriveIntf::get_fw_version_major(ptr); break;
+            case 8: *(decltype(ODriveIntf::get_fw_version_minor(std::declval<T*>()))*)(&res) = ODriveIntf::get_fw_version_minor(ptr); break;
+            case 9: *(decltype(ODriveIntf::get_fw_version_revision(std::declval<T*>()))*)(&res) = ODriveIntf::get_fw_version_revision(ptr); break;
+            case 10: *(decltype(ODriveIntf::get_fw_version_unreleased(std::declval<T*>()))*)(&res) = ODriveIntf::get_fw_version_unreleased(ptr); break;
+            case 11: *(decltype(ODriveIntf::get_brake_resistor_armed(std::declval<T*>()))*)(&res) = ODriveIntf::get_brake_resistor_armed(ptr); break;
+            case 12: *(decltype(ODriveIntf::get_brake_resistor_saturated(std::declval<T*>()))*)(&res) = ODriveIntf::get_brake_resistor_saturated(ptr); break;
+            case 13: *(decltype(ODriveIntf::get_system_stats(std::declval<T*>()))*)(&res) = ODriveIntf::get_system_stats(ptr); break;
+            case 14: *(decltype(ODriveIntf::get_config(std::declval<T*>()))*)(&res) = ODriveIntf::get_config(ptr); break;
+            case 15: *(decltype(ODriveIntf::get_user_config_loaded(std::declval<T*>()))*)(&res) = ODriveIntf::get_user_config_loaded(ptr); break;
+            case 16: *(decltype(ODriveIntf::get_axis0(std::declval<T*>()))*)(&res) = ODriveIntf::get_axis0(ptr); break;
+            case 17: *(decltype(ODriveIntf::get_axis1(std::declval<T*>()))*)(&res) = ODriveIntf::get_axis1(ptr); break;
+            case 18: *(decltype(ODriveIntf::get_can(std::declval<T*>()))*)(&res) = ODriveIntf::get_can(ptr); break;
+            case 19: *(decltype(ODriveIntf::get_test_property(std::declval<T*>()))*)(&res) = ODriveIntf::get_test_property(ptr); break;
         }
         return res;
     }
@@ -106,13 +107,15 @@ struct ODriveAxisTypeInfo : TypeInfo {
             case 5: *(decltype(ODriveIntf::AxisIntf::get_lockin_state(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_lockin_state(ptr); break;
             case 6: *(decltype(ODriveIntf::AxisIntf::get_is_homed(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_is_homed(ptr); break;
             case 7: *(decltype(ODriveIntf::AxisIntf::get_config(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_config(ptr); break;
-            case 8: *(decltype(ODriveIntf::AxisIntf::get_motor(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_motor(ptr); break;
-            case 9: *(decltype(ODriveIntf::AxisIntf::get_controller(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_controller(ptr); break;
-            case 10: *(decltype(ODriveIntf::AxisIntf::get_encoder(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_encoder(ptr); break;
-            case 11: *(decltype(ODriveIntf::AxisIntf::get_sensorless_estimator(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_sensorless_estimator(ptr); break;
-            case 12: *(decltype(ODriveIntf::AxisIntf::get_trap_traj(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_trap_traj(ptr); break;
-            case 13: *(decltype(ODriveIntf::AxisIntf::get_min_endstop(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_min_endstop(ptr); break;
-            case 14: *(decltype(ODriveIntf::AxisIntf::get_max_endstop(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_max_endstop(ptr); break;
+            case 8: *(decltype(ODriveIntf::AxisIntf::get_fet_thermistor(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_fet_thermistor(ptr); break;
+            case 9: *(decltype(ODriveIntf::AxisIntf::get_motor_thermistor(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_motor_thermistor(ptr); break;
+            case 10: *(decltype(ODriveIntf::AxisIntf::get_motor(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_motor(ptr); break;
+            case 11: *(decltype(ODriveIntf::AxisIntf::get_controller(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_controller(ptr); break;
+            case 12: *(decltype(ODriveIntf::AxisIntf::get_encoder(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_encoder(ptr); break;
+            case 13: *(decltype(ODriveIntf::AxisIntf::get_sensorless_estimator(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_sensorless_estimator(ptr); break;
+            case 14: *(decltype(ODriveIntf::AxisIntf::get_trap_traj(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_trap_traj(ptr); break;
+            case 15: *(decltype(ODriveIntf::AxisIntf::get_min_endstop(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_min_endstop(ptr); break;
+            case 16: *(decltype(ODriveIntf::AxisIntf::get_max_endstop(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_max_endstop(ptr); break;
         }
         return res;
     }
@@ -144,6 +147,60 @@ struct ODriveAxisLockinConfigTypeInfo : TypeInfo {
 };
 
 template<typename T>
+struct ODriveThermistorCurrentLimiterTypeInfo : TypeInfo {
+    using TypeInfo::TypeInfo;
+    static const PropertyInfo property_table[];
+    static const ODriveThermistorCurrentLimiterTypeInfo<T> singleton;
+    static Introspectable make_introspectable(T& obj) { return TypeInfo::make_introspectable(&obj, &singleton); }
+
+    introspectable_storage_t get_child(introspectable_storage_t obj, size_t idx) const override {
+        T* ptr = *(T**)&obj;
+        introspectable_storage_t res;
+        switch (idx) {
+        }
+        return res;
+    }
+};
+
+template<typename T>
+struct ODriveOnboardThermistorCurrentLimiterTypeInfo : TypeInfo {
+    using TypeInfo::TypeInfo;
+    static const PropertyInfo property_table[];
+    static const ODriveOnboardThermistorCurrentLimiterTypeInfo<T> singleton;
+    static Introspectable make_introspectable(T& obj) { return TypeInfo::make_introspectable(&obj, &singleton); }
+
+    introspectable_storage_t get_child(introspectable_storage_t obj, size_t idx) const override {
+        T* ptr = *(T**)&obj;
+        introspectable_storage_t res;
+        switch (idx) {
+            case 0: *(decltype(ODriveIntf::OnboardThermistorCurrentLimiterIntf::get_error(std::declval<T*>()))*)(&res) = ODriveIntf::OnboardThermistorCurrentLimiterIntf::get_error(ptr); break;
+            case 1: *(decltype(ODriveIntf::OnboardThermistorCurrentLimiterIntf::get_temperature(std::declval<T*>()))*)(&res) = ODriveIntf::OnboardThermistorCurrentLimiterIntf::get_temperature(ptr); break;
+            case 2: *(decltype(ODriveIntf::OnboardThermistorCurrentLimiterIntf::get_config(std::declval<T*>()))*)(&res) = ODriveIntf::OnboardThermistorCurrentLimiterIntf::get_config(ptr); break;
+        }
+        return res;
+    }
+};
+
+template<typename T>
+struct ODriveOffboardThermistorCurrentLimiterTypeInfo : TypeInfo {
+    using TypeInfo::TypeInfo;
+    static const PropertyInfo property_table[];
+    static const ODriveOffboardThermistorCurrentLimiterTypeInfo<T> singleton;
+    static Introspectable make_introspectable(T& obj) { return TypeInfo::make_introspectable(&obj, &singleton); }
+
+    introspectable_storage_t get_child(introspectable_storage_t obj, size_t idx) const override {
+        T* ptr = *(T**)&obj;
+        introspectable_storage_t res;
+        switch (idx) {
+            case 0: *(decltype(ODriveIntf::OffboardThermistorCurrentLimiterIntf::get_error(std::declval<T*>()))*)(&res) = ODriveIntf::OffboardThermistorCurrentLimiterIntf::get_error(ptr); break;
+            case 1: *(decltype(ODriveIntf::OffboardThermistorCurrentLimiterIntf::get_temperature(std::declval<T*>()))*)(&res) = ODriveIntf::OffboardThermistorCurrentLimiterIntf::get_temperature(ptr); break;
+            case 2: *(decltype(ODriveIntf::OffboardThermistorCurrentLimiterIntf::get_config(std::declval<T*>()))*)(&res) = ODriveIntf::OffboardThermistorCurrentLimiterIntf::get_config(ptr); break;
+        }
+        return res;
+    }
+};
+
+template<typename T>
 struct ODriveMotorTypeInfo : TypeInfo {
     using TypeInfo::TypeInfo;
     static const PropertyInfo property_table[];
@@ -162,12 +219,11 @@ struct ODriveMotorTypeInfo : TypeInfo {
             case 5: *(decltype(ODriveIntf::MotorIntf::get_DC_calib_phB(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::get_DC_calib_phB(ptr); break;
             case 6: *(decltype(ODriveIntf::MotorIntf::get_DC_calib_phC(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::get_DC_calib_phC(ptr); break;
             case 7: *(decltype(ODriveIntf::MotorIntf::get_phase_current_rev_gain(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::get_phase_current_rev_gain(ptr); break;
-            case 8: *(decltype(ODriveIntf::MotorIntf::get_thermal_current_lim(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::get_thermal_current_lim(ptr); break;
-            case 9: *(decltype(ODriveIntf::MotorIntf::get_inverter_temp(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::get_inverter_temp(ptr); break;
-            case 10: *(decltype(ODriveIntf::MotorIntf::get_current_control(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::get_current_control(ptr); break;
-            case 11: *(decltype(ODriveIntf::MotorIntf::get_gate_driver(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::get_gate_driver(ptr); break;
-            case 12: *(decltype(ODriveIntf::MotorIntf::get_timing_log(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::get_timing_log(ptr); break;
-            case 13: *(decltype(ODriveIntf::MotorIntf::get_config(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::get_config(ptr); break;
+            case 8: *(decltype(ODriveIntf::MotorIntf::get_effective_current_lim(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::get_effective_current_lim(ptr); break;
+            case 9: *(decltype(ODriveIntf::MotorIntf::get_current_control(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::get_current_control(ptr); break;
+            case 10: *(decltype(ODriveIntf::MotorIntf::get_gate_driver(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::get_gate_driver(ptr); break;
+            case 11: *(decltype(ODriveIntf::MotorIntf::get_timing_log(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::get_timing_log(ptr); break;
+            case 12: *(decltype(ODriveIntf::MotorIntf::get_config(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::get_config(ptr); break;
         }
         return res;
     }
@@ -219,13 +275,20 @@ struct ODriveEncoderTypeInfo : TypeInfo {
             case 5: *(decltype(ODriveIntf::EncoderIntf::get_interpolation(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_interpolation(ptr); break;
             case 6: *(decltype(ODriveIntf::EncoderIntf::get_phase(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_phase(ptr); break;
             case 7: *(decltype(ODriveIntf::EncoderIntf::get_pos_estimate(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_pos_estimate(ptr); break;
-            case 8: *(decltype(ODriveIntf::EncoderIntf::get_pos_cpr(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_pos_cpr(ptr); break;
-            case 9: *(decltype(ODriveIntf::EncoderIntf::get_hall_state(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_hall_state(ptr); break;
-            case 10: *(decltype(ODriveIntf::EncoderIntf::get_vel_estimate(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_vel_estimate(ptr); break;
-            case 11: *(decltype(ODriveIntf::EncoderIntf::get_calib_scan_response(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_calib_scan_response(ptr); break;
-            case 12: *(decltype(ODriveIntf::EncoderIntf::get_pos_abs(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_pos_abs(ptr); break;
-            case 13: *(decltype(ODriveIntf::EncoderIntf::get_spi_error_rate(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_spi_error_rate(ptr); break;
-            case 14: *(decltype(ODriveIntf::EncoderIntf::get_config(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_config(ptr); break;
+            case 8: *(decltype(ODriveIntf::EncoderIntf::get_pos_estimate_counts(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_pos_estimate_counts(ptr); break;
+            case 9: *(decltype(ODriveIntf::EncoderIntf::get_pos_cpr(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_pos_cpr(ptr); break;
+            case 10: *(decltype(ODriveIntf::EncoderIntf::get_pos_cpr_counts(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_pos_cpr_counts(ptr); break;
+            case 11: *(decltype(ODriveIntf::EncoderIntf::get_pos_circular(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_pos_circular(ptr); break;
+            case 12: *(decltype(ODriveIntf::EncoderIntf::get_hall_state(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_hall_state(ptr); break;
+            case 13: *(decltype(ODriveIntf::EncoderIntf::get_vel_estimate(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_vel_estimate(ptr); break;
+            case 14: *(decltype(ODriveIntf::EncoderIntf::get_vel_estimate_counts(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_vel_estimate_counts(ptr); break;
+            case 15: *(decltype(ODriveIntf::EncoderIntf::get_calib_scan_response(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_calib_scan_response(ptr); break;
+            case 16: *(decltype(ODriveIntf::EncoderIntf::get_mWorkFirstTime(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_mWorkFirstTime(ptr); break;
+            case 17: *(decltype(ODriveIntf::EncoderIntf::get_mWorkErrorSPI(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_mWorkErrorSPI(ptr); break;
+            case 18: *(decltype(ODriveIntf::EncoderIntf::get_errorCodeFromAS(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_errorCodeFromAS(ptr); break;
+            case 19: *(decltype(ODriveIntf::EncoderIntf::get_pos_abs(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_pos_abs(ptr); break;
+            case 20: *(decltype(ODriveIntf::EncoderIntf::get_spi_error_rate(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_spi_error_rate(ptr); break;
+            case 21: *(decltype(ODriveIntf::EncoderIntf::get_config(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_config(ptr); break;
         }
         return res;
     }
@@ -433,10 +496,10 @@ struct ODriveAxisConfigTypeInfo : TypeInfo {
             case 4: *(decltype(ODriveIntf::AxisIntf::ConfigIntf::get_startup_sensorless_control(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::ConfigIntf::get_startup_sensorless_control(ptr); break;
             case 5: *(decltype(ODriveIntf::AxisIntf::ConfigIntf::get_startup_homing(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::ConfigIntf::get_startup_homing(ptr); break;
             case 6: *(decltype(ODriveIntf::AxisIntf::ConfigIntf::get_enable_step_dir(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::ConfigIntf::get_enable_step_dir(ptr); break;
-            case 7: *(decltype(ODriveIntf::AxisIntf::ConfigIntf::get_step_dir_always_on(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::ConfigIntf::get_step_dir_always_on(ptr); break;
-            case 8: *(decltype(ODriveIntf::AxisIntf::ConfigIntf::get_use_enable_pin(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::ConfigIntf::get_use_enable_pin(ptr); break;
-            case 9: *(decltype(ODriveIntf::AxisIntf::ConfigIntf::get_enable_pin_active_low(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::ConfigIntf::get_enable_pin_active_low(ptr); break;
-            case 10: *(decltype(ODriveIntf::AxisIntf::ConfigIntf::get_counts_per_step(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::ConfigIntf::get_counts_per_step(ptr); break;
+            case 7: *(decltype(ODriveIntf::AxisIntf::ConfigIntf::get_use_enable_pin(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::ConfigIntf::get_use_enable_pin(ptr); break;
+            case 8: *(decltype(ODriveIntf::AxisIntf::ConfigIntf::get_enable_pin_active_low(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::ConfigIntf::get_enable_pin_active_low(ptr); break;
+            case 9: *(decltype(ODriveIntf::AxisIntf::ConfigIntf::get_step_dir_always_on(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::ConfigIntf::get_step_dir_always_on(ptr); break;
+            case 10: *(decltype(ODriveIntf::AxisIntf::ConfigIntf::get_turns_per_step(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::ConfigIntf::get_turns_per_step(ptr); break;
             case 11: *(decltype(ODriveIntf::AxisIntf::ConfigIntf::get_watchdog_timeout(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::ConfigIntf::get_watchdog_timeout(ptr); break;
             case 12: *(decltype(ODriveIntf::AxisIntf::ConfigIntf::get_enable_watchdog(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::ConfigIntf::get_enable_watchdog(ptr); break;
             case 13: *(decltype(ODriveIntf::AxisIntf::ConfigIntf::get_step_gpio_pin(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::ConfigIntf::get_step_gpio_pin(ptr); break;
@@ -448,7 +511,6 @@ struct ODriveAxisConfigTypeInfo : TypeInfo {
             case 19: *(decltype(ODriveIntf::AxisIntf::ConfigIntf::get_can_node_id(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::ConfigIntf::get_can_node_id(ptr); break;
             case 20: *(decltype(ODriveIntf::AxisIntf::ConfigIntf::get_can_node_id_extended(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::ConfigIntf::get_can_node_id_extended(ptr); break;
             case 21: *(decltype(ODriveIntf::AxisIntf::ConfigIntf::get_can_heartbeat_rate_ms(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::ConfigIntf::get_can_heartbeat_rate_ms(ptr); break;
-
         }
         return res;
     }
@@ -470,6 +532,49 @@ struct ODriveAxisConfigCalibrationLockinTypeInfo : TypeInfo {
             case 2: *(decltype(ODriveIntf::AxisIntf::ConfigIntf::CalibrationLockinIntf::get_ramp_distance(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::ConfigIntf::CalibrationLockinIntf::get_ramp_distance(ptr); break;
             case 3: *(decltype(ODriveIntf::AxisIntf::ConfigIntf::CalibrationLockinIntf::get_accel(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::ConfigIntf::CalibrationLockinIntf::get_accel(ptr); break;
             case 4: *(decltype(ODriveIntf::AxisIntf::ConfigIntf::CalibrationLockinIntf::get_vel(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::ConfigIntf::CalibrationLockinIntf::get_vel(ptr); break;
+        }
+        return res;
+    }
+};
+
+template<typename T>
+struct ODriveOnboardThermistorCurrentLimiterConfigTypeInfo : TypeInfo {
+    using TypeInfo::TypeInfo;
+    static const PropertyInfo property_table[];
+    static const ODriveOnboardThermistorCurrentLimiterConfigTypeInfo<T> singleton;
+    static Introspectable make_introspectable(T& obj) { return TypeInfo::make_introspectable(&obj, &singleton); }
+
+    introspectable_storage_t get_child(introspectable_storage_t obj, size_t idx) const override {
+        T* ptr = *(T**)&obj;
+        introspectable_storage_t res;
+        switch (idx) {
+            case 0: *(decltype(ODriveIntf::OnboardThermistorCurrentLimiterIntf::ConfigIntf::get_temp_limit_lower(std::declval<T*>()))*)(&res) = ODriveIntf::OnboardThermistorCurrentLimiterIntf::ConfigIntf::get_temp_limit_lower(ptr); break;
+            case 1: *(decltype(ODriveIntf::OnboardThermistorCurrentLimiterIntf::ConfigIntf::get_temp_limit_upper(std::declval<T*>()))*)(&res) = ODriveIntf::OnboardThermistorCurrentLimiterIntf::ConfigIntf::get_temp_limit_upper(ptr); break;
+            case 2: *(decltype(ODriveIntf::OnboardThermistorCurrentLimiterIntf::ConfigIntf::get_enabled(std::declval<T*>()))*)(&res) = ODriveIntf::OnboardThermistorCurrentLimiterIntf::ConfigIntf::get_enabled(ptr); break;
+        }
+        return res;
+    }
+};
+
+template<typename T>
+struct ODriveOffboardThermistorCurrentLimiterConfigTypeInfo : TypeInfo {
+    using TypeInfo::TypeInfo;
+    static const PropertyInfo property_table[];
+    static const ODriveOffboardThermistorCurrentLimiterConfigTypeInfo<T> singleton;
+    static Introspectable make_introspectable(T& obj) { return TypeInfo::make_introspectable(&obj, &singleton); }
+
+    introspectable_storage_t get_child(introspectable_storage_t obj, size_t idx) const override {
+        T* ptr = *(T**)&obj;
+        introspectable_storage_t res;
+        switch (idx) {
+            case 0: *(decltype(ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_gpio_pin(std::declval<T*>()))*)(&res) = ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_gpio_pin(ptr); break;
+            case 1: *(decltype(ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_poly_coefficient_0(std::declval<T*>()))*)(&res) = ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_poly_coefficient_0(ptr); break;
+            case 2: *(decltype(ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_poly_coefficient_1(std::declval<T*>()))*)(&res) = ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_poly_coefficient_1(ptr); break;
+            case 3: *(decltype(ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_poly_coefficient_2(std::declval<T*>()))*)(&res) = ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_poly_coefficient_2(ptr); break;
+            case 4: *(decltype(ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_poly_coefficient_3(std::declval<T*>()))*)(&res) = ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_poly_coefficient_3(ptr); break;
+            case 5: *(decltype(ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_temp_limit_lower(std::declval<T*>()))*)(&res) = ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_temp_limit_lower(ptr); break;
+            case 6: *(decltype(ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_temp_limit_upper(std::declval<T*>()))*)(&res) = ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_temp_limit_upper(ptr); break;
+            case 7: *(decltype(ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_enabled(std::declval<T*>()))*)(&res) = ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_enabled(ptr); break;
         }
         return res;
     }
@@ -616,13 +721,15 @@ struct ODriveControllerConfigTypeInfo : TypeInfo {
             case 11: *(decltype(ODriveIntf::ControllerIntf::ConfigIntf::get_vel_limit_tolerance(std::declval<T*>()))*)(&res) = ODriveIntf::ControllerIntf::ConfigIntf::get_vel_limit_tolerance(ptr); break;
             case 12: *(decltype(ODriveIntf::ControllerIntf::ConfigIntf::get_vel_ramp_rate(std::declval<T*>()))*)(&res) = ODriveIntf::ControllerIntf::ConfigIntf::get_vel_ramp_rate(ptr); break;
             case 13: *(decltype(ODriveIntf::ControllerIntf::ConfigIntf::get_torque_ramp_rate(std::declval<T*>()))*)(&res) = ODriveIntf::ControllerIntf::ConfigIntf::get_torque_ramp_rate(ptr); break;
-            case 14: *(decltype(ODriveIntf::ControllerIntf::ConfigIntf::get_homing_speed(std::declval<T*>()))*)(&res) = ODriveIntf::ControllerIntf::ConfigIntf::get_homing_speed(ptr); break;
-            case 15: *(decltype(ODriveIntf::ControllerIntf::ConfigIntf::get_inertia(std::declval<T*>()))*)(&res) = ODriveIntf::ControllerIntf::ConfigIntf::get_inertia(ptr); break;
-            case 16: *(decltype(ODriveIntf::ControllerIntf::ConfigIntf::get_axis_to_mirror(std::declval<T*>()))*)(&res) = ODriveIntf::ControllerIntf::ConfigIntf::get_axis_to_mirror(ptr); break;
-            case 17: *(decltype(ODriveIntf::ControllerIntf::ConfigIntf::get_mirror_ratio(std::declval<T*>()))*)(&res) = ODriveIntf::ControllerIntf::ConfigIntf::get_mirror_ratio(ptr); break;
-            case 18: *(decltype(ODriveIntf::ControllerIntf::ConfigIntf::get_load_encoder_axis(std::declval<T*>()))*)(&res) = ODriveIntf::ControllerIntf::ConfigIntf::get_load_encoder_axis(ptr); break;
-            case 19: *(decltype(ODriveIntf::ControllerIntf::ConfigIntf::get_input_filter_bandwidth(std::declval<T*>()))*)(&res) = ODriveIntf::ControllerIntf::ConfigIntf::get_input_filter_bandwidth(ptr); break;
-            case 20: *(decltype(ODriveIntf::ControllerIntf::ConfigIntf::get_anticogging(std::declval<T*>()))*)(&res) = ODriveIntf::ControllerIntf::ConfigIntf::get_anticogging(ptr); break;
+            case 14: *(decltype(ODriveIntf::ControllerIntf::ConfigIntf::get_circular_setpoints(std::declval<T*>()))*)(&res) = ODriveIntf::ControllerIntf::ConfigIntf::get_circular_setpoints(ptr); break;
+            case 15: *(decltype(ODriveIntf::ControllerIntf::ConfigIntf::get_circular_setpoint_range(std::declval<T*>()))*)(&res) = ODriveIntf::ControllerIntf::ConfigIntf::get_circular_setpoint_range(ptr); break;
+            case 16: *(decltype(ODriveIntf::ControllerIntf::ConfigIntf::get_homing_speed(std::declval<T*>()))*)(&res) = ODriveIntf::ControllerIntf::ConfigIntf::get_homing_speed(ptr); break;
+            case 17: *(decltype(ODriveIntf::ControllerIntf::ConfigIntf::get_inertia(std::declval<T*>()))*)(&res) = ODriveIntf::ControllerIntf::ConfigIntf::get_inertia(ptr); break;
+            case 18: *(decltype(ODriveIntf::ControllerIntf::ConfigIntf::get_axis_to_mirror(std::declval<T*>()))*)(&res) = ODriveIntf::ControllerIntf::ConfigIntf::get_axis_to_mirror(ptr); break;
+            case 19: *(decltype(ODriveIntf::ControllerIntf::ConfigIntf::get_mirror_ratio(std::declval<T*>()))*)(&res) = ODriveIntf::ControllerIntf::ConfigIntf::get_mirror_ratio(ptr); break;
+            case 20: *(decltype(ODriveIntf::ControllerIntf::ConfigIntf::get_load_encoder_axis(std::declval<T*>()))*)(&res) = ODriveIntf::ControllerIntf::ConfigIntf::get_load_encoder_axis(ptr); break;
+            case 21: *(decltype(ODriveIntf::ControllerIntf::ConfigIntf::get_input_filter_bandwidth(std::declval<T*>()))*)(&res) = ODriveIntf::ControllerIntf::ConfigIntf::get_input_filter_bandwidth(ptr); break;
+            case 22: *(decltype(ODriveIntf::ControllerIntf::ConfigIntf::get_anticogging(std::declval<T*>()))*)(&res) = ODriveIntf::ControllerIntf::ConfigIntf::get_anticogging(ptr); break;
         }
         return res;
     }
@@ -751,6 +858,7 @@ template<typename T>
 const PropertyInfo ODriveTypeInfo<T>::property_table[] = {
     {"vbus_voltage", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::get_vbus_voltage(std::declval<T*>()))>>::singleton},
     {"ibus", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::get_ibus(std::declval<T*>()))>>::singleton},
+    {"ibus_report_filter_k", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::get_ibus_report_filter_k(std::declval<T*>()))>>::singleton},
     {"serial_number", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::get_serial_number(std::declval<T*>()))>>::singleton},
     {"hw_version_major", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::get_hw_version_major(std::declval<T*>()))>>::singleton},
     {"hw_version_minor", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::get_hw_version_minor(std::declval<T*>()))>>::singleton},
@@ -802,6 +910,8 @@ const PropertyInfo ODriveAxisTypeInfo<T>::property_table[] = {
     {"lockin_state", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::get_lockin_state(std::declval<T*>()))>>::singleton},
     {"is_homed", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::get_is_homed(std::declval<T*>()))>>::singleton},
     {"config", &ODriveAxisConfigTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::get_config(std::declval<T*>()))>>::singleton},
+    {"fet_thermistor", &ODriveOnboardThermistorCurrentLimiterTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::get_fet_thermistor(std::declval<T*>()))>>::singleton},
+    {"motor_thermistor", &ODriveOffboardThermistorCurrentLimiterTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::get_motor_thermistor(std::declval<T*>()))>>::singleton},
     {"motor", &ODriveMotorTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::get_motor(std::declval<T*>()))>>::singleton},
     {"controller", &ODriveControllerTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::get_controller(std::declval<T*>()))>>::singleton},
     {"encoder", &ODriveEncoderTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::get_encoder(std::declval<T*>()))>>::singleton},
@@ -831,6 +941,33 @@ const ODriveAxisLockinConfigTypeInfo<T> ODriveAxisLockinConfigTypeInfo<T>::singl
 
 
 template<typename T>
+const PropertyInfo ODriveThermistorCurrentLimiterTypeInfo<T>::property_table[] = {
+};
+template<typename T>
+const ODriveThermistorCurrentLimiterTypeInfo<T> ODriveThermistorCurrentLimiterTypeInfo<T>::singleton{ODriveThermistorCurrentLimiterTypeInfo<T>::property_table, sizeof(ODriveThermistorCurrentLimiterTypeInfo<T>::property_table) / sizeof(ODriveThermistorCurrentLimiterTypeInfo<T>::property_table[0])};
+
+
+template<typename T>
+const PropertyInfo ODriveOnboardThermistorCurrentLimiterTypeInfo<T>::property_table[] = {
+    {"error", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::OnboardThermistorCurrentLimiterIntf::get_error(std::declval<T*>()))>>::singleton},
+    {"temperature", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::OnboardThermistorCurrentLimiterIntf::get_temperature(std::declval<T*>()))>>::singleton},
+    {"config", &ODriveOnboardThermistorCurrentLimiterConfigTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::OnboardThermistorCurrentLimiterIntf::get_config(std::declval<T*>()))>>::singleton},
+};
+template<typename T>
+const ODriveOnboardThermistorCurrentLimiterTypeInfo<T> ODriveOnboardThermistorCurrentLimiterTypeInfo<T>::singleton{ODriveOnboardThermistorCurrentLimiterTypeInfo<T>::property_table, sizeof(ODriveOnboardThermistorCurrentLimiterTypeInfo<T>::property_table) / sizeof(ODriveOnboardThermistorCurrentLimiterTypeInfo<T>::property_table[0])};
+
+
+template<typename T>
+const PropertyInfo ODriveOffboardThermistorCurrentLimiterTypeInfo<T>::property_table[] = {
+    {"error", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::OffboardThermistorCurrentLimiterIntf::get_error(std::declval<T*>()))>>::singleton},
+    {"temperature", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::OffboardThermistorCurrentLimiterIntf::get_temperature(std::declval<T*>()))>>::singleton},
+    {"config", &ODriveOffboardThermistorCurrentLimiterConfigTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::OffboardThermistorCurrentLimiterIntf::get_config(std::declval<T*>()))>>::singleton},
+};
+template<typename T>
+const ODriveOffboardThermistorCurrentLimiterTypeInfo<T> ODriveOffboardThermistorCurrentLimiterTypeInfo<T>::singleton{ODriveOffboardThermistorCurrentLimiterTypeInfo<T>::property_table, sizeof(ODriveOffboardThermistorCurrentLimiterTypeInfo<T>::property_table) / sizeof(ODriveOffboardThermistorCurrentLimiterTypeInfo<T>::property_table[0])};
+
+
+template<typename T>
 const PropertyInfo ODriveMotorTypeInfo<T>::property_table[] = {
     {"error", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::get_error(std::declval<T*>()))>>::singleton},
     {"armed_state", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::get_armed_state(std::declval<T*>()))>>::singleton},
@@ -840,8 +977,7 @@ const PropertyInfo ODriveMotorTypeInfo<T>::property_table[] = {
     {"DC_calib_phB", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::get_DC_calib_phB(std::declval<T*>()))>>::singleton},
     {"DC_calib_phC", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::get_DC_calib_phC(std::declval<T*>()))>>::singleton},
     {"phase_current_rev_gain", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::get_phase_current_rev_gain(std::declval<T*>()))>>::singleton},
-    {"thermal_current_lim", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::get_thermal_current_lim(std::declval<T*>()))>>::singleton},
-    {"inverter_temp", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::get_inverter_temp(std::declval<T*>()))>>::singleton},
+    {"effective_current_lim", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::get_effective_current_lim(std::declval<T*>()))>>::singleton},
     {"current_control", &ODriveMotorCurrentControlTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::get_current_control(std::declval<T*>()))>>::singleton},
     {"gate_driver", &ODriveMotorGateDriverTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::get_gate_driver(std::declval<T*>()))>>::singleton},
     {"timing_log", &ODriveMotorTimingLogTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::get_timing_log(std::declval<T*>()))>>::singleton},
@@ -879,10 +1015,17 @@ const PropertyInfo ODriveEncoderTypeInfo<T>::property_table[] = {
     {"interpolation", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_interpolation(std::declval<T*>()))>>::singleton},
     {"phase", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_phase(std::declval<T*>()))>>::singleton},
     {"pos_estimate", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_pos_estimate(std::declval<T*>()))>>::singleton},
+    {"pos_estimate_counts", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_pos_estimate_counts(std::declval<T*>()))>>::singleton},
     {"pos_cpr", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_pos_cpr(std::declval<T*>()))>>::singleton},
+    {"pos_cpr_counts", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_pos_cpr_counts(std::declval<T*>()))>>::singleton},
+    {"pos_circular", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_pos_circular(std::declval<T*>()))>>::singleton},
     {"hall_state", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_hall_state(std::declval<T*>()))>>::singleton},
     {"vel_estimate", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_vel_estimate(std::declval<T*>()))>>::singleton},
+    {"vel_estimate_counts", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_vel_estimate_counts(std::declval<T*>()))>>::singleton},
     {"calib_scan_response", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_calib_scan_response(std::declval<T*>()))>>::singleton},
+    {"mWorkFirstTime", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_mWorkFirstTime(std::declval<T*>()))>>::singleton},
+    {"mWorkErrorSPI", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_mWorkErrorSPI(std::declval<T*>()))>>::singleton},
+    {"errorCodeFromAS", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_errorCodeFromAS(std::declval<T*>()))>>::singleton},
     {"pos_abs", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_pos_abs(std::declval<T*>()))>>::singleton},
     {"spi_error_rate", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_spi_error_rate(std::declval<T*>()))>>::singleton},
     {"config", &ODriveEncoderConfigTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_config(std::declval<T*>()))>>::singleton},
@@ -1012,10 +1155,10 @@ const PropertyInfo ODriveAxisConfigTypeInfo<T>::property_table[] = {
     {"startup_sensorless_control", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::ConfigIntf::get_startup_sensorless_control(std::declval<T*>()))>>::singleton},
     {"startup_homing", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::ConfigIntf::get_startup_homing(std::declval<T*>()))>>::singleton},
     {"enable_step_dir", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::ConfigIntf::get_enable_step_dir(std::declval<T*>()))>>::singleton},
-    {"step_dir_always_on", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::ConfigIntf::get_step_dir_always_on(std::declval<T*>()))>>::singleton},
     {"use_enable_pin", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::ConfigIntf::get_use_enable_pin(std::declval<T*>()))>>::singleton},
     {"enable_pin_active_low", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::ConfigIntf::get_enable_pin_active_low(std::declval<T*>()))>>::singleton},
-    {"counts_per_step", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::ConfigIntf::get_counts_per_step(std::declval<T*>()))>>::singleton},
+    {"step_dir_always_on", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::ConfigIntf::get_step_dir_always_on(std::declval<T*>()))>>::singleton},
+    {"turns_per_step", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::ConfigIntf::get_turns_per_step(std::declval<T*>()))>>::singleton},
     {"watchdog_timeout", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::ConfigIntf::get_watchdog_timeout(std::declval<T*>()))>>::singleton},
     {"enable_watchdog", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::ConfigIntf::get_enable_watchdog(std::declval<T*>()))>>::singleton},
     {"step_gpio_pin", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::ConfigIntf::get_step_gpio_pin(std::declval<T*>()))>>::singleton},
@@ -1042,6 +1185,31 @@ const PropertyInfo ODriveAxisConfigCalibrationLockinTypeInfo<T>::property_table[
 };
 template<typename T>
 const ODriveAxisConfigCalibrationLockinTypeInfo<T> ODriveAxisConfigCalibrationLockinTypeInfo<T>::singleton{ODriveAxisConfigCalibrationLockinTypeInfo<T>::property_table, sizeof(ODriveAxisConfigCalibrationLockinTypeInfo<T>::property_table) / sizeof(ODriveAxisConfigCalibrationLockinTypeInfo<T>::property_table[0])};
+
+
+template<typename T>
+const PropertyInfo ODriveOnboardThermistorCurrentLimiterConfigTypeInfo<T>::property_table[] = {
+    {"temp_limit_lower", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::OnboardThermistorCurrentLimiterIntf::ConfigIntf::get_temp_limit_lower(std::declval<T*>()))>>::singleton},
+    {"temp_limit_upper", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::OnboardThermistorCurrentLimiterIntf::ConfigIntf::get_temp_limit_upper(std::declval<T*>()))>>::singleton},
+    {"enabled", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::OnboardThermistorCurrentLimiterIntf::ConfigIntf::get_enabled(std::declval<T*>()))>>::singleton},
+};
+template<typename T>
+const ODriveOnboardThermistorCurrentLimiterConfigTypeInfo<T> ODriveOnboardThermistorCurrentLimiterConfigTypeInfo<T>::singleton{ODriveOnboardThermistorCurrentLimiterConfigTypeInfo<T>::property_table, sizeof(ODriveOnboardThermistorCurrentLimiterConfigTypeInfo<T>::property_table) / sizeof(ODriveOnboardThermistorCurrentLimiterConfigTypeInfo<T>::property_table[0])};
+
+
+template<typename T>
+const PropertyInfo ODriveOffboardThermistorCurrentLimiterConfigTypeInfo<T>::property_table[] = {
+    {"gpio_pin", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_gpio_pin(std::declval<T*>()))>>::singleton},
+    {"poly_coefficient_0", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_poly_coefficient_0(std::declval<T*>()))>>::singleton},
+    {"poly_coefficient_1", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_poly_coefficient_1(std::declval<T*>()))>>::singleton},
+    {"poly_coefficient_2", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_poly_coefficient_2(std::declval<T*>()))>>::singleton},
+    {"poly_coefficient_3", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_poly_coefficient_3(std::declval<T*>()))>>::singleton},
+    {"temp_limit_lower", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_temp_limit_lower(std::declval<T*>()))>>::singleton},
+    {"temp_limit_upper", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_temp_limit_upper(std::declval<T*>()))>>::singleton},
+    {"enabled", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::OffboardThermistorCurrentLimiterIntf::ConfigIntf::get_enabled(std::declval<T*>()))>>::singleton},
+};
+template<typename T>
+const ODriveOffboardThermistorCurrentLimiterConfigTypeInfo<T> ODriveOffboardThermistorCurrentLimiterConfigTypeInfo<T>::singleton{ODriveOffboardThermistorCurrentLimiterConfigTypeInfo<T>::property_table, sizeof(ODriveOffboardThermistorCurrentLimiterConfigTypeInfo<T>::property_table) / sizeof(ODriveOffboardThermistorCurrentLimiterConfigTypeInfo<T>::property_table[0])};
 
 
 template<typename T>
@@ -1140,6 +1308,8 @@ const PropertyInfo ODriveControllerConfigTypeInfo<T>::property_table[] = {
     {"vel_limit_tolerance", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ControllerIntf::ConfigIntf::get_vel_limit_tolerance(std::declval<T*>()))>>::singleton},
     {"vel_ramp_rate", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ControllerIntf::ConfigIntf::get_vel_ramp_rate(std::declval<T*>()))>>::singleton},
     {"torque_ramp_rate", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ControllerIntf::ConfigIntf::get_torque_ramp_rate(std::declval<T*>()))>>::singleton},
+    {"circular_setpoints", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ControllerIntf::ConfigIntf::get_circular_setpoints(std::declval<T*>()))>>::singleton},
+    {"circular_setpoint_range", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ControllerIntf::ConfigIntf::get_circular_setpoint_range(std::declval<T*>()))>>::singleton},
     {"homing_speed", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ControllerIntf::ConfigIntf::get_homing_speed(std::declval<T*>()))>>::singleton},
     {"inertia", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ControllerIntf::ConfigIntf::get_inertia(std::declval<T*>()))>>::singleton},
     {"axis_to_mirror", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ControllerIntf::ConfigIntf::get_axis_to_mirror(std::declval<T*>()))>>::singleton},

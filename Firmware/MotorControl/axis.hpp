@@ -62,6 +62,7 @@ public:
         // custom setters
         Axis* parent = nullptr;
         void set_step_gpio_pin(uint16_t value) { step_gpio_pin = value; parent->decode_step_dir_pins(); }
+        void set_en_gpio_pin(uint16_t value) { en_gpio_pin = value; parent->decode_step_dir_pins(); }
         void set_dir_gpio_pin(uint16_t value) { dir_gpio_pin = value; parent->decode_step_dir_pins(); }
     };
 
