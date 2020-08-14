@@ -271,10 +271,12 @@ int odrive_main(void) {
     // Start state machine threads. Each thread will go through various calibration
     // procedures and then run the actual controller loops.
     // TODO: generalize for AXIS_COUNT != 2
-    for (size_t i = 0; i < AXIS_COUNT; ++i) {
+    /*for (size_t i = 0; i < AXIS_COUNT; ++i) {
+        axes[i]->start_thread();
+    }*/
+    for (size_t i = 0; i < 1; ++i) {
         axes[i]->start_thread();
     }
-
     start_analog_thread();
 
     system_stats_.fully_booted = true;
