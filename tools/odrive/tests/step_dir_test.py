@@ -42,15 +42,18 @@ class TestStepDir():
         step_gpio.write(False)
         dir_gpio.config(output=True)
         dir_gpio.write(True)
-
+        en_gpio.config(output=True)
+        en_gpio.write(True)
         axis.parent.erase_config_and_reboot()
         setattr(axis.parent.handle.config, 'gpio' + str(step_gpio_num) + '_mode', GPIO_MODE_DIGITAL)
         setattr(axis.parent.handle.config, 'gpio' + str(dir_gpio_num) + '_mode', GPIO_MODE_DIGITAL)
+        setattr(axis.parent.handle.config, 'gpio' + str(en_gpio_num) + '_mode', GPIO_MODE_DIGITAL)
         axis.parent.save_config_and_reboot()
         axis.handle.config.enable_step_dir = True
         axis.handle.config.step_dir_always_on = True # needed for testing
         axis.handle.config.step_gpio_pin = step_gpio_num
         axis.handle.config.dir_gpio_pin = dir_gpio_num
+        axis.handle.config.en_gpio_pin = en_gpio_num
         request_state(axis, AXIS_STATE_IDLE) # apply step_dir_always_on config
 
 

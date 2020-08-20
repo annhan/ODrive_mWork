@@ -42,10 +42,11 @@ struct ODriveTypeInfo : TypeInfo {
             case 13: *(decltype(ODriveIntf::get_system_stats(std::declval<T*>()))*)(&res) = ODriveIntf::get_system_stats(ptr); break;
             case 14: *(decltype(ODriveIntf::get_config(std::declval<T*>()))*)(&res) = ODriveIntf::get_config(ptr); break;
             case 15: *(decltype(ODriveIntf::get_user_config_loaded(std::declval<T*>()))*)(&res) = ODriveIntf::get_user_config_loaded(ptr); break;
-            case 16: *(decltype(ODriveIntf::get_axis0(std::declval<T*>()))*)(&res) = ODriveIntf::get_axis0(ptr); break;
-            case 17: *(decltype(ODriveIntf::get_axis1(std::declval<T*>()))*)(&res) = ODriveIntf::get_axis1(ptr); break;
-            case 18: *(decltype(ODriveIntf::get_can(std::declval<T*>()))*)(&res) = ODriveIntf::get_can(ptr); break;
-            case 19: *(decltype(ODriveIntf::get_test_property(std::declval<T*>()))*)(&res) = ODriveIntf::get_test_property(ptr); break;
+            case 16: *(decltype(ODriveIntf::get_misconfigured(std::declval<T*>()))*)(&res) = ODriveIntf::get_misconfigured(ptr); break;
+            case 17: *(decltype(ODriveIntf::get_axis0(std::declval<T*>()))*)(&res) = ODriveIntf::get_axis0(ptr); break;
+            case 18: *(decltype(ODriveIntf::get_axis1(std::declval<T*>()))*)(&res) = ODriveIntf::get_axis1(ptr); break;
+            case 19: *(decltype(ODriveIntf::get_can(std::declval<T*>()))*)(&res) = ODriveIntf::get_can(ptr); break;
+            case 20: *(decltype(ODriveIntf::get_test_property(std::declval<T*>()))*)(&res) = ODriveIntf::get_test_property(ptr); break;
         }
         return res;
     }
@@ -221,9 +222,8 @@ struct ODriveMotorTypeInfo : TypeInfo {
             case 7: *(decltype(ODriveIntf::MotorIntf::get_phase_current_rev_gain(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::get_phase_current_rev_gain(ptr); break;
             case 8: *(decltype(ODriveIntf::MotorIntf::get_effective_current_lim(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::get_effective_current_lim(ptr); break;
             case 9: *(decltype(ODriveIntf::MotorIntf::get_current_control(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::get_current_control(ptr); break;
-            case 10: *(decltype(ODriveIntf::MotorIntf::get_gate_driver(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::get_gate_driver(ptr); break;
-            case 11: *(decltype(ODriveIntf::MotorIntf::get_timing_log(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::get_timing_log(ptr); break;
-            case 12: *(decltype(ODriveIntf::MotorIntf::get_config(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::get_config(ptr); break;
+            case 10: *(decltype(ODriveIntf::MotorIntf::get_timing_log(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::get_timing_log(ptr); break;
+            case 11: *(decltype(ODriveIntf::MotorIntf::get_config(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::get_config(ptr); break;
         }
         return res;
     }
@@ -363,24 +363,20 @@ struct ODriveSystemStatsTypeInfo : TypeInfo {
         switch (idx) {
             case 0: *(decltype(ODriveIntf::SystemStatsIntf::get_uptime(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_uptime(ptr); break;
             case 1: *(decltype(ODriveIntf::SystemStatsIntf::get_min_heap_space(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_min_heap_space(ptr); break;
-            case 2: *(decltype(ODriveIntf::SystemStatsIntf::get_min_stack_space_axis0(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_min_stack_space_axis0(ptr); break;
-            case 3: *(decltype(ODriveIntf::SystemStatsIntf::get_min_stack_space_axis1(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_min_stack_space_axis1(ptr); break;
-            case 4: *(decltype(ODriveIntf::SystemStatsIntf::get_min_stack_space_comms(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_min_stack_space_comms(ptr); break;
-            case 5: *(decltype(ODriveIntf::SystemStatsIntf::get_min_stack_space_usb(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_min_stack_space_usb(ptr); break;
-            case 6: *(decltype(ODriveIntf::SystemStatsIntf::get_min_stack_space_uart(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_min_stack_space_uart(ptr); break;
-            case 7: *(decltype(ODriveIntf::SystemStatsIntf::get_min_stack_space_can(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_min_stack_space_can(ptr); break;
-            case 8: *(decltype(ODriveIntf::SystemStatsIntf::get_min_stack_space_usb_irq(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_min_stack_space_usb_irq(ptr); break;
-            case 9: *(decltype(ODriveIntf::SystemStatsIntf::get_min_stack_space_startup(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_min_stack_space_startup(ptr); break;
-            case 10: *(decltype(ODriveIntf::SystemStatsIntf::get_stack_usage_axis0(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_stack_usage_axis0(ptr); break;
-            case 11: *(decltype(ODriveIntf::SystemStatsIntf::get_stack_usage_axis1(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_stack_usage_axis1(ptr); break;
-            case 12: *(decltype(ODriveIntf::SystemStatsIntf::get_stack_usage_comms(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_stack_usage_comms(ptr); break;
-            case 13: *(decltype(ODriveIntf::SystemStatsIntf::get_stack_usage_usb(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_stack_usage_usb(ptr); break;
-            case 14: *(decltype(ODriveIntf::SystemStatsIntf::get_stack_usage_uart(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_stack_usage_uart(ptr); break;
-            case 15: *(decltype(ODriveIntf::SystemStatsIntf::get_stack_usage_usb_irq(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_stack_usage_usb_irq(ptr); break;
-            case 16: *(decltype(ODriveIntf::SystemStatsIntf::get_stack_usage_startup(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_stack_usage_startup(ptr); break;
-            case 17: *(decltype(ODriveIntf::SystemStatsIntf::get_stack_usage_can(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_stack_usage_can(ptr); break;
-            case 18: *(decltype(ODriveIntf::SystemStatsIntf::get_usb(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_usb(ptr); break;
-            case 19: *(decltype(ODriveIntf::SystemStatsIntf::get_i2c(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_i2c(ptr); break;
+            case 2: *(decltype(ODriveIntf::SystemStatsIntf::get_min_stack_space_axis(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_min_stack_space_axis(ptr); break;
+            case 3: *(decltype(ODriveIntf::SystemStatsIntf::get_min_stack_space_usb(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_min_stack_space_usb(ptr); break;
+            case 4: *(decltype(ODriveIntf::SystemStatsIntf::get_min_stack_space_uart(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_min_stack_space_uart(ptr); break;
+            case 5: *(decltype(ODriveIntf::SystemStatsIntf::get_min_stack_space_can(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_min_stack_space_can(ptr); break;
+            case 6: *(decltype(ODriveIntf::SystemStatsIntf::get_min_stack_space_usb_irq(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_min_stack_space_usb_irq(ptr); break;
+            case 7: *(decltype(ODriveIntf::SystemStatsIntf::get_min_stack_space_startup(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_min_stack_space_startup(ptr); break;
+            case 8: *(decltype(ODriveIntf::SystemStatsIntf::get_stack_usage_axis(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_stack_usage_axis(ptr); break;
+            case 9: *(decltype(ODriveIntf::SystemStatsIntf::get_stack_usage_usb(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_stack_usage_usb(ptr); break;
+            case 10: *(decltype(ODriveIntf::SystemStatsIntf::get_stack_usage_uart(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_stack_usage_uart(ptr); break;
+            case 11: *(decltype(ODriveIntf::SystemStatsIntf::get_stack_usage_usb_irq(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_stack_usage_usb_irq(ptr); break;
+            case 12: *(decltype(ODriveIntf::SystemStatsIntf::get_stack_usage_startup(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_stack_usage_startup(ptr); break;
+            case 13: *(decltype(ODriveIntf::SystemStatsIntf::get_stack_usage_can(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_stack_usage_can(ptr); break;
+            case 14: *(decltype(ODriveIntf::SystemStatsIntf::get_usb(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_usb(ptr); break;
+            case 15: *(decltype(ODriveIntf::SystemStatsIntf::get_i2c(std::declval<T*>()))*)(&res) = ODriveIntf::SystemStatsIntf::get_i2c(ptr); break;
         }
         return res;
     }
@@ -436,25 +432,46 @@ struct ODriveConfigTypeInfo : TypeInfo {
         T* ptr = *(T**)&obj;
         introspectable_storage_t res;
         switch (idx) {
-            case 0: *(decltype(ODriveIntf::ConfigIntf::get_enable_uart(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_enable_uart(ptr); break;
-            case 1: *(decltype(ODriveIntf::ConfigIntf::get_uart_baudrate(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_uart_baudrate(ptr); break;
-            case 2: *(decltype(ODriveIntf::ConfigIntf::get_enable_i2c_instead_of_can(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_enable_i2c_instead_of_can(ptr); break;
-            case 3: *(decltype(ODriveIntf::ConfigIntf::get_enable_ascii_protocol_on_usb(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_enable_ascii_protocol_on_usb(ptr); break;
-            case 4: *(decltype(ODriveIntf::ConfigIntf::get_max_regen_current(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_max_regen_current(ptr); break;
-            case 5: *(decltype(ODriveIntf::ConfigIntf::get_brake_resistance(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_brake_resistance(ptr); break;
-            case 6: *(decltype(ODriveIntf::ConfigIntf::get_dc_bus_undervoltage_trip_level(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_dc_bus_undervoltage_trip_level(ptr); break;
-            case 7: *(decltype(ODriveIntf::ConfigIntf::get_dc_bus_overvoltage_trip_level(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_dc_bus_overvoltage_trip_level(ptr); break;
-            case 8: *(decltype(ODriveIntf::ConfigIntf::get_enable_dc_bus_overvoltage_ramp(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_enable_dc_bus_overvoltage_ramp(ptr); break;
-            case 9: *(decltype(ODriveIntf::ConfigIntf::get_dc_bus_overvoltage_ramp_start(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_dc_bus_overvoltage_ramp_start(ptr); break;
-            case 10: *(decltype(ODriveIntf::ConfigIntf::get_dc_bus_overvoltage_ramp_end(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_dc_bus_overvoltage_ramp_end(ptr); break;
-            case 11: *(decltype(ODriveIntf::ConfigIntf::get_dc_max_positive_current(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_dc_max_positive_current(ptr); break;
-            case 12: *(decltype(ODriveIntf::ConfigIntf::get_dc_max_negative_current(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_dc_max_negative_current(ptr); break;
-            case 13: *(decltype(ODriveIntf::ConfigIntf::get_gpio1_pwm_mapping(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio1_pwm_mapping(ptr); break;
-            case 14: *(decltype(ODriveIntf::ConfigIntf::get_gpio2_pwm_mapping(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio2_pwm_mapping(ptr); break;
-            case 15: *(decltype(ODriveIntf::ConfigIntf::get_gpio3_pwm_mapping(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio3_pwm_mapping(ptr); break;
-            case 16: *(decltype(ODriveIntf::ConfigIntf::get_gpio4_pwm_mapping(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio4_pwm_mapping(ptr); break;
-            case 17: *(decltype(ODriveIntf::ConfigIntf::get_gpio3_analog_mapping(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio3_analog_mapping(ptr); break;
-            case 18: *(decltype(ODriveIntf::ConfigIntf::get_gpio4_analog_mapping(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio4_analog_mapping(ptr); break;
+            case 0: *(decltype(ODriveIntf::ConfigIntf::get_gpio1_mode(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio1_mode(ptr); break;
+            case 1: *(decltype(ODriveIntf::ConfigIntf::get_gpio2_mode(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio2_mode(ptr); break;
+            case 2: *(decltype(ODriveIntf::ConfigIntf::get_gpio3_mode(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio3_mode(ptr); break;
+            case 3: *(decltype(ODriveIntf::ConfigIntf::get_gpio4_mode(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio4_mode(ptr); break;
+            case 4: *(decltype(ODriveIntf::ConfigIntf::get_gpio5_mode(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio5_mode(ptr); break;
+            case 5: *(decltype(ODriveIntf::ConfigIntf::get_gpio6_mode(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio6_mode(ptr); break;
+            case 6: *(decltype(ODriveIntf::ConfigIntf::get_gpio7_mode(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio7_mode(ptr); break;
+            case 7: *(decltype(ODriveIntf::ConfigIntf::get_gpio8_mode(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio8_mode(ptr); break;
+            case 8: *(decltype(ODriveIntf::ConfigIntf::get_gpio9_mode(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio9_mode(ptr); break;
+            case 9: *(decltype(ODriveIntf::ConfigIntf::get_gpio10_mode(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio10_mode(ptr); break;
+            case 10: *(decltype(ODriveIntf::ConfigIntf::get_gpio11_mode(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio11_mode(ptr); break;
+            case 11: *(decltype(ODriveIntf::ConfigIntf::get_gpio12_mode(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio12_mode(ptr); break;
+            case 12: *(decltype(ODriveIntf::ConfigIntf::get_gpio13_mode(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio13_mode(ptr); break;
+            case 13: *(decltype(ODriveIntf::ConfigIntf::get_gpio14_mode(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio14_mode(ptr); break;
+            case 14: *(decltype(ODriveIntf::ConfigIntf::get_gpio15_mode(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio15_mode(ptr); break;
+            case 15: *(decltype(ODriveIntf::ConfigIntf::get_gpio16_mode(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio16_mode(ptr); break;
+            case 16: *(decltype(ODriveIntf::ConfigIntf::get_enable_uart0(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_enable_uart0(ptr); break;
+            case 17: *(decltype(ODriveIntf::ConfigIntf::get_enable_uart1(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_enable_uart1(ptr); break;
+            case 18: *(decltype(ODriveIntf::ConfigIntf::get_enable_uart2(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_enable_uart2(ptr); break;
+            case 19: *(decltype(ODriveIntf::ConfigIntf::get_uart0_baudrate(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_uart0_baudrate(ptr); break;
+            case 20: *(decltype(ODriveIntf::ConfigIntf::get_uart1_baudrate(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_uart1_baudrate(ptr); break;
+            case 21: *(decltype(ODriveIntf::ConfigIntf::get_uart2_baudrate(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_uart2_baudrate(ptr); break;
+            case 22: *(decltype(ODriveIntf::ConfigIntf::get_enable_can0(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_enable_can0(ptr); break;
+            case 23: *(decltype(ODriveIntf::ConfigIntf::get_enable_i2c0(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_enable_i2c0(ptr); break;
+            case 24: *(decltype(ODriveIntf::ConfigIntf::get_enable_ascii_protocol_on_usb(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_enable_ascii_protocol_on_usb(ptr); break;
+            case 25: *(decltype(ODriveIntf::ConfigIntf::get_max_regen_current(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_max_regen_current(ptr); break;
+            case 26: *(decltype(ODriveIntf::ConfigIntf::get_brake_resistance(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_brake_resistance(ptr); break;
+            case 27: *(decltype(ODriveIntf::ConfigIntf::get_dc_bus_undervoltage_trip_level(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_dc_bus_undervoltage_trip_level(ptr); break;
+            case 28: *(decltype(ODriveIntf::ConfigIntf::get_dc_bus_overvoltage_trip_level(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_dc_bus_overvoltage_trip_level(ptr); break;
+            case 29: *(decltype(ODriveIntf::ConfigIntf::get_enable_dc_bus_overvoltage_ramp(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_enable_dc_bus_overvoltage_ramp(ptr); break;
+            case 30: *(decltype(ODriveIntf::ConfigIntf::get_dc_bus_overvoltage_ramp_start(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_dc_bus_overvoltage_ramp_start(ptr); break;
+            case 31: *(decltype(ODriveIntf::ConfigIntf::get_dc_bus_overvoltage_ramp_end(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_dc_bus_overvoltage_ramp_end(ptr); break;
+            case 32: *(decltype(ODriveIntf::ConfigIntf::get_dc_max_positive_current(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_dc_max_positive_current(ptr); break;
+            case 33: *(decltype(ODriveIntf::ConfigIntf::get_dc_max_negative_current(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_dc_max_negative_current(ptr); break;
+            case 34: *(decltype(ODriveIntf::ConfigIntf::get_gpio1_pwm_mapping(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio1_pwm_mapping(ptr); break;
+            case 35: *(decltype(ODriveIntf::ConfigIntf::get_gpio2_pwm_mapping(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio2_pwm_mapping(ptr); break;
+            case 36: *(decltype(ODriveIntf::ConfigIntf::get_gpio3_pwm_mapping(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio3_pwm_mapping(ptr); break;
+            case 37: *(decltype(ODriveIntf::ConfigIntf::get_gpio4_pwm_mapping(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio4_pwm_mapping(ptr); break;
+            case 38: *(decltype(ODriveIntf::ConfigIntf::get_gpio3_analog_mapping(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio3_analog_mapping(ptr); break;
+            case 39: *(decltype(ODriveIntf::ConfigIntf::get_gpio4_analog_mapping(std::declval<T*>()))*)(&res) = ODriveIntf::ConfigIntf::get_gpio4_analog_mapping(ptr); break;
         }
         return res;
     }
@@ -608,23 +625,6 @@ struct ODriveMotorCurrentControlTypeInfo : TypeInfo {
             case 14: *(decltype(ODriveIntf::MotorIntf::CurrentControlIntf::get_acim_rotor_flux(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::CurrentControlIntf::get_acim_rotor_flux(ptr); break;
             case 15: *(decltype(ODriveIntf::MotorIntf::CurrentControlIntf::get_async_phase_vel(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::CurrentControlIntf::get_async_phase_vel(ptr); break;
             case 16: *(decltype(ODriveIntf::MotorIntf::CurrentControlIntf::get_async_phase_offset(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::CurrentControlIntf::get_async_phase_offset(ptr); break;
-        }
-        return res;
-    }
-};
-
-template<typename T>
-struct ODriveMotorGateDriverTypeInfo : TypeInfo {
-    using TypeInfo::TypeInfo;
-    static const PropertyInfo property_table[];
-    static const ODriveMotorGateDriverTypeInfo<T> singleton;
-    static Introspectable make_introspectable(T& obj) { return TypeInfo::make_introspectable(&obj, &singleton); }
-
-    introspectable_storage_t get_child(introspectable_storage_t obj, size_t idx) const override {
-        T* ptr = *(T**)&obj;
-        introspectable_storage_t res;
-        switch (idx) {
-            case 0: *(decltype(ODriveIntf::MotorIntf::GateDriverIntf::get_drv_fault(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::GateDriverIntf::get_drv_fault(ptr); break;
         }
         return res;
     }
@@ -872,6 +872,7 @@ const PropertyInfo ODriveTypeInfo<T>::property_table[] = {
     {"system_stats", &ODriveSystemStatsTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::get_system_stats(std::declval<T*>()))>>::singleton},
     {"config", &ODriveConfigTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::get_config(std::declval<T*>()))>>::singleton},
     {"user_config_loaded", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::get_user_config_loaded(std::declval<T*>()))>>::singleton},
+    {"misconfigured", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::get_misconfigured(std::declval<T*>()))>>::singleton},
     {"axis0", &ODriveAxisTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::get_axis0(std::declval<T*>()))>>::singleton},
     {"axis1", &ODriveAxisTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::get_axis1(std::declval<T*>()))>>::singleton},
     {"can", &ODriveCanTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::get_can(std::declval<T*>()))>>::singleton},
@@ -979,7 +980,6 @@ const PropertyInfo ODriveMotorTypeInfo<T>::property_table[] = {
     {"phase_current_rev_gain", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::get_phase_current_rev_gain(std::declval<T*>()))>>::singleton},
     {"effective_current_lim", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::get_effective_current_lim(std::declval<T*>()))>>::singleton},
     {"current_control", &ODriveMotorCurrentControlTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::get_current_control(std::declval<T*>()))>>::singleton},
-    {"gate_driver", &ODriveMotorGateDriverTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::get_gate_driver(std::declval<T*>()))>>::singleton},
     {"timing_log", &ODriveMotorTimingLogTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::get_timing_log(std::declval<T*>()))>>::singleton},
     {"config", &ODriveMotorConfigTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::get_config(std::declval<T*>()))>>::singleton},
 };
@@ -1067,17 +1067,13 @@ template<typename T>
 const PropertyInfo ODriveSystemStatsTypeInfo<T>::property_table[] = {
     {"uptime", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::SystemStatsIntf::get_uptime(std::declval<T*>()))>>::singleton},
     {"min_heap_space", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::SystemStatsIntf::get_min_heap_space(std::declval<T*>()))>>::singleton},
-    {"min_stack_space_axis0", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::SystemStatsIntf::get_min_stack_space_axis0(std::declval<T*>()))>>::singleton},
-    {"min_stack_space_axis1", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::SystemStatsIntf::get_min_stack_space_axis1(std::declval<T*>()))>>::singleton},
-    {"min_stack_space_comms", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::SystemStatsIntf::get_min_stack_space_comms(std::declval<T*>()))>>::singleton},
+    {"min_stack_space_axis", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::SystemStatsIntf::get_min_stack_space_axis(std::declval<T*>()))>>::singleton},
     {"min_stack_space_usb", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::SystemStatsIntf::get_min_stack_space_usb(std::declval<T*>()))>>::singleton},
     {"min_stack_space_uart", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::SystemStatsIntf::get_min_stack_space_uart(std::declval<T*>()))>>::singleton},
     {"min_stack_space_can", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::SystemStatsIntf::get_min_stack_space_can(std::declval<T*>()))>>::singleton},
     {"min_stack_space_usb_irq", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::SystemStatsIntf::get_min_stack_space_usb_irq(std::declval<T*>()))>>::singleton},
     {"min_stack_space_startup", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::SystemStatsIntf::get_min_stack_space_startup(std::declval<T*>()))>>::singleton},
-    {"stack_usage_axis0", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::SystemStatsIntf::get_stack_usage_axis0(std::declval<T*>()))>>::singleton},
-    {"stack_usage_axis1", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::SystemStatsIntf::get_stack_usage_axis1(std::declval<T*>()))>>::singleton},
-    {"stack_usage_comms", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::SystemStatsIntf::get_stack_usage_comms(std::declval<T*>()))>>::singleton},
+    {"stack_usage_axis", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::SystemStatsIntf::get_stack_usage_axis(std::declval<T*>()))>>::singleton},
     {"stack_usage_usb", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::SystemStatsIntf::get_stack_usage_usb(std::declval<T*>()))>>::singleton},
     {"stack_usage_uart", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::SystemStatsIntf::get_stack_usage_uart(std::declval<T*>()))>>::singleton},
     {"stack_usage_usb_irq", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::SystemStatsIntf::get_stack_usage_usb_irq(std::declval<T*>()))>>::singleton},
@@ -1113,9 +1109,30 @@ const ODriveSystemStatsI2CTypeInfo<T> ODriveSystemStatsI2CTypeInfo<T>::singleton
 
 template<typename T>
 const PropertyInfo ODriveConfigTypeInfo<T>::property_table[] = {
-    {"enable_uart", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_enable_uart(std::declval<T*>()))>>::singleton},
-    {"uart_baudrate", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_uart_baudrate(std::declval<T*>()))>>::singleton},
-    {"enable_i2c_instead_of_can", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_enable_i2c_instead_of_can(std::declval<T*>()))>>::singleton},
+    {"gpio1_mode", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_gpio1_mode(std::declval<T*>()))>>::singleton},
+    {"gpio2_mode", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_gpio2_mode(std::declval<T*>()))>>::singleton},
+    {"gpio3_mode", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_gpio3_mode(std::declval<T*>()))>>::singleton},
+    {"gpio4_mode", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_gpio4_mode(std::declval<T*>()))>>::singleton},
+    {"gpio5_mode", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_gpio5_mode(std::declval<T*>()))>>::singleton},
+    {"gpio6_mode", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_gpio6_mode(std::declval<T*>()))>>::singleton},
+    {"gpio7_mode", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_gpio7_mode(std::declval<T*>()))>>::singleton},
+    {"gpio8_mode", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_gpio8_mode(std::declval<T*>()))>>::singleton},
+    {"gpio9_mode", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_gpio9_mode(std::declval<T*>()))>>::singleton},
+    {"gpio10_mode", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_gpio10_mode(std::declval<T*>()))>>::singleton},
+    {"gpio11_mode", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_gpio11_mode(std::declval<T*>()))>>::singleton},
+    {"gpio12_mode", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_gpio12_mode(std::declval<T*>()))>>::singleton},
+    {"gpio13_mode", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_gpio13_mode(std::declval<T*>()))>>::singleton},
+    {"gpio14_mode", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_gpio14_mode(std::declval<T*>()))>>::singleton},
+    {"gpio15_mode", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_gpio15_mode(std::declval<T*>()))>>::singleton},
+    {"gpio16_mode", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_gpio16_mode(std::declval<T*>()))>>::singleton},
+    {"enable_uart0", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_enable_uart0(std::declval<T*>()))>>::singleton},
+    {"enable_uart1", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_enable_uart1(std::declval<T*>()))>>::singleton},
+    {"enable_uart2", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_enable_uart2(std::declval<T*>()))>>::singleton},
+    {"uart0_baudrate", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_uart0_baudrate(std::declval<T*>()))>>::singleton},
+    {"uart1_baudrate", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_uart1_baudrate(std::declval<T*>()))>>::singleton},
+    {"uart2_baudrate", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_uart2_baudrate(std::declval<T*>()))>>::singleton},
+    {"enable_can0", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_enable_can0(std::declval<T*>()))>>::singleton},
+    {"enable_i2c0", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_enable_i2c0(std::declval<T*>()))>>::singleton},
     {"enable_ascii_protocol_on_usb", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_enable_ascii_protocol_on_usb(std::declval<T*>()))>>::singleton},
     {"max_regen_current", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_max_regen_current(std::declval<T*>()))>>::singleton},
     {"brake_resistance", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::ConfigIntf::get_brake_resistance(std::declval<T*>()))>>::singleton},
@@ -1234,14 +1251,6 @@ const PropertyInfo ODriveMotorCurrentControlTypeInfo<T>::property_table[] = {
 };
 template<typename T>
 const ODriveMotorCurrentControlTypeInfo<T> ODriveMotorCurrentControlTypeInfo<T>::singleton{ODriveMotorCurrentControlTypeInfo<T>::property_table, sizeof(ODriveMotorCurrentControlTypeInfo<T>::property_table) / sizeof(ODriveMotorCurrentControlTypeInfo<T>::property_table[0])};
-
-
-template<typename T>
-const PropertyInfo ODriveMotorGateDriverTypeInfo<T>::property_table[] = {
-    {"drv_fault", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::GateDriverIntf::get_drv_fault(std::declval<T*>()))>>::singleton},
-};
-template<typename T>
-const ODriveMotorGateDriverTypeInfo<T> ODriveMotorGateDriverTypeInfo<T>::singleton{ODriveMotorGateDriverTypeInfo<T>::property_table, sizeof(ODriveMotorGateDriverTypeInfo<T>::property_table) / sizeof(ODriveMotorGateDriverTypeInfo<T>::property_table[0])};
 
 
 template<typename T>

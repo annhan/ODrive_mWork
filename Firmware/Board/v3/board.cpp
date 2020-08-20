@@ -107,6 +107,7 @@ std::array<Axis, AXIS_COUNT> axes{{
         0, // axis_num
         1, // step_gpio_pin
         2, // dir_gpio_pin
+        3,
         (osPriority)(osPriorityHigh + (osPriority)1), // thread_priority
         encoders[0], // encoder
         sensorless_estimators[0], // sensorless_estimator
@@ -122,6 +123,7 @@ std::array<Axis, AXIS_COUNT> axes{{
 #if HW_VERSION_MAJOR == 3 && HW_VERSION_MINOR >= 5
         7, // step_gpio_pin
         8, // dir_gpio_pin
+        6, //enable pin
 #else
         3, // step_gpio_pin
         4, // dir_gpio_pin

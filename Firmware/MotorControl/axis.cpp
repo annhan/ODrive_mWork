@@ -9,8 +9,8 @@
 
 Axis::Axis(int axis_num,
            uint16_t default_step_gpio_pin,
-           uint16_t default_en_gpio_pin,
            uint16_t default_dir_gpio_pin,
+           uint16_t default_en_gpio_pin,
            osPriority thread_priority,
            Encoder& encoder,
            SensorlessEstimator& sensorless_estimator,
@@ -22,9 +22,9 @@ Axis::Axis(int axis_num,
            Endstop& min_endstop,
            Endstop& max_endstop)
     : axis_num_(axis_num),
-      default_step_gpio_pin_(default_step_gpio_pin),
-      default_en_gpio_pin_(default_en_gpio_pin),
+      default_step_gpio_pin_(default_step_gpio_pin),     
       default_dir_gpio_pin_(default_dir_gpio_pin),
+      default_en_gpio_pin_(default_en_gpio_pin),
       thread_priority_(thread_priority),
       encoder_(encoder),
       sensorless_estimator_(sensorless_estimator),
@@ -97,7 +97,7 @@ void Axis::clear_config() {
     config_.step_gpio_pin = default_step_gpio_pin_;
     config_.en_gpio_pin = default_en_gpio_pin_;
     config_.dir_gpio_pin = default_dir_gpio_pin_;
-    config_.use_enable_pin
+    config_.use_enable_pin = false;
     config_.can_node_id = axis_num_;
 }
 
@@ -146,7 +146,6 @@ void Axis::decode_step_dir_pins() {
     step_gpio_ = get_gpio(config_.step_gpio_pin);
     dir_gpio_ = get_gpio(config_.dir_gpio_pin);
     en_gpio_ = get_gpio(config_.en_gpio_pin);
-}
 }
 
 // @brief (de)activates step/dir input
@@ -326,7 +325,8 @@ void Axis::enable_pin_check() {
     if (error_ != ERROR_NONE ) return;
     if (encoder_.mWorkFirstTime_) return;
     if (config_.use_enable_pin) {
-        bool enable = HAL_GPIO_ReadPin(en_port_, en_pin_) ^ config_.enable_pin_active_low;
+        bool enable = en_gpio_.read() ^ config_.enable_pin_active_low;
+        //bool enable = HAL_GPIO_ReadPin(en_port_, en_pin_) ^ config_.enable_pin_active_low;
         switch(current_state_){
             case AXIS_STATE_IDLE: 
                 if (enable) requested_state_ = AXIS_STATE_CLOSED_LOOP_CONTROL ;

@@ -84,6 +84,7 @@ public:
     Axis(int axis_num,
             uint16_t default_step_gpio_pin,
             uint16_t default_dir_gpio_pin,
+            uint16_t default_en_gpio_pin,
             osPriority thread_priority,
             Encoder& encoder,
             SensorlessEstimator& sensorless_estimator,
@@ -213,8 +214,8 @@ public:
     // hardware config
     int axis_num_;
     uint16_t default_step_gpio_pin_;
-    uint16_t default_en_gpio_pin_;
     uint16_t default_dir_gpio_pin_;
+    uint16_t default_en_gpio_pin_;
     osPriority thread_priority_;
     Config_t config_;
 
@@ -251,7 +252,7 @@ public:
     uint16_t en_pin_;*/
     Stm32Gpio step_gpio_;
     Stm32Gpio dir_gpio_;
-    Stm32Gpio en_port_;
+    Stm32Gpio en_gpio_;
 
     AxisState requested_state_ = AXIS_STATE_STARTUP_SEQUENCE;
     std::array<AxisState, 10> task_chain_ = { AXIS_STATE_UNDEFINED };

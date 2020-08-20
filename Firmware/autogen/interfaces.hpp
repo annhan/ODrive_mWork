@@ -9,6 +9,10 @@
  * interfaces.
  *
  */
+#ifndef __FIBRE_INTERFACES_HPP
+#define __FIBRE_INTERFACES_HPP
+
+#include <fibre/protocol.hpp>
 
 #pragma GCC push_options
 #pragma GCC optimize ("s")
@@ -287,51 +291,32 @@ public:
             template<typename T> static inline auto get_async_phase_offset(T* obj) { return Property<float>{&obj->async_phase_offset}; }
             template<typename T> static inline void get_async_phase_offset(T* obj, void* ptr) { new (ptr) Property<float>{&obj->async_phase_offset}; }
         };
-        class GateDriverIntf {
-        public:
-            enum DrvFault {
-                DRV_FAULT_NO_FAULT               = 0x00000000,
-                DRV_FAULT_FET_LOW_C_OVERCURRENT  = 0x00000001,
-                DRV_FAULT_FET_HIGH_C_OVERCURRENT = 0x00000002,
-                DRV_FAULT_FET_LOW_B_OVERCURRENT  = 0x00000004,
-                DRV_FAULT_FET_HIGH_B_OVERCURRENT = 0x00000008,
-                DRV_FAULT_FET_LOW_A_OVERCURRENT  = 0x00000010,
-                DRV_FAULT_FET_HIGH_A_OVERCURRENT = 0x00000020,
-                DRV_FAULT_OVERTEMPERATURE_WARNING = 0x00000040,
-                DRV_FAULT_OVERTEMPERATURE_SHUTDOWN = 0x00000080,
-                DRV_FAULT_P_VDD_UNDERVOLTAGE     = 0x00000100,
-                DRV_FAULT_G_VDD_UNDERVOLTAGE     = 0x00000200,
-                DRV_FAULT_G_VDD_OVERVOLTAGE      = 0x00000400,
-            };
-            template<typename T> static inline auto get_drv_fault(T* obj) { return Property<const ODriveIntf::MotorIntf::GateDriverIntf::DrvFault>{&obj->drv_fault}; }
-            template<typename T> static inline void get_drv_fault(T* obj, void* ptr) { new (ptr) Property<const ODriveIntf::MotorIntf::GateDriverIntf::DrvFault>{&obj->drv_fault}; }
-        };
         class TimingLogIntf {
         public:
-            template<typename T> static inline auto get_general(T* obj) { return Property<const uint16_t>{&obj->get(TIMING_LOG_GENERAL)}; }
-            template<typename T> static inline void get_general(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(TIMING_LOG_GENERAL)}; }
-            template<typename T> static inline auto get_adc_cb_i(T* obj) { return Property<const uint16_t>{&obj->get(TIMING_LOG_ADC_CB_I)}; }
-            template<typename T> static inline void get_adc_cb_i(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(TIMING_LOG_ADC_CB_I)}; }
-            template<typename T> static inline auto get_adc_cb_dc(T* obj) { return Property<const uint16_t>{&obj->get(TIMING_LOG_ADC_CB_DC)}; }
-            template<typename T> static inline void get_adc_cb_dc(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(TIMING_LOG_ADC_CB_DC)}; }
-            template<typename T> static inline auto get_meas_r(T* obj) { return Property<const uint16_t>{&obj->get(TIMING_LOG_MEAS_R)}; }
-            template<typename T> static inline void get_meas_r(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(TIMING_LOG_MEAS_R)}; }
-            template<typename T> static inline auto get_meas_l(T* obj) { return Property<const uint16_t>{&obj->get(TIMING_LOG_MEAS_L)}; }
-            template<typename T> static inline void get_meas_l(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(TIMING_LOG_MEAS_L)}; }
-            template<typename T> static inline auto get_enc_calib(T* obj) { return Property<const uint16_t>{&obj->get(TIMING_LOG_ENC_CALIB)}; }
-            template<typename T> static inline void get_enc_calib(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(TIMING_LOG_ENC_CALIB)}; }
-            template<typename T> static inline auto get_idx_search(T* obj) { return Property<const uint16_t>{&obj->get(TIMING_LOG_IDX_SEARCH)}; }
-            template<typename T> static inline void get_idx_search(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(TIMING_LOG_IDX_SEARCH)}; }
-            template<typename T> static inline auto get_foc_voltage(T* obj) { return Property<const uint16_t>{&obj->get(TIMING_LOG_FOC_VOLTAGE)}; }
-            template<typename T> static inline void get_foc_voltage(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(TIMING_LOG_FOC_VOLTAGE)}; }
-            template<typename T> static inline auto get_foc_current(T* obj) { return Property<const uint16_t>{&obj->get(TIMING_LOG_FOC_CURRENT)}; }
-            template<typename T> static inline void get_foc_current(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(TIMING_LOG_FOC_CURRENT)}; }
-            template<typename T> static inline auto get_spi_start(T* obj) { return Property<const uint16_t>{&obj->get(TIMING_LOG_SPI_START)}; }
-            template<typename T> static inline void get_spi_start(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(TIMING_LOG_SPI_START)}; }
-            template<typename T> static inline auto get_sample_now(T* obj) { return Property<const uint16_t>{&obj->get(TIMING_LOG_SAMPLE_NOW)}; }
-            template<typename T> static inline void get_sample_now(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(TIMING_LOG_SAMPLE_NOW)}; }
-            template<typename T> static inline auto get_spi_end(T* obj) { return Property<const uint16_t>{&obj->get(TIMING_LOG_SPI_END)}; }
-            template<typename T> static inline void get_spi_end(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(TIMING_LOG_SPI_END)}; }
+            template<typename T> static inline auto get_general(T* obj) { return Property<const uint16_t>{&obj->get(0)}; }
+            template<typename T> static inline void get_general(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(0)}; }
+            template<typename T> static inline auto get_adc_cb_i(T* obj) { return Property<const uint16_t>{&obj->get(1)}; }
+            template<typename T> static inline void get_adc_cb_i(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(1)}; }
+            template<typename T> static inline auto get_adc_cb_dc(T* obj) { return Property<const uint16_t>{&obj->get(2)}; }
+            template<typename T> static inline void get_adc_cb_dc(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(2)}; }
+            template<typename T> static inline auto get_meas_r(T* obj) { return Property<const uint16_t>{&obj->get(3)}; }
+            template<typename T> static inline void get_meas_r(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(3)}; }
+            template<typename T> static inline auto get_meas_l(T* obj) { return Property<const uint16_t>{&obj->get(4)}; }
+            template<typename T> static inline void get_meas_l(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(4)}; }
+            template<typename T> static inline auto get_enc_calib(T* obj) { return Property<const uint16_t>{&obj->get(5)}; }
+            template<typename T> static inline void get_enc_calib(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(5)}; }
+            template<typename T> static inline auto get_idx_search(T* obj) { return Property<const uint16_t>{&obj->get(6)}; }
+            template<typename T> static inline void get_idx_search(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(6)}; }
+            template<typename T> static inline auto get_foc_voltage(T* obj) { return Property<const uint16_t>{&obj->get(7)}; }
+            template<typename T> static inline void get_foc_voltage(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(7)}; }
+            template<typename T> static inline auto get_foc_current(T* obj) { return Property<const uint16_t>{&obj->get(8)}; }
+            template<typename T> static inline void get_foc_current(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(8)}; }
+            template<typename T> static inline auto get_spi_start(T* obj) { return Property<const uint16_t>{&obj->get(9)}; }
+            template<typename T> static inline void get_spi_start(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(9)}; }
+            template<typename T> static inline auto get_sample_now(T* obj) { return Property<const uint16_t>{&obj->get(10)}; }
+            template<typename T> static inline void get_sample_now(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(10)}; }
+            template<typename T> static inline auto get_spi_end(T* obj) { return Property<const uint16_t>{&obj->get(11)}; }
+            template<typename T> static inline void get_spi_end(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->get(11)}; }
         };
         class ConfigIntf {
         public:
@@ -428,7 +413,6 @@ public:
         template<typename T> static inline auto get_effective_current_lim(T* obj) { return Property<const float>{&obj->effective_current_lim_}; }
         template<typename T> static inline void get_effective_current_lim(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->effective_current_lim_}; }
         template<typename T> static inline auto get_current_control(T* obj) { return &obj->current_control_; }
-        template<typename T> static inline auto get_gate_driver(T* obj) { return &obj->gate_driver_exported_; }
         template<typename T> static inline auto get_timing_log(T* obj) { return &obj->timing_log_; }
         template<typename T> static inline auto get_config(T* obj) { return &obj->config_; }
     };
@@ -749,12 +733,8 @@ public:
         template<typename T> static inline void get_uptime(T* obj, void* ptr) { new (ptr) Property<const uint32_t>{&obj->uptime}; }
         template<typename T> static inline auto get_min_heap_space(T* obj) { return Property<const uint32_t>{&obj->min_heap_space}; }
         template<typename T> static inline void get_min_heap_space(T* obj, void* ptr) { new (ptr) Property<const uint32_t>{&obj->min_heap_space}; }
-        template<typename T> static inline auto get_min_stack_space_axis0(T* obj) { return Property<const uint32_t>{&obj->min_stack_space_axis0}; }
-        template<typename T> static inline void get_min_stack_space_axis0(T* obj, void* ptr) { new (ptr) Property<const uint32_t>{&obj->min_stack_space_axis0}; }
-        template<typename T> static inline auto get_min_stack_space_axis1(T* obj) { return Property<const uint32_t>{&obj->min_stack_space_axis1}; }
-        template<typename T> static inline void get_min_stack_space_axis1(T* obj, void* ptr) { new (ptr) Property<const uint32_t>{&obj->min_stack_space_axis1}; }
-        template<typename T> static inline auto get_min_stack_space_comms(T* obj) { return Property<const uint32_t>{&obj->min_stack_space_comms}; }
-        template<typename T> static inline void get_min_stack_space_comms(T* obj, void* ptr) { new (ptr) Property<const uint32_t>{&obj->min_stack_space_comms}; }
+        template<typename T> static inline auto get_min_stack_space_axis(T* obj) { return Property<const uint32_t>{&obj->min_stack_space_axis}; }
+        template<typename T> static inline void get_min_stack_space_axis(T* obj, void* ptr) { new (ptr) Property<const uint32_t>{&obj->min_stack_space_axis}; }
         template<typename T> static inline auto get_min_stack_space_usb(T* obj) { return Property<const uint32_t>{&obj->min_stack_space_usb}; }
         template<typename T> static inline void get_min_stack_space_usb(T* obj, void* ptr) { new (ptr) Property<const uint32_t>{&obj->min_stack_space_usb}; }
         template<typename T> static inline auto get_min_stack_space_uart(T* obj) { return Property<const uint32_t>{&obj->min_stack_space_uart}; }
@@ -765,12 +745,8 @@ public:
         template<typename T> static inline void get_min_stack_space_usb_irq(T* obj, void* ptr) { new (ptr) Property<const uint32_t>{&obj->min_stack_space_usb_irq}; }
         template<typename T> static inline auto get_min_stack_space_startup(T* obj) { return Property<const uint32_t>{&obj->min_stack_space_startup}; }
         template<typename T> static inline void get_min_stack_space_startup(T* obj, void* ptr) { new (ptr) Property<const uint32_t>{&obj->min_stack_space_startup}; }
-        template<typename T> static inline auto get_stack_usage_axis0(T* obj) { return Property<const uint32_t>{&obj->stack_usage_axis0}; }
-        template<typename T> static inline void get_stack_usage_axis0(T* obj, void* ptr) { new (ptr) Property<const uint32_t>{&obj->stack_usage_axis0}; }
-        template<typename T> static inline auto get_stack_usage_axis1(T* obj) { return Property<const uint32_t>{&obj->stack_usage_axis1}; }
-        template<typename T> static inline void get_stack_usage_axis1(T* obj, void* ptr) { new (ptr) Property<const uint32_t>{&obj->stack_usage_axis1}; }
-        template<typename T> static inline auto get_stack_usage_comms(T* obj) { return Property<const uint32_t>{&obj->stack_usage_comms}; }
-        template<typename T> static inline void get_stack_usage_comms(T* obj, void* ptr) { new (ptr) Property<const uint32_t>{&obj->stack_usage_comms}; }
+        template<typename T> static inline auto get_stack_usage_axis(T* obj) { return Property<const uint32_t>{&obj->stack_usage_axis}; }
+        template<typename T> static inline void get_stack_usage_axis(T* obj, void* ptr) { new (ptr) Property<const uint32_t>{&obj->stack_usage_axis}; }
         template<typename T> static inline auto get_stack_usage_usb(T* obj) { return Property<const uint32_t>{&obj->stack_usage_usb}; }
         template<typename T> static inline void get_stack_usage_usb(T* obj, void* ptr) { new (ptr) Property<const uint32_t>{&obj->stack_usage_usb}; }
         template<typename T> static inline auto get_stack_usage_uart(T* obj) { return Property<const uint32_t>{&obj->stack_usage_uart}; }
@@ -786,12 +762,54 @@ public:
     };
     class ConfigIntf {
     public:
-        template<typename T> static inline auto get_enable_uart(T* obj) { return Property<bool>{&obj->enable_uart}; }
-        template<typename T> static inline void get_enable_uart(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->enable_uart}; }
-        template<typename T> static inline auto get_uart_baudrate(T* obj) { return Property<uint32_t>{&obj->uart_baudrate}; }
-        template<typename T> static inline void get_uart_baudrate(T* obj, void* ptr) { new (ptr) Property<uint32_t>{&obj->uart_baudrate}; }
-        template<typename T> static inline auto get_enable_i2c_instead_of_can(T* obj) { return Property<bool>{&obj->enable_i2c_instead_of_can}; }
-        template<typename T> static inline void get_enable_i2c_instead_of_can(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->enable_i2c_instead_of_can}; }
+        template<typename T> static inline auto get_gpio1_mode(T* obj) { return Property<ODriveIntf::GpioMode>{&obj->gpio_modes[1]}; }
+        template<typename T> static inline void get_gpio1_mode(T* obj, void* ptr) { new (ptr) Property<ODriveIntf::GpioMode>{&obj->gpio_modes[1]}; }
+        template<typename T> static inline auto get_gpio2_mode(T* obj) { return Property<ODriveIntf::GpioMode>{&obj->gpio_modes[2]}; }
+        template<typename T> static inline void get_gpio2_mode(T* obj, void* ptr) { new (ptr) Property<ODriveIntf::GpioMode>{&obj->gpio_modes[2]}; }
+        template<typename T> static inline auto get_gpio3_mode(T* obj) { return Property<ODriveIntf::GpioMode>{&obj->gpio_modes[3]}; }
+        template<typename T> static inline void get_gpio3_mode(T* obj, void* ptr) { new (ptr) Property<ODriveIntf::GpioMode>{&obj->gpio_modes[3]}; }
+        template<typename T> static inline auto get_gpio4_mode(T* obj) { return Property<ODriveIntf::GpioMode>{&obj->gpio_modes[4]}; }
+        template<typename T> static inline void get_gpio4_mode(T* obj, void* ptr) { new (ptr) Property<ODriveIntf::GpioMode>{&obj->gpio_modes[4]}; }
+        template<typename T> static inline auto get_gpio5_mode(T* obj) { return Property<ODriveIntf::GpioMode>{&obj->gpio_modes[5]}; }
+        template<typename T> static inline void get_gpio5_mode(T* obj, void* ptr) { new (ptr) Property<ODriveIntf::GpioMode>{&obj->gpio_modes[5]}; }
+        template<typename T> static inline auto get_gpio6_mode(T* obj) { return Property<ODriveIntf::GpioMode>{&obj->gpio_modes[6]}; }
+        template<typename T> static inline void get_gpio6_mode(T* obj, void* ptr) { new (ptr) Property<ODriveIntf::GpioMode>{&obj->gpio_modes[6]}; }
+        template<typename T> static inline auto get_gpio7_mode(T* obj) { return Property<ODriveIntf::GpioMode>{&obj->gpio_modes[7]}; }
+        template<typename T> static inline void get_gpio7_mode(T* obj, void* ptr) { new (ptr) Property<ODriveIntf::GpioMode>{&obj->gpio_modes[7]}; }
+        template<typename T> static inline auto get_gpio8_mode(T* obj) { return Property<ODriveIntf::GpioMode>{&obj->gpio_modes[8]}; }
+        template<typename T> static inline void get_gpio8_mode(T* obj, void* ptr) { new (ptr) Property<ODriveIntf::GpioMode>{&obj->gpio_modes[8]}; }
+        template<typename T> static inline auto get_gpio9_mode(T* obj) { return Property<ODriveIntf::GpioMode>{&obj->gpio_modes[9]}; }
+        template<typename T> static inline void get_gpio9_mode(T* obj, void* ptr) { new (ptr) Property<ODriveIntf::GpioMode>{&obj->gpio_modes[9]}; }
+        template<typename T> static inline auto get_gpio10_mode(T* obj) { return Property<ODriveIntf::GpioMode>{&obj->gpio_modes[10]}; }
+        template<typename T> static inline void get_gpio10_mode(T* obj, void* ptr) { new (ptr) Property<ODriveIntf::GpioMode>{&obj->gpio_modes[10]}; }
+        template<typename T> static inline auto get_gpio11_mode(T* obj) { return Property<ODriveIntf::GpioMode>{&obj->gpio_modes[11]}; }
+        template<typename T> static inline void get_gpio11_mode(T* obj, void* ptr) { new (ptr) Property<ODriveIntf::GpioMode>{&obj->gpio_modes[11]}; }
+        template<typename T> static inline auto get_gpio12_mode(T* obj) { return Property<ODriveIntf::GpioMode>{&obj->gpio_modes[12]}; }
+        template<typename T> static inline void get_gpio12_mode(T* obj, void* ptr) { new (ptr) Property<ODriveIntf::GpioMode>{&obj->gpio_modes[12]}; }
+        template<typename T> static inline auto get_gpio13_mode(T* obj) { return Property<ODriveIntf::GpioMode>{&obj->gpio_modes[13]}; }
+        template<typename T> static inline void get_gpio13_mode(T* obj, void* ptr) { new (ptr) Property<ODriveIntf::GpioMode>{&obj->gpio_modes[13]}; }
+        template<typename T> static inline auto get_gpio14_mode(T* obj) { return Property<ODriveIntf::GpioMode>{&obj->gpio_modes[14]}; }
+        template<typename T> static inline void get_gpio14_mode(T* obj, void* ptr) { new (ptr) Property<ODriveIntf::GpioMode>{&obj->gpio_modes[14]}; }
+        template<typename T> static inline auto get_gpio15_mode(T* obj) { return Property<ODriveIntf::GpioMode>{&obj->gpio_modes[15]}; }
+        template<typename T> static inline void get_gpio15_mode(T* obj, void* ptr) { new (ptr) Property<ODriveIntf::GpioMode>{&obj->gpio_modes[15]}; }
+        template<typename T> static inline auto get_gpio16_mode(T* obj) { return Property<ODriveIntf::GpioMode>{&obj->gpio_modes[16]}; }
+        template<typename T> static inline void get_gpio16_mode(T* obj, void* ptr) { new (ptr) Property<ODriveIntf::GpioMode>{&obj->gpio_modes[16]}; }
+        template<typename T> static inline auto get_enable_uart0(T* obj) { return Property<bool>{&obj->enable_uart0}; }
+        template<typename T> static inline void get_enable_uart0(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->enable_uart0}; }
+        template<typename T> static inline auto get_enable_uart1(T* obj) { return Property<bool>{&obj->enable_uart1}; }
+        template<typename T> static inline void get_enable_uart1(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->enable_uart1}; }
+        template<typename T> static inline auto get_enable_uart2(T* obj) { return Property<bool>{&obj->enable_uart2}; }
+        template<typename T> static inline void get_enable_uart2(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->enable_uart2}; }
+        template<typename T> static inline auto get_uart0_baudrate(T* obj) { return Property<uint32_t>{&obj->uart0_baudrate}; }
+        template<typename T> static inline void get_uart0_baudrate(T* obj, void* ptr) { new (ptr) Property<uint32_t>{&obj->uart0_baudrate}; }
+        template<typename T> static inline auto get_uart1_baudrate(T* obj) { return Property<uint32_t>{&obj->uart1_baudrate}; }
+        template<typename T> static inline void get_uart1_baudrate(T* obj, void* ptr) { new (ptr) Property<uint32_t>{&obj->uart1_baudrate}; }
+        template<typename T> static inline auto get_uart2_baudrate(T* obj) { return Property<uint32_t>{&obj->uart2_baudrate}; }
+        template<typename T> static inline void get_uart2_baudrate(T* obj, void* ptr) { new (ptr) Property<uint32_t>{&obj->uart2_baudrate}; }
+        template<typename T> static inline auto get_enable_can0(T* obj) { return Property<bool>{&obj->enable_can0}; }
+        template<typename T> static inline void get_enable_can0(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->enable_can0}; }
+        template<typename T> static inline auto get_enable_i2c0(T* obj) { return Property<bool>{&obj->enable_i2c0}; }
+        template<typename T> static inline void get_enable_i2c0(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->enable_i2c0}; }
         template<typename T> static inline auto get_enable_ascii_protocol_on_usb(T* obj) { return Property<bool>{&obj->enable_ascii_protocol_on_usb}; }
         template<typename T> static inline void get_enable_ascii_protocol_on_usb(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->enable_ascii_protocol_on_usb}; }
         template<typename T> static inline auto get_max_regen_current(T* obj) { return Property<float>{&obj->max_regen_current}; }
@@ -816,8 +834,22 @@ public:
         template<typename T> static inline auto get_gpio2_pwm_mapping(T* obj) { return &obj->pwm_mappings[1]; }
         template<typename T> static inline auto get_gpio3_pwm_mapping(T* obj) { return &obj->pwm_mappings[2]; }
         template<typename T> static inline auto get_gpio4_pwm_mapping(T* obj) { return &obj->pwm_mappings[3]; }
-        template<typename T> static inline auto get_gpio3_analog_mapping(T* obj) { return &obj->analog_mappings[2]; }
-        template<typename T> static inline auto get_gpio4_analog_mapping(T* obj) { return &obj->analog_mappings[3]; }
+        template<typename T> static inline auto get_gpio3_analog_mapping(T* obj) { return &obj->analog_mappings[3]; }
+        template<typename T> static inline auto get_gpio4_analog_mapping(T* obj) { return &obj->analog_mappings[4]; }
+    };
+    enum GpioMode {
+        GPIO_MODE_DIGITAL                = 0,
+        GPIO_MODE_ANALOG_IN              = 1,
+        GPIO_MODE_UART0                  = 2,
+        GPIO_MODE_UART1                  = 3,
+        GPIO_MODE_UART2                  = 4,
+        GPIO_MODE_CAN0                   = 5,
+        GPIO_MODE_I2C0                   = 6,
+        GPIO_MODE_SPI0                   = 7,
+        GPIO_MODE_PWM0                   = 8,
+        GPIO_MODE_ENC0                   = 9,
+        GPIO_MODE_ENC1                   = 10,
+        GPIO_MODE_ENC2                   = 11,
     };
     template<typename T> static inline auto get_vbus_voltage(T* obj) { return Property<const float>{&obj->vbus_voltage_}; }
     template<typename T> static inline void get_vbus_voltage(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->vbus_voltage_}; }
@@ -847,8 +879,10 @@ public:
     template<typename T> static inline void get_brake_resistor_saturated(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->brake_resistor_saturated_}; }
     template<typename T> static inline auto get_system_stats(T* obj) { return &obj->system_stats_; }
     template<typename T> static inline auto get_config(T* obj) { return &obj->config_; }
-    template<typename T> static inline auto get_user_config_loaded(T* obj) { return Property<const bool>{&obj->user_config_loaded_}; }
-    template<typename T> static inline void get_user_config_loaded(T* obj, void* ptr) { new (ptr) Property<const bool>{&obj->user_config_loaded_}; }
+    template<typename T> static inline auto get_user_config_loaded(T* obj) { return Property<const uint32_t>{&obj->user_config_loaded_}; }
+    template<typename T> static inline void get_user_config_loaded(T* obj, void* ptr) { new (ptr) Property<const uint32_t>{&obj->user_config_loaded_}; }
+    template<typename T> static inline auto get_misconfigured(T* obj) { return Property<const bool>{&obj->misconfigured_}; }
+    template<typename T> static inline void get_misconfigured(T* obj, void* ptr) { new (ptr) Property<const bool>{&obj->misconfigured_}; }
     template<typename T> static inline auto get_axis0(T* obj) { return &obj->get_axis(0); }
     template<typename T> static inline auto get_axis1(T* obj) { return &obj->get_axis(1); }
     template<typename T> static inline auto get_can(T* obj) { return &obj->get_can(); }
@@ -861,6 +895,8 @@ public:
     virtual void erase_configuration() = 0;
     virtual void reboot() = 0;
     virtual void enter_dfu_mode() = 0;
+    virtual uint32_t get_interrupt_status(int32_t irqn) = 0;
+    virtual uint32_t get_dma_status(uint8_t stream_num) = 0;
     int32_t test_function_in_delta_; // for internal use by Fibre
     template<typename T> static auto get_test_function_in_delta_(T* obj) { return Property<int32_t>{&obj->test_function_in_delta_}; }
     template<typename T> static void get_test_function_in_delta_(T* obj, void* ptr) { new (ptr) Property<int32_t>{&obj->test_function_in_delta_}; }
@@ -879,6 +915,18 @@ public:
     float get_adc_voltage_out_voltage_; // for internal use by Fibre
     template<typename T> static auto get_get_adc_voltage_out_voltage_(T* obj) { return Property<const float>{&obj->get_adc_voltage_out_voltage_}; }
     template<typename T> static void get_get_adc_voltage_out_voltage_(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->get_adc_voltage_out_voltage_}; }
+    int32_t get_interrupt_status_in_irqn_; // for internal use by Fibre
+    template<typename T> static auto get_get_interrupt_status_in_irqn_(T* obj) { return Property<int32_t>{&obj->get_interrupt_status_in_irqn_}; }
+    template<typename T> static void get_get_interrupt_status_in_irqn_(T* obj, void* ptr) { new (ptr) Property<int32_t>{&obj->get_interrupt_status_in_irqn_}; }
+    uint32_t get_interrupt_status_out_status_; // for internal use by Fibre
+    template<typename T> static auto get_get_interrupt_status_out_status_(T* obj) { return Property<const uint32_t>{&obj->get_interrupt_status_out_status_}; }
+    template<typename T> static void get_get_interrupt_status_out_status_(T* obj, void* ptr) { new (ptr) Property<const uint32_t>{&obj->get_interrupt_status_out_status_}; }
+    uint8_t get_dma_status_in_stream_num_; // for internal use by Fibre
+    template<typename T> static auto get_get_dma_status_in_stream_num_(T* obj) { return Property<uint8_t>{&obj->get_dma_status_in_stream_num_}; }
+    template<typename T> static void get_get_dma_status_in_stream_num_(T* obj, void* ptr) { new (ptr) Property<uint8_t>{&obj->get_dma_status_in_stream_num_}; }
+    uint32_t get_dma_status_out_status_; // for internal use by Fibre
+    template<typename T> static auto get_get_dma_status_out_status_(T* obj) { return Property<const uint32_t>{&obj->get_dma_status_out_status_}; }
+    template<typename T> static void get_get_dma_status_out_status_(T* obj, void* ptr) { new (ptr) Property<const uint32_t>{&obj->get_dma_status_out_status_}; }
 };
 
 // this is technically not thread-safe but practically it might be
@@ -914,14 +962,6 @@ inline ODriveIntf::MotorIntf::Error& operator &= (ODriveIntf::MotorIntf::Error &
 inline ODriveIntf::MotorIntf::Error& operator ^= (ODriveIntf::MotorIntf::Error &a, ODriveIntf::MotorIntf::Error b) { return reinterpret_cast<ODriveIntf::MotorIntf::Error&>(reinterpret_cast<std::underlying_type_t<ODriveIntf::MotorIntf::Error>&>(a) ^= static_cast<std::underlying_type_t<ODriveIntf::MotorIntf::Error>>(b)); }
 inline ODriveIntf::MotorIntf::Error operator ~ (ODriveIntf::MotorIntf::Error a) { return static_cast<ODriveIntf::MotorIntf::Error>(~static_cast<std::underlying_type_t<ODriveIntf::MotorIntf::Error>>(a)); }
 // this is technically not thread-safe but practically it might be
-inline ODriveIntf::MotorIntf::GateDriverIntf::DrvFault operator | (ODriveIntf::MotorIntf::GateDriverIntf::DrvFault a, ODriveIntf::MotorIntf::GateDriverIntf::DrvFault b) { return static_cast<ODriveIntf::MotorIntf::GateDriverIntf::DrvFault>(static_cast<std::underlying_type_t<ODriveIntf::MotorIntf::GateDriverIntf::DrvFault>>(a) | static_cast<std::underlying_type_t<ODriveIntf::MotorIntf::GateDriverIntf::DrvFault>>(b)); }
-inline ODriveIntf::MotorIntf::GateDriverIntf::DrvFault operator & (ODriveIntf::MotorIntf::GateDriverIntf::DrvFault a, ODriveIntf::MotorIntf::GateDriverIntf::DrvFault b) { return static_cast<ODriveIntf::MotorIntf::GateDriverIntf::DrvFault>(static_cast<std::underlying_type_t<ODriveIntf::MotorIntf::GateDriverIntf::DrvFault>>(a) & static_cast<std::underlying_type_t<ODriveIntf::MotorIntf::GateDriverIntf::DrvFault>>(b)); }
-inline ODriveIntf::MotorIntf::GateDriverIntf::DrvFault operator ^ (ODriveIntf::MotorIntf::GateDriverIntf::DrvFault a, ODriveIntf::MotorIntf::GateDriverIntf::DrvFault b) { return static_cast<ODriveIntf::MotorIntf::GateDriverIntf::DrvFault>(static_cast<std::underlying_type_t<ODriveIntf::MotorIntf::GateDriverIntf::DrvFault>>(a) ^ static_cast<std::underlying_type_t<ODriveIntf::MotorIntf::GateDriverIntf::DrvFault>>(b)); }
-inline ODriveIntf::MotorIntf::GateDriverIntf::DrvFault& operator |= (ODriveIntf::MotorIntf::GateDriverIntf::DrvFault &a, ODriveIntf::MotorIntf::GateDriverIntf::DrvFault b) { return reinterpret_cast<ODriveIntf::MotorIntf::GateDriverIntf::DrvFault&>(reinterpret_cast<std::underlying_type_t<ODriveIntf::MotorIntf::GateDriverIntf::DrvFault>&>(a) |= static_cast<std::underlying_type_t<ODriveIntf::MotorIntf::GateDriverIntf::DrvFault>>(b)); }
-inline ODriveIntf::MotorIntf::GateDriverIntf::DrvFault& operator &= (ODriveIntf::MotorIntf::GateDriverIntf::DrvFault &a, ODriveIntf::MotorIntf::GateDriverIntf::DrvFault b) { return reinterpret_cast<ODriveIntf::MotorIntf::GateDriverIntf::DrvFault&>(reinterpret_cast<std::underlying_type_t<ODriveIntf::MotorIntf::GateDriverIntf::DrvFault>&>(a) &= static_cast<std::underlying_type_t<ODriveIntf::MotorIntf::GateDriverIntf::DrvFault>>(b)); }
-inline ODriveIntf::MotorIntf::GateDriverIntf::DrvFault& operator ^= (ODriveIntf::MotorIntf::GateDriverIntf::DrvFault &a, ODriveIntf::MotorIntf::GateDriverIntf::DrvFault b) { return reinterpret_cast<ODriveIntf::MotorIntf::GateDriverIntf::DrvFault&>(reinterpret_cast<std::underlying_type_t<ODriveIntf::MotorIntf::GateDriverIntf::DrvFault>&>(a) ^= static_cast<std::underlying_type_t<ODriveIntf::MotorIntf::GateDriverIntf::DrvFault>>(b)); }
-inline ODriveIntf::MotorIntf::GateDriverIntf::DrvFault operator ~ (ODriveIntf::MotorIntf::GateDriverIntf::DrvFault a) { return static_cast<ODriveIntf::MotorIntf::GateDriverIntf::DrvFault>(~static_cast<std::underlying_type_t<ODriveIntf::MotorIntf::GateDriverIntf::DrvFault>>(a)); }
-// this is technically not thread-safe but practically it might be
 inline ODriveIntf::ControllerIntf::Error operator | (ODriveIntf::ControllerIntf::Error a, ODriveIntf::ControllerIntf::Error b) { return static_cast<ODriveIntf::ControllerIntf::Error>(static_cast<std::underlying_type_t<ODriveIntf::ControllerIntf::Error>>(a) | static_cast<std::underlying_type_t<ODriveIntf::ControllerIntf::Error>>(b)); }
 inline ODriveIntf::ControllerIntf::Error operator & (ODriveIntf::ControllerIntf::Error a, ODriveIntf::ControllerIntf::Error b) { return static_cast<ODriveIntf::ControllerIntf::Error>(static_cast<std::underlying_type_t<ODriveIntf::ControllerIntf::Error>>(a) & static_cast<std::underlying_type_t<ODriveIntf::ControllerIntf::Error>>(b)); }
 inline ODriveIntf::ControllerIntf::Error operator ^ (ODriveIntf::ControllerIntf::Error a, ODriveIntf::ControllerIntf::Error b) { return static_cast<ODriveIntf::ControllerIntf::Error>(static_cast<std::underlying_type_t<ODriveIntf::ControllerIntf::Error>>(a) ^ static_cast<std::underlying_type_t<ODriveIntf::ControllerIntf::Error>>(b)); }
@@ -949,3 +989,5 @@ inline ODriveIntf::SensorlessEstimatorIntf::Error operator ~ (ODriveIntf::Sensor
 
 
 #pragma GCC pop_options
+
+#endif // __FIBRE_INTERFACES_HPP
