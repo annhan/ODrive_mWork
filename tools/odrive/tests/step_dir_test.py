@@ -37,16 +37,14 @@ class TestStepDir():
             
             yield (odrive.axes[1], 7, gpio_conns[4], 8, gpio_conns[5])
 
-    def run_test(self, axis: ODriveAxisComponent, step_gpio_num: int, step_gpio: LinuxGpioComponent, dir_gpio_num: int, dir_gpio: LinuxGpioComponent, logger: Logger):
+    def run_test(self, axis: ODriveAxisComponent,  step_gpio_num: int, step_gpio: LinuxGpioComponent, dir_gpio_num: int, dir_gpio: LinuxGpioComponent, logger: Logger):
         step_gpio.config(output=True)
         step_gpio.write(False)
         dir_gpio.config(output=True)
         dir_gpio.write(True)
 
-        axis.parent.erase_config_and_reboot()
-        setattr(axis.parent.handle.config, 'gpio' + str(step_gpio_num) + '_mode', GPIO_MODE_DIGITAL)
-        setattr(axis.parent.handle.config, 'gpio' + str(dir_gpio_num) + '_mode', GPIO_MODE_DIGITAL)
-        axis.parent.save_config_and_reboot()
+        if axis.num == 0:
+            axis.parent.handle.config.enable_uart = False
         axis.handle.config.enable_step_dir = True
         axis.handle.config.step_dir_always_on = True # needed for testing
         axis.handle.config.step_gpio_pin = step_gpio_num
@@ -54,7 +52,6 @@ class TestStepDir():
         request_state(axis, AXIS_STATE_IDLE) # apply step_dir_always_on config
 
 
-        axis.handle.controller.input_pos = 0
         ref = axis.handle.controller.input_pos
         axis.handle.config.turns_per_step = turns_per_step = 10
 
@@ -62,7 +59,6 @@ class TestStepDir():
 
         for i in range(100):
             step_gpio.write(True)
-            test_assert_eq(axis.handle.controller.input_pos, ref + (i + 1) * turns_per_step, range = 0.4 * turns_per_step)
             step_gpio.write(False)
             test_assert_eq(axis.handle.controller.input_pos, ref + (i + 1) * turns_per_step, range = 0.4 * turns_per_step)
 
@@ -71,7 +67,6 @@ class TestStepDir():
 
         for i in range(100):
             step_gpio.write(True)
-            test_assert_eq(axis.handle.controller.input_pos, ref - (i + 1) * turns_per_step, range = 0.4 * turns_per_step)
             step_gpio.write(False)
             test_assert_eq(axis.handle.controller.input_pos, ref - (i + 1) * turns_per_step, range = 0.4 * turns_per_step)
 
@@ -81,7 +76,6 @@ class TestStepDir():
 
         for i in range(100):
             step_gpio.write(True)
-            test_assert_eq(axis.handle.controller.input_pos, ref + (i + 1) * turns_per_step, range = 0.4 * turns_per_step)
             step_gpio.write(False)
             test_assert_eq(axis.handle.controller.input_pos, ref + (i + 1) * turns_per_step, range = 0.4 * turns_per_step)
 
@@ -90,7 +84,6 @@ class TestStepDir():
 
         for i in range(100):
             step_gpio.write(True)
-            test_assert_eq(axis.handle.controller.input_pos, ref + (i + 1) * turns_per_step, range = 0.4 * abs(turns_per_step))
             step_gpio.write(False)
             test_assert_eq(axis.handle.controller.input_pos, ref + (i + 1) * turns_per_step, range = 0.4 * abs(turns_per_step))
 

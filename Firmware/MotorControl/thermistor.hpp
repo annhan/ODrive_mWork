@@ -1,10 +1,9 @@
 #ifndef __THERMISTOR_HPP
 #define __THERMISTOR_HPP
 
-class Axis; // declared in axis.hpp
-
-#include "current_limiter.hpp"
-#include <autogen/interfaces.hpp>
+#ifndef __ODRIVE_MAIN_H
+#error "This file should not be included directly. Include odrive_main.h instead."
+#endif
 
 class ThermistorCurrentLimiter : public CurrentLimiter, public ODriveIntf::ThermistorCurrentLimiterIntf {
 public:
@@ -24,7 +23,7 @@ public:
     uint16_t adc_channel_;
     const float* const coefficients_;
     const size_t num_coeffs_;
-    float temperature_ = NAN; // [°C] NaN while the ODrive is initializing.
+    float temperature_;
     const float& temp_limit_lower_;
     const float& temp_limit_upper_;
     const bool& enabled_;
@@ -41,9 +40,9 @@ public:
     };
 
     virtual ~OnboardThermistorCurrentLimiter() = default;
-    OnboardThermistorCurrentLimiter(uint16_t adc_channel, const float* const coefficients, size_t num_coeffs);
+    OnboardThermistorCurrentLimiter(const ThermistorHardwareConfig_t& hw_config, Config_t& config);
 
-    Config_t config_;
+    Config_t& config_;
 };
 
 class OffboardThermistorCurrentLimiter : public ThermistorCurrentLimiter, public ODriveIntf::OffboardThermistorCurrentLimiterIntf {
@@ -64,9 +63,9 @@ public:
     };
 
     virtual ~OffboardThermistorCurrentLimiter() = default;
-    OffboardThermistorCurrentLimiter();
+    OffboardThermistorCurrentLimiter(Config_t& config);
 
-    Config_t config_;
+    Config_t& config_;
 
 private:
     void decode_pin();

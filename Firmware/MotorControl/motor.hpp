@@ -1,28 +1,11 @@
 #ifndef __MOTOR_HPP
 #define __MOTOR_HPP
 
-class Axis; // declared in axis.hpp
-class Motor;
+#ifndef __ODRIVE_MAIN_H
+#error "This file should not be included directly. Include odrive_main.h instead."
+#endif
 
-#include <board.h>
-
-#include <autogen/interfaces.hpp>
-
-enum TimingLog_t {
-    TIMING_LOG_GENERAL,
-    TIMING_LOG_ADC_CB_I,
-    TIMING_LOG_ADC_CB_DC,
-    TIMING_LOG_MEAS_R,
-    TIMING_LOG_MEAS_L,
-    TIMING_LOG_ENC_CALIB,
-    TIMING_LOG_IDX_SEARCH,
-    TIMING_LOG_FOC_VOLTAGE,
-    TIMING_LOG_FOC_CURRENT,
-    TIMING_LOG_SPI_START,
-    TIMING_LOG_SAMPLE_NOW,
-    TIMING_LOG_SPI_END,
-    TIMING_LOG_NUM_SLOTS
-};
+#include "drv8301.h"
 
 class Motor : public ODriveIntf::MotorIntf {
 public:
@@ -93,19 +76,20 @@ public:
         void set_current_control_bandwidth(float value) { current_control_bandwidth = value; parent->update_current_controller_gains(); }
     };
 
-    Motor(TIM_HandleTypeDef* timer,
-         uint16_t control_deadline,
-         float shunt_conductance,
-         TGateDriver& gate_driver,
-         TOpAmp& opamp);
+    Motor(const MotorHardwareConfig_t& hw_config,
+         const GateDriverHardwareConfig_t& gate_driver_config,
+         Config_t& config);
 
     bool arm();
     void disarm();
-    bool apply_config();
-    bool setup();
+    void setup() {
+        DRV8301_setup();
+    }
     void reset_current_control();
 
     void update_current_controller_gains();
+    void DRV8301_setup();
+    bool check_DRV_fault();
     void set_error(Error error);
     bool do_checks();
     float effective_current_lim();
@@ -120,20 +104,15 @@ public:
     bool FOC_voltage(float v_d, float v_q, float pwm_phase);
     bool FOC_current(float Id_des, float Iq_des, float I_phase, float pwm_phase);
     bool update(float current_setpoint, float phase, float phase_vel);
-    void tim_update_cb();
 
-    // hardware config
-    TIM_HandleTypeDef* const timer_;
-    const uint16_t control_deadline_;
-    const float shunt_conductance_;
-    TGateDriver& gate_driver_;
-    TOpAmp& opamp_;
-
-    Config_t config_;
+    const MotorHardwareConfig_t& hw_config_;
+    const GateDriverHardwareConfig_t gate_driver_config_;
+    Config_t& config_;
     Axis* axis_ = nullptr; // set by Axis constructor
 
 //private:
 
+    DRV8301_Obj gate_driver_; // initialized in constructor
     uint16_t next_timings_[3] = {
         TIM_1_8_PERIOD_CLOCKS / 2,
         TIM_1_8_PERIOD_CLOCKS / 2,
@@ -176,7 +155,11 @@ public:
         .async_phase_vel = 0.0f,
         .async_phase_offset = 0.0f,
     };
-    float effective_current_lim_ = 10.0f; // [A]
+    struct : GateDriverIntf {
+        DrvFault drv_fault = DRV_FAULT_NO_FAULT;
+    } gate_driver_exported_;
+    DRV_SPI_8301_Vars_t gate_driver_regs_; //Local view of DRV registers (initialized by DRV8301_setup)
+    float effective_current_lim_ = 10.0f;
 };
 
 #endif // __MOTOR_HPP
