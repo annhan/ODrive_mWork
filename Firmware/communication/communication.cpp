@@ -43,8 +43,8 @@ void init_communication(void) {
 
     if (odrv.config_.enable_uart0 && uart0) {
         start_uart_server();
-    }
-
+    }   
+    
     start_usb_server();
 
     if (odrv.config_.enable_i2c0) {

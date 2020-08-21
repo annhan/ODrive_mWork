@@ -218,7 +218,6 @@ public:
     uint16_t default_en_gpio_pin_;
     osPriority thread_priority_;
     Config_t config_;
-
     Encoder& encoder_;
     SensorlessEstimator& sensorless_estimator_;
     Controller& controller_;

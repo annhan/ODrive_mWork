@@ -40,13 +40,13 @@
 #else
 #define DEFAULT_BRAKE_RESISTANCE (0.47f) // [ohm]
 #endif
-
+/*remove GPIO_MODE_UART0 and GPIO_MODE_ANALOG_IN*/
 #define DEFAULT_GPIO_MODES \
     ODriveIntf::GPIO_MODE_DIGITAL, \
     ODriveIntf::GPIO_MODE_UART0, \
     ODriveIntf::GPIO_MODE_UART0, \
-    ODriveIntf::GPIO_MODE_ANALOG_IN, \
-    ODriveIntf::GPIO_MODE_ANALOG_IN, \
+    ODriveIntf::GPIO_MODE_DIGITAL, \
+    ODriveIntf::GPIO_MODE_DIGITAL, \
     ODriveIntf::GPIO_MODE_ANALOG_IN, \
     ODriveIntf::GPIO_MODE_DIGITAL, \
     ODriveIntf::GPIO_MODE_DIGITAL, \
