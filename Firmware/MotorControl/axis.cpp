@@ -154,7 +154,7 @@ void Axis::set_step_dir_active(bool active) {
         // Set up the step/direction GPIOs as input
         dir_gpio_.config(GPIO_MODE_INPUT, GPIO_NOPULL);
         step_gpio_.config(GPIO_MODE_INPUT, GPIO_PULLDOWN);
-        en_gpio_.config(GPIO_MODE_INPUT, GPIO_PULLUP);
+        en_gpio_.config(GPIO_MODE_INPUT, GPIO_NOPULL);
         // Subscribe to rising edges of the step GPIO
         if (!step_gpio_.subscribe(true, false, step_cb_wrapper, this)) {
             odrv.misconfigured_ = true;
