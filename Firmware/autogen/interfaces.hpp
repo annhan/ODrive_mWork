@@ -364,6 +364,10 @@ public:
             template<typename T> static inline void get_acim_autoflux_attack_gain(T* obj, void* ptr) { new (ptr) Property<float>{&obj->acim_autoflux_attack_gain}; }
             template<typename T> static inline auto get_acim_autoflux_decay_gain(T* obj) { return Property<float>{&obj->acim_autoflux_decay_gain}; }
             template<typename T> static inline void get_acim_autoflux_decay_gain(T* obj, void* ptr) { new (ptr) Property<float>{&obj->acim_autoflux_decay_gain}; }
+            template<typename T> static inline auto get_R_wL_FF_enable(T* obj) { return Property<bool>{&obj->R_wL_FF_enable}; }
+            template<typename T> static inline void get_R_wL_FF_enable(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->R_wL_FF_enable}; }
+            template<typename T> static inline auto get_bEMF_FF_enable(T* obj) { return Property<bool>{&obj->bEMF_FF_enable}; }
+            template<typename T> static inline void get_bEMF_FF_enable(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->bEMF_FF_enable}; }
         };
         enum Error {
             ERROR_NONE                       = 0x00000000,

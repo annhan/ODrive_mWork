@@ -321,12 +321,11 @@ bool Axis::run_sensorless_control_loop() {
     return check_for_errors();
 }
 void Axis::enable_pin_check() {
-    if (!encoder_.config_.pre_calibrated){return;}     // No work until encoder pre_calibrated set True
-    if (error_ != ERROR_NONE ) return;
-    if (encoder_.mWorkFirstTime_) return;
+    if (!encoder_.config_.pre_calibrated){goto exit_check_enable;}     // No work until encoder pre_calibrated set True
+    if (error_ != ERROR_NONE ) goto exit_check_enable;
+    if (encoder_.mWorkFirstTime_) goto exit_check_enable;
     if (config_.use_enable_pin) {
         bool enable = en_gpio_.read() ^ config_.enable_pin_active_low;
-        //bool enable = HAL_GPIO_ReadPin(en_port_, en_pin_) ^ config_.enable_pin_active_low;
         switch(current_state_){
             case AXIS_STATE_IDLE: 
                 if (enable) requested_state_ = AXIS_STATE_CLOSED_LOOP_CONTROL ;
@@ -337,13 +336,9 @@ void Axis::enable_pin_check() {
             default :
                 break;
         }
-       
-       /* if (enable && (current_state_ == AXIS_STATE_IDLE)) {
-            requested_state_ = AXIS_STATE_CLOSED_LOOP_CONTROL;   
-        } else if (!enable && (current_state_ != AXIS_STATE_IDLE)) {
-            requested_state_ = AXIS_STATE_IDLE;
-        }*/
     }
+    exit_check_enable:
+        return;
 }
 bool Axis::run_closed_loop_control_loop() {
     if (!controller_.select_encoder(controller_.config_.load_encoder_axis)) {

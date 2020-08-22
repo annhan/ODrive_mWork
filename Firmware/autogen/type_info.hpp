@@ -691,6 +691,8 @@ struct ODriveMotorConfigTypeInfo : TypeInfo {
             case 19: *(decltype(ODriveIntf::MotorIntf::ConfigIntf::get_acim_autoflux_enable(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::ConfigIntf::get_acim_autoflux_enable(ptr); break;
             case 20: *(decltype(ODriveIntf::MotorIntf::ConfigIntf::get_acim_autoflux_attack_gain(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::ConfigIntf::get_acim_autoflux_attack_gain(ptr); break;
             case 21: *(decltype(ODriveIntf::MotorIntf::ConfigIntf::get_acim_autoflux_decay_gain(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::ConfigIntf::get_acim_autoflux_decay_gain(ptr); break;
+            case 22: *(decltype(ODriveIntf::MotorIntf::ConfigIntf::get_R_wL_FF_enable(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::ConfigIntf::get_R_wL_FF_enable(ptr); break;
+            case 23: *(decltype(ODriveIntf::MotorIntf::ConfigIntf::get_bEMF_FF_enable(std::declval<T*>()))*)(&res) = ODriveIntf::MotorIntf::ConfigIntf::get_bEMF_FF_enable(ptr); break;
         }
         return res;
     }
@@ -1296,6 +1298,8 @@ const PropertyInfo ODriveMotorConfigTypeInfo<T>::property_table[] = {
     {"acim_autoflux_enable", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::ConfigIntf::get_acim_autoflux_enable(std::declval<T*>()))>>::singleton},
     {"acim_autoflux_attack_gain", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::ConfigIntf::get_acim_autoflux_attack_gain(std::declval<T*>()))>>::singleton},
     {"acim_autoflux_decay_gain", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::ConfigIntf::get_acim_autoflux_decay_gain(std::declval<T*>()))>>::singleton},
+    {"R_wL_FF_enable", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::ConfigIntf::get_R_wL_FF_enable(std::declval<T*>()))>>::singleton},
+    {"bEMF_FF_enable", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MotorIntf::ConfigIntf::get_bEMF_FF_enable(std::declval<T*>()))>>::singleton},
 };
 template<typename T>
 const ODriveMotorConfigTypeInfo<T> ODriveMotorConfigTypeInfo<T>::singleton{ODriveMotorConfigTypeInfo<T>::property_table, sizeof(ODriveMotorConfigTypeInfo<T>::property_table) / sizeof(ODriveMotorConfigTypeInfo<T>::property_table[0])};
