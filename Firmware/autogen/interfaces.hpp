@@ -386,6 +386,7 @@ public:
             ERROR_BRAKE_DUTY_CYCLE_NAN       = 0x00002000,
             ERROR_DC_BUS_OVER_REGEN_CURRENT  = 0x00004000,
             ERROR_DC_BUS_OVER_CURRENT        = 0x00008000,
+            ERROR_MODULATION_IS_NAN          = 0x00010000,
         };
         enum ArmedState {
             ARMED_STATE_DISARMED             = 0,
