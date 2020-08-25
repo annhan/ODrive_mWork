@@ -166,3 +166,4 @@ Some of these chips come with evaluation boards that can simplify mounting the c
 Sometimes the encoder takes longer than the ODrive to start, in which case you need to clear the errors after every restart.
 
 If you are having calibration problems - make sure your magnet is centered on the axis of rotation on the motor, some users report this has a significant impact on calibration. Also make sure your magnet height is within range of the spec sheet.
+
