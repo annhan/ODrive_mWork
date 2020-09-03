@@ -623,8 +623,6 @@ public:
         template<typename T> static inline void get_pos_estimate(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->pos_estimate_}; }
         template<typename T> static inline auto get_pos_estimate_counts(T* obj) { return Property<const float>{&obj->pos_estimate_counts_}; }
         template<typename T> static inline void get_pos_estimate_counts(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->pos_estimate_counts_}; }
-        template<typename T> static inline auto get_pos_cpr(T* obj) { return Property<const float>{&obj->pos_cpr_}; }
-        template<typename T> static inline void get_pos_cpr(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->pos_cpr_}; }
         template<typename T> static inline auto get_pos_cpr_counts(T* obj) { return Property<const float>{&obj->pos_cpr_counts_}; }
         template<typename T> static inline void get_pos_cpr_counts(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->pos_cpr_counts_}; }
         template<typename T> static inline auto get_pos_circular(T* obj) { return Property<const float>{&obj->pos_circular_}; }
@@ -637,12 +635,6 @@ public:
         template<typename T> static inline void get_vel_estimate_counts(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->vel_estimate_counts_}; }
         template<typename T> static inline auto get_calib_scan_response(T* obj) { return Property<const float>{&obj->calib_scan_response_}; }
         template<typename T> static inline void get_calib_scan_response(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->calib_scan_response_}; }
-        template<typename T> static inline auto get_mWorkFirstTime(T* obj) { return Property<const bool>{&obj->mWorkFirstTime_}; }
-        template<typename T> static inline void get_mWorkFirstTime(T* obj, void* ptr) { new (ptr) Property<const bool>{&obj->mWorkFirstTime_}; }
-        template<typename T> static inline auto get_mWorkErrorSPI(T* obj) { return Property<const uint8_t>{&obj->mWorkErrorSPI_}; }
-        template<typename T> static inline void get_mWorkErrorSPI(T* obj, void* ptr) { new (ptr) Property<const uint8_t>{&obj->mWorkErrorSPI_}; }
-        template<typename T> static inline auto get_errorCodeFromAS(T* obj) { return Property<const uint16_t>{&obj->errorCodeFromAS_}; }
-        template<typename T> static inline void get_errorCodeFromAS(T* obj, void* ptr) { new (ptr) Property<const uint16_t>{&obj->errorCodeFromAS_}; }
         template<typename T> static inline auto get_pos_abs(T* obj) { return Property<int32_t>{&obj->pos_abs_}; }
         template<typename T> static inline void get_pos_abs(T* obj, void* ptr) { new (ptr) Property<int32_t>{&obj->pos_abs_}; }
         template<typename T> static inline auto get_spi_error_rate(T* obj) { return Property<const float>{&obj->spi_error_rate_}; }
@@ -703,8 +695,6 @@ public:
             template<typename T> static inline void get_offset(T* obj, void* ptr) { new (ptr) Property<float>{&obj->offset}; }
             template<typename T> static inline auto get_is_active_high(T* obj) { return Property<bool>{&obj->is_active_high}; }
             template<typename T> static inline void get_is_active_high(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->is_active_high}; }
-            template<typename T> static inline auto get_pullup(T* obj) { return Property<bool>{&obj->pullup}; }
-            template<typename T> static inline void get_pullup(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->pullup}; }
             template<typename T> static inline auto get_debounce_ms(T* obj) { return Property<uint32_t>{obj, [](void* ctx){ return (uint32_t)((T*)ctx)->debounce_ms; }, [](void* ctx, uint32_t value){ ((T*)ctx)->set_debounce_ms(value); }}; }
             template<typename T> static inline void get_debounce_ms(T* obj, void* ptr) { new (ptr) Property<uint32_t>{obj, [](void* ctx){ return (uint32_t)((T*)ctx)->debounce_ms; }, [](void* ctx, uint32_t value){ ((T*)ctx)->set_debounce_ms(value); }}; }
         };
@@ -844,17 +834,19 @@ public:
     };
     enum GpioMode {
         GPIO_MODE_DIGITAL                = 0,
-        GPIO_MODE_ANALOG_IN              = 1,
-        GPIO_MODE_UART0                  = 2,
-        GPIO_MODE_UART1                  = 3,
-        GPIO_MODE_UART2                  = 4,
-        GPIO_MODE_CAN0                   = 5,
-        GPIO_MODE_I2C0                   = 6,
-        GPIO_MODE_SPI0                   = 7,
-        GPIO_MODE_PWM0                   = 8,
-        GPIO_MODE_ENC0                   = 9,
-        GPIO_MODE_ENC1                   = 10,
-        GPIO_MODE_ENC2                   = 11,
+        GPIO_MODE_DIGITAL_PULL_UP        = 1,
+        GPIO_MODE_DIGITAL_PULL_DOWN      = 2,
+        GPIO_MODE_ANALOG_IN              = 3,
+        GPIO_MODE_UART0                  = 4,
+        GPIO_MODE_UART1                  = 5,
+        GPIO_MODE_UART2                  = 6,
+        GPIO_MODE_CAN0                   = 7,
+        GPIO_MODE_I2C0                   = 8,
+        GPIO_MODE_SPI0                   = 9,
+        GPIO_MODE_PWM0                   = 10,
+        GPIO_MODE_ENC0                   = 11,
+        GPIO_MODE_ENC1                   = 12,
+        GPIO_MODE_ENC2                   = 13,
     };
     template<typename T> static inline auto get_vbus_voltage(T* obj) { return Property<const float>{&obj->vbus_voltage_}; }
     template<typename T> static inline void get_vbus_voltage(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->vbus_voltage_}; }

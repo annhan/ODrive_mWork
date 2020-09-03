@@ -446,7 +446,7 @@ void Encoder::abs_spi_cb(bool success) {
             }
             // Set data to GET ANGLE after clean Error Bit
             if (abs_spi_dma_tx_[0] == AS_CMD_ERROR){
-                abs_spi_dma_tx_[0] =AS_CMD_ANGLE;
+                abs_spi_dma_tx_[0] = AS_CMD_ANGLE;
                 mWorkErrorSPI_ = statusGetBitError;
                 goto done;
             }
@@ -460,16 +460,8 @@ void Encoder::abs_spi_cb(bool success) {
             if (ams_parity(rawVal)){
                 goto done;
             }
-/*
-        statusOK = 0,
-        statusCleanError = 1,
-        statusGetBitError =2,
-            if (readErrorSPI == 1)return;
-            else if (readErrorSPI == 2){ errorCodeFromAS_ = rawVal & 0x3fff;return;}
-            else if (readErrorSPI > 2){ mWorkErrorSPI_ = false;return;}
-*/
            // pos = rawVal & 0x3fff;
-            pos = rawVal & 0x3ffc; //remove 2 first bit for noise
+            pos = rawVal & 0x3fff; //remove 2 first bit for noise
         } break;
 
         case MODE_SPI_ABS_CUI: {

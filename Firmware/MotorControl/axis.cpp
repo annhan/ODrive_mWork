@@ -165,7 +165,6 @@ void Axis::set_step_dir_active(bool active) {
         step_dir_active_ = true;
     } else {
         step_dir_active_ = false;
-
         // Unsubscribe from step GPIO
         // TODO: if we change the GPIO while the subscription is active and then
         // unsubscribe then the unsubscribe is for the wrong pin.

@@ -399,7 +399,6 @@ interfaces:
           enable_pin_active_low:
             type: bool
             doc: dung muc thap
-              Make sure to set the corresponding GPIO's mode to `GPIO_MODE_DIGITAL`.
           step_dir_always_on:
             type: bool
             doc: Keep step/dir enabled while the motor is disabled.
@@ -849,9 +848,6 @@ interfaces:
       vel_estimate: readonly float32
       vel_estimate_counts: readonly float32
       calib_scan_response: readonly float32
-      mWorkFirstTime: readonly bool
-      mWorkErrorSPI: readonly uint8
-      errorCodeFromAS: readonly uint16
       pos_abs: int32
       spi_error_rate: readonly float32
       config:

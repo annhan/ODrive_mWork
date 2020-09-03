@@ -131,7 +131,7 @@ public:
         return error_ == ERROR_NONE;
     }
     void enable_pin_check();
-    void use_enable_pin_update();
+    //void use_enable_pin_update();
     // @brief Runs the specified update handler at the frequency of the current measurements.
     //
     // The loop runs until one of the following conditions:
@@ -156,7 +156,7 @@ public:
     void run_control_loop(const T& update_handler) {
         //enable_pin_check(); // This can override requested_state_ based on the enable pin state.
         while (requested_state_ == AXIS_STATE_UNDEFINED) {
-           // enable_pin_check(); // This can override requested_state_ based on the enable pin state.
+            enable_pin_check(); // This can override requested_state_ based on the enable pin state.
             // look for errors at axis level and also all subcomponents
             bool checks_ok = do_checks();
             // Update all estimators
@@ -234,7 +234,7 @@ public:
     std::array<ThermistorCurrentLimiter*, 2> thermistors_;
 
     osThreadId thread_id_;
-    const uint32_t stack_size_ = 4096; // Bytes
+    const uint32_t stack_size_ = 2048; // Bytes
     //30722048
     volatile bool thread_id_valid_ = false;
 

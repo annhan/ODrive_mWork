@@ -137,10 +137,10 @@ public:
     Stm32Gpio abs_spi_cs_gpio_;
     uint32_t abs_spi_cr1;
     uint32_t abs_spi_cr2;
-    bool mWorkFirstTime_ = true;
-    uint8_t mWorkErrorSPI_ = statusOK;
-    uint16_t errorCodeFromAS_ = 0x0000;
-    uint16_t abs_spi_dma_tx_[1] = {0xFFFF};
+    volatile bool mWorkFirstTime_ = true;
+    volatile uint8_t mWorkErrorSPI_ = statusOK;
+    volatile uint16_t errorCodeFromAS_ = 0x0000;
+    volatile uint16_t abs_spi_dma_tx_[1] = {0xFFFF};
     uint16_t abs_spi_dma_rx_[1];
     Stm32SpiArbiter::SpiTask spi_task_;
 

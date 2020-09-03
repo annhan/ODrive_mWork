@@ -276,19 +276,15 @@ struct ODriveEncoderTypeInfo : TypeInfo {
             case 6: *(decltype(ODriveIntf::EncoderIntf::get_phase(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_phase(ptr); break;
             case 7: *(decltype(ODriveIntf::EncoderIntf::get_pos_estimate(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_pos_estimate(ptr); break;
             case 8: *(decltype(ODriveIntf::EncoderIntf::get_pos_estimate_counts(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_pos_estimate_counts(ptr); break;
-            case 9: *(decltype(ODriveIntf::EncoderIntf::get_pos_cpr(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_pos_cpr(ptr); break;
-            case 10: *(decltype(ODriveIntf::EncoderIntf::get_pos_cpr_counts(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_pos_cpr_counts(ptr); break;
-            case 11: *(decltype(ODriveIntf::EncoderIntf::get_pos_circular(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_pos_circular(ptr); break;
-            case 12: *(decltype(ODriveIntf::EncoderIntf::get_hall_state(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_hall_state(ptr); break;
-            case 13: *(decltype(ODriveIntf::EncoderIntf::get_vel_estimate(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_vel_estimate(ptr); break;
-            case 14: *(decltype(ODriveIntf::EncoderIntf::get_vel_estimate_counts(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_vel_estimate_counts(ptr); break;
-            case 15: *(decltype(ODriveIntf::EncoderIntf::get_calib_scan_response(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_calib_scan_response(ptr); break;
-            case 16: *(decltype(ODriveIntf::EncoderIntf::get_mWorkFirstTime(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_mWorkFirstTime(ptr); break;
-            case 17: *(decltype(ODriveIntf::EncoderIntf::get_mWorkErrorSPI(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_mWorkErrorSPI(ptr); break;
-            case 18: *(decltype(ODriveIntf::EncoderIntf::get_errorCodeFromAS(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_errorCodeFromAS(ptr); break;
-            case 19: *(decltype(ODriveIntf::EncoderIntf::get_pos_abs(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_pos_abs(ptr); break;
-            case 20: *(decltype(ODriveIntf::EncoderIntf::get_spi_error_rate(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_spi_error_rate(ptr); break;
-            case 21: *(decltype(ODriveIntf::EncoderIntf::get_config(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_config(ptr); break;
+            case 9: *(decltype(ODriveIntf::EncoderIntf::get_pos_cpr_counts(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_pos_cpr_counts(ptr); break;
+            case 10: *(decltype(ODriveIntf::EncoderIntf::get_pos_circular(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_pos_circular(ptr); break;
+            case 11: *(decltype(ODriveIntf::EncoderIntf::get_hall_state(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_hall_state(ptr); break;
+            case 12: *(decltype(ODriveIntf::EncoderIntf::get_vel_estimate(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_vel_estimate(ptr); break;
+            case 13: *(decltype(ODriveIntf::EncoderIntf::get_vel_estimate_counts(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_vel_estimate_counts(ptr); break;
+            case 14: *(decltype(ODriveIntf::EncoderIntf::get_calib_scan_response(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_calib_scan_response(ptr); break;
+            case 15: *(decltype(ODriveIntf::EncoderIntf::get_pos_abs(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_pos_abs(ptr); break;
+            case 16: *(decltype(ODriveIntf::EncoderIntf::get_spi_error_rate(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_spi_error_rate(ptr); break;
+            case 17: *(decltype(ODriveIntf::EncoderIntf::get_config(std::declval<T*>()))*)(&res) = ODriveIntf::EncoderIntf::get_config(ptr); break;
         }
         return res;
     }
@@ -847,8 +843,7 @@ struct ODriveEndstopConfigTypeInfo : TypeInfo {
             case 1: *(decltype(ODriveIntf::EndstopIntf::ConfigIntf::get_enabled(std::declval<T*>()))*)(&res) = ODriveIntf::EndstopIntf::ConfigIntf::get_enabled(ptr); break;
             case 2: *(decltype(ODriveIntf::EndstopIntf::ConfigIntf::get_offset(std::declval<T*>()))*)(&res) = ODriveIntf::EndstopIntf::ConfigIntf::get_offset(ptr); break;
             case 3: *(decltype(ODriveIntf::EndstopIntf::ConfigIntf::get_is_active_high(std::declval<T*>()))*)(&res) = ODriveIntf::EndstopIntf::ConfigIntf::get_is_active_high(ptr); break;
-            case 4: *(decltype(ODriveIntf::EndstopIntf::ConfigIntf::get_pullup(std::declval<T*>()))*)(&res) = ODriveIntf::EndstopIntf::ConfigIntf::get_pullup(ptr); break;
-            case 5: *(decltype(ODriveIntf::EndstopIntf::ConfigIntf::get_debounce_ms(std::declval<T*>()))*)(&res) = ODriveIntf::EndstopIntf::ConfigIntf::get_debounce_ms(ptr); break;
+            case 4: *(decltype(ODriveIntf::EndstopIntf::ConfigIntf::get_debounce_ms(std::declval<T*>()))*)(&res) = ODriveIntf::EndstopIntf::ConfigIntf::get_debounce_ms(ptr); break;
         }
         return res;
     }
@@ -1018,16 +1013,12 @@ const PropertyInfo ODriveEncoderTypeInfo<T>::property_table[] = {
     {"phase", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_phase(std::declval<T*>()))>>::singleton},
     {"pos_estimate", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_pos_estimate(std::declval<T*>()))>>::singleton},
     {"pos_estimate_counts", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_pos_estimate_counts(std::declval<T*>()))>>::singleton},
-    {"pos_cpr", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_pos_cpr(std::declval<T*>()))>>::singleton},
     {"pos_cpr_counts", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_pos_cpr_counts(std::declval<T*>()))>>::singleton},
     {"pos_circular", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_pos_circular(std::declval<T*>()))>>::singleton},
     {"hall_state", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_hall_state(std::declval<T*>()))>>::singleton},
     {"vel_estimate", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_vel_estimate(std::declval<T*>()))>>::singleton},
     {"vel_estimate_counts", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_vel_estimate_counts(std::declval<T*>()))>>::singleton},
     {"calib_scan_response", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_calib_scan_response(std::declval<T*>()))>>::singleton},
-    {"mWorkFirstTime", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_mWorkFirstTime(std::declval<T*>()))>>::singleton},
-    {"mWorkErrorSPI", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_mWorkErrorSPI(std::declval<T*>()))>>::singleton},
-    {"errorCodeFromAS", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_errorCodeFromAS(std::declval<T*>()))>>::singleton},
     {"pos_abs", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_pos_abs(std::declval<T*>()))>>::singleton},
     {"spi_error_rate", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_spi_error_rate(std::declval<T*>()))>>::singleton},
     {"config", &ODriveEncoderConfigTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EncoderIntf::get_config(std::declval<T*>()))>>::singleton},
@@ -1400,7 +1391,6 @@ const PropertyInfo ODriveEndstopConfigTypeInfo<T>::property_table[] = {
     {"enabled", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EndstopIntf::ConfigIntf::get_enabled(std::declval<T*>()))>>::singleton},
     {"offset", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EndstopIntf::ConfigIntf::get_offset(std::declval<T*>()))>>::singleton},
     {"is_active_high", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EndstopIntf::ConfigIntf::get_is_active_high(std::declval<T*>()))>>::singleton},
-    {"pullup", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EndstopIntf::ConfigIntf::get_pullup(std::declval<T*>()))>>::singleton},
     {"debounce_ms", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::EndstopIntf::ConfigIntf::get_debounce_ms(std::declval<T*>()))>>::singleton},
 };
 template<typename T>

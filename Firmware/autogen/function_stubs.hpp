@@ -452,17 +452,6 @@ static inline bool fibre_property_int32_readonly_read(std::optional<Property<con
 
 
 
-static inline bool fibre_property_uint16_readonly_read(std::optional<Property<const uint16_t>> in_obj, uint16_t* out_value, fibre::cbufptr_t* input_buffer, fibre::bufptr_t* output_buffer) {
-    bool success = (in_obj.has_value() || (in_obj = fibre::Codec<Property<const uint16_t>>::decode(input_buffer)).has_value());
-    if (!success) {
-        return false;
-    }
-    std::tuple<uint16_t> ret = in_obj.value()->read();
-    return ((out_value && ((*out_value = std::get<0>(ret)), true)) || fibre::Codec<uint16_t>::encode(std::get<0>(ret), output_buffer));
-}
-
-
-
 static inline bool fibre_property_int32_readwrite_exchange(std::optional<Property<int32_t>> in_obj, std::optional<int32_t> in_value, int32_t* out_value, fibre::cbufptr_t* input_buffer, fibre::bufptr_t* output_buffer) {
     bool success = (in_obj.has_value() || (in_obj = fibre::Codec<Property<int32_t>>::decode(input_buffer)).has_value())
                 && (in_value.has_value() || (in_value = fibre::Codec<int32_t>::decode(input_buffer)).has_value() || true);
@@ -518,6 +507,17 @@ static inline bool fibre_property_uint16_readwrite_exchange(std::optional<Proper
         return false;
     }
     std::tuple<uint16_t> ret = in_obj.value()->exchange(in_value);
+    return ((out_value && ((*out_value = std::get<0>(ret)), true)) || fibre::Codec<uint16_t>::encode(std::get<0>(ret), output_buffer));
+}
+
+
+
+static inline bool fibre_property_uint16_readonly_read(std::optional<Property<const uint16_t>> in_obj, uint16_t* out_value, fibre::cbufptr_t* input_buffer, fibre::bufptr_t* output_buffer) {
+    bool success = (in_obj.has_value() || (in_obj = fibre::Codec<Property<const uint16_t>>::decode(input_buffer)).has_value());
+    if (!success) {
+        return false;
+    }
+    std::tuple<uint16_t> ret = in_obj.value()->read();
     return ((out_value && ((*out_value = std::get<0>(ret)), true)) || fibre::Codec<uint16_t>::encode(std::get<0>(ret), output_buffer));
 }
 
