@@ -8,12 +8,24 @@ from engineio.payload import Payload
 import json
 import time
 import argparse
+import logging
 
 # interface for odrive GUI to get data from odrivetool
-#better handling of websockets
-# eventlet.monkey_patch()
+
+# Flush stdout by default
+# Source:
+# https://stackoverflow.com/questions/230751/how-to-flush-output-of-python-print
+old_print = print
+def print(*args, **kwargs):
+    kwargs.pop('flush', False)
+    old_print(*args, **kwargs)
+    file = kwargs.get('file', sys.stdout)
+    file.flush() if file is not None else sys.stdout.flush()
 
 app = flask.Flask(__name__)
+# disable logging, very noisy!
+log = logging.getLogger('werkzeug')
+log.disabled = True
 app.config['SECRET_KEY'] = 'secret'
 app.config.update(
     SESSION_COOKIE_SECURE=True,
@@ -116,8 +128,8 @@ def get_property(message):
         time.sleep(0.1)
     globals()['inUse'] = True
     val = getVal(globals()['odrives'], message["path"].split('.'))
-    emit('ODriveProperty', json.dumps({"path": message["path"], "val": val}))
     globals()['inUse'] = False
+    emit('ODriveProperty', json.dumps({"path": message["path"], "val": val}))
 
 @socketio.on('setProperty')
 def set_property(message):
@@ -128,16 +140,16 @@ def set_property(message):
     print("From setProperty event handler: " + str(message))
     postVal(globals()['odrives'], message["path"].split('.'), message["val"], message["type"])
     val = getVal(globals()['odrives'], message["path"].split('.'))
-    emit('ODriveProperty', json.dumps({"path": message["path"], "val": val}))
     globals()['inUse'] = False
+    emit('ODriveProperty', json.dumps({"path": message["path"], "val": val}))
 
 @socketio.on('callFunction')
 def call_function(message):
     # message is {"path"}, no args yet (do we know which functions accept arguments from the odrive tree directly?)
     while globals()['inUse']:
         time.sleep(0.1)
-    globals()['inUse'] = True
     print("From callFunction event handler: " + str(message))
+    globals()['inUse'] = True
     callFunc(globals()['odrives'], message["path"].split('.'))
     globals()['inUse'] = False
 
@@ -178,7 +190,7 @@ def postVal(odrives, keyList, value, argType):
         if argType == "number":
             RO.set_value(float(value))
         elif argType == "boolean":
-            RO.set_value(value == "true")
+            RO.set_value(value)
         else:
             pass # dont support that type yet
     except fibre.protocol.ChannelBrokenException:
