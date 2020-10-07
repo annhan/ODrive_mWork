@@ -185,6 +185,28 @@ static inline bool odrive_encoder_set_linear_count(std::optional<ODriveIntf::Enc
 
 
 
+static inline bool odrive_mechanical_brake_engage(std::optional<ODriveIntf::MechanicalBrakeIntf*> in_obj, fibre::cbufptr_t* input_buffer, fibre::bufptr_t* output_buffer) {
+    bool success = (in_obj.has_value() || (in_obj = fibre::Codec<ODriveIntf::MechanicalBrakeIntf*>::decode(input_buffer)).has_value());
+    if (!success) {
+        return false;
+    }
+    in_obj.value()->engage();
+    return true;
+}
+
+static inline bool odrive_mechanical_brake_release(std::optional<ODriveIntf::MechanicalBrakeIntf*> in_obj, fibre::cbufptr_t* input_buffer, fibre::bufptr_t* output_buffer) {
+    bool success = (in_obj.has_value() || (in_obj = fibre::Codec<ODriveIntf::MechanicalBrakeIntf*>::decode(input_buffer)).has_value());
+    if (!success) {
+        return false;
+    }
+    in_obj.value()->release();
+    return true;
+}
+
+
+
+
+
 
 
 

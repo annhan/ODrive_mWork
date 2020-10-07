@@ -117,6 +117,7 @@ struct ODriveAxisTypeInfo : TypeInfo {
             case 14: *(decltype(ODriveIntf::AxisIntf::get_trap_traj(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_trap_traj(ptr); break;
             case 15: *(decltype(ODriveIntf::AxisIntf::get_min_endstop(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_min_endstop(ptr); break;
             case 16: *(decltype(ODriveIntf::AxisIntf::get_max_endstop(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_max_endstop(ptr); break;
+            case 17: *(decltype(ODriveIntf::AxisIntf::get_mechanical_brake(std::declval<T*>()))*)(&res) = ODriveIntf::AxisIntf::get_mechanical_brake(ptr); break;
         }
         return res;
     }
@@ -341,6 +342,23 @@ struct ODriveEndstopTypeInfo : TypeInfo {
         switch (idx) {
             case 0: *(decltype(ODriveIntf::EndstopIntf::get_endstop_state(std::declval<T*>()))*)(&res) = ODriveIntf::EndstopIntf::get_endstop_state(ptr); break;
             case 1: *(decltype(ODriveIntf::EndstopIntf::get_config(std::declval<T*>()))*)(&res) = ODriveIntf::EndstopIntf::get_config(ptr); break;
+        }
+        return res;
+    }
+};
+
+template<typename T>
+struct ODriveMechanicalBrakeTypeInfo : TypeInfo {
+    using TypeInfo::TypeInfo;
+    static const PropertyInfo property_table[];
+    static const ODriveMechanicalBrakeTypeInfo<T> singleton;
+    static Introspectable make_introspectable(T& obj) { return TypeInfo::make_introspectable(&obj, &singleton); }
+
+    introspectable_storage_t get_child(introspectable_storage_t obj, size_t idx) const override {
+        T* ptr = *(T**)&obj;
+        introspectable_storage_t res;
+        switch (idx) {
+            case 0: *(decltype(ODriveIntf::MechanicalBrakeIntf::get_config(std::declval<T*>()))*)(&res) = ODriveIntf::MechanicalBrakeIntf::get_config(ptr); break;
         }
         return res;
     }
@@ -849,6 +867,24 @@ struct ODriveEndstopConfigTypeInfo : TypeInfo {
     }
 };
 
+template<typename T>
+struct ODriveMechanicalBrakeConfigTypeInfo : TypeInfo {
+    using TypeInfo::TypeInfo;
+    static const PropertyInfo property_table[];
+    static const ODriveMechanicalBrakeConfigTypeInfo<T> singleton;
+    static Introspectable make_introspectable(T& obj) { return TypeInfo::make_introspectable(&obj, &singleton); }
+
+    introspectable_storage_t get_child(introspectable_storage_t obj, size_t idx) const override {
+        T* ptr = *(T**)&obj;
+        introspectable_storage_t res;
+        switch (idx) {
+            case 0: *(decltype(ODriveIntf::MechanicalBrakeIntf::ConfigIntf::get_gpio_num(std::declval<T*>()))*)(&res) = ODriveIntf::MechanicalBrakeIntf::ConfigIntf::get_gpio_num(ptr); break;
+            case 1: *(decltype(ODriveIntf::MechanicalBrakeIntf::ConfigIntf::get_is_active_low(std::declval<T*>()))*)(&res) = ODriveIntf::MechanicalBrakeIntf::ConfigIntf::get_is_active_low(ptr); break;
+        }
+        return res;
+    }
+};
+
 
 
 template<typename T>
@@ -917,6 +953,7 @@ const PropertyInfo ODriveAxisTypeInfo<T>::property_table[] = {
     {"trap_traj", &ODriveTrapezoidalTrajectoryTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::get_trap_traj(std::declval<T*>()))>>::singleton},
     {"min_endstop", &ODriveEndstopTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::get_min_endstop(std::declval<T*>()))>>::singleton},
     {"max_endstop", &ODriveEndstopTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::get_max_endstop(std::declval<T*>()))>>::singleton},
+    {"mechanical_brake", &ODriveMechanicalBrakeTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::AxisIntf::get_mechanical_brake(std::declval<T*>()))>>::singleton},
 };
 template<typename T>
 const ODriveAxisTypeInfo<T> ODriveAxisTypeInfo<T>::singleton{ODriveAxisTypeInfo<T>::property_table, sizeof(ODriveAxisTypeInfo<T>::property_table) / sizeof(ODriveAxisTypeInfo<T>::property_table[0])};
@@ -1054,6 +1091,14 @@ const PropertyInfo ODriveEndstopTypeInfo<T>::property_table[] = {
 };
 template<typename T>
 const ODriveEndstopTypeInfo<T> ODriveEndstopTypeInfo<T>::singleton{ODriveEndstopTypeInfo<T>::property_table, sizeof(ODriveEndstopTypeInfo<T>::property_table) / sizeof(ODriveEndstopTypeInfo<T>::property_table[0])};
+
+
+template<typename T>
+const PropertyInfo ODriveMechanicalBrakeTypeInfo<T>::property_table[] = {
+    {"config", &ODriveMechanicalBrakeConfigTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MechanicalBrakeIntf::get_config(std::declval<T*>()))>>::singleton},
+};
+template<typename T>
+const ODriveMechanicalBrakeTypeInfo<T> ODriveMechanicalBrakeTypeInfo<T>::singleton{ODriveMechanicalBrakeTypeInfo<T>::property_table, sizeof(ODriveMechanicalBrakeTypeInfo<T>::property_table) / sizeof(ODriveMechanicalBrakeTypeInfo<T>::property_table[0])};
 
 
 template<typename T>
@@ -1395,6 +1440,15 @@ const PropertyInfo ODriveEndstopConfigTypeInfo<T>::property_table[] = {
 };
 template<typename T>
 const ODriveEndstopConfigTypeInfo<T> ODriveEndstopConfigTypeInfo<T>::singleton{ODriveEndstopConfigTypeInfo<T>::property_table, sizeof(ODriveEndstopConfigTypeInfo<T>::property_table) / sizeof(ODriveEndstopConfigTypeInfo<T>::property_table[0])};
+
+
+template<typename T>
+const PropertyInfo ODriveMechanicalBrakeConfigTypeInfo<T>::property_table[] = {
+    {"gpio_num", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MechanicalBrakeIntf::ConfigIntf::get_gpio_num(std::declval<T*>()))>>::singleton},
+    {"is_active_low", &FibrePropertyTypeInfo<std::remove_reference_t<decltype(*ODriveIntf::MechanicalBrakeIntf::ConfigIntf::get_is_active_low(std::declval<T*>()))>>::singleton},
+};
+template<typename T>
+const ODriveMechanicalBrakeConfigTypeInfo<T> ODriveMechanicalBrakeConfigTypeInfo<T>::singleton{ODriveMechanicalBrakeConfigTypeInfo<T>::property_table, sizeof(ODriveMechanicalBrakeConfigTypeInfo<T>::property_table) / sizeof(ODriveMechanicalBrakeConfigTypeInfo<T>::property_table[0])};
 
 
 

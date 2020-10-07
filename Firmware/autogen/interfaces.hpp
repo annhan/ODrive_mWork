@@ -198,6 +198,7 @@ public:
         template<typename T> static inline auto get_trap_traj(T* obj) { return &obj->trap_traj_; }
         template<typename T> static inline auto get_min_endstop(T* obj) { return &obj->min_endstop_; }
         template<typename T> static inline auto get_max_endstop(T* obj) { return &obj->max_endstop_; }
+        template<typename T> static inline auto get_mechanical_brake(T* obj) { return &obj->mechanical_brake_; }
         virtual void watchdog_feed() = 0;
         virtual void clear_errors() = 0;
     };
@@ -702,6 +703,19 @@ public:
         template<typename T> static inline void get_endstop_state(T* obj, void* ptr) { new (ptr) Property<const bool>{&obj->endstop_state_}; }
         template<typename T> static inline auto get_config(T* obj) { return &obj->config_; }
     };
+    class MechanicalBrakeIntf {
+    public:
+        class ConfigIntf {
+        public:
+            template<typename T> static inline auto get_gpio_num(T* obj) { return Property<uint16_t>{obj, [](void* ctx){ return (uint16_t)((T*)ctx)->gpio_num; }, [](void* ctx, uint16_t value){ ((T*)ctx)->set_gpio_num(value); }}; }
+            template<typename T> static inline void get_gpio_num(T* obj, void* ptr) { new (ptr) Property<uint16_t>{obj, [](void* ctx){ return (uint16_t)((T*)ctx)->gpio_num; }, [](void* ctx, uint16_t value){ ((T*)ctx)->set_gpio_num(value); }}; }
+            template<typename T> static inline auto get_is_active_low(T* obj) { return Property<bool>{&obj->is_active_low}; }
+            template<typename T> static inline void get_is_active_low(T* obj, void* ptr) { new (ptr) Property<bool>{&obj->is_active_low}; }
+        };
+        template<typename T> static inline auto get_config(T* obj) { return &obj->config_; }
+        virtual void engage() = 0;
+        virtual void release() = 0;
+    };
     class SystemStatsIntf {
     public:
         class UsbIntf {
@@ -847,6 +861,7 @@ public:
         GPIO_MODE_ENC0                   = 11,
         GPIO_MODE_ENC1                   = 12,
         GPIO_MODE_ENC2                   = 13,
+        GPIO_MODE_MECH_BRAKE             = 14,
     };
     template<typename T> static inline auto get_vbus_voltage(T* obj) { return Property<const float>{&obj->vbus_voltage_}; }
     template<typename T> static inline void get_vbus_voltage(T* obj, void* ptr) { new (ptr) Property<const float>{&obj->vbus_voltage_}; }
